@@ -6,9 +6,15 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>home</ion-title>
-  </ion-navbar>
+  <ion-toolbar class="bar-appture">
+    <ion-buttons start>
+      <button ion-button icon-only menuToggle>
+        <ion-icon ios="ios-menu" md="md-menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Home</ion-title>
+
+  </ion-toolbar>
 
 </ion-header>
 
@@ -16,3 +22,80 @@
 <ion-content padding>
 
 </ion-content>
+
+<ion-footer class="footer-appture">
+  <ion-scroll zoom="false" scrollX="true" style="height: 60px" class="categories-filter">
+			<span class="footer-col"  ng-click="footerLink(links)">
+                <ion-row class="padding-top-5">
+                    <ion-col class="col padding-0 text-x-large" >
+                        <ion-icon name="search"></ion-icon>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="">
+                    <ion-col class="col padding-0 text-small">
+                        Search
+                    </ion-col>
+                </ion-row>
+            </span>
+            <span class="footer-col"  ng-click="footerLink(links)">
+                <ion-row class="padding-top-5">
+                    <ion-col class="col padding-0 text-x-large" >
+                        <ion-icon name="search"></ion-icon>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="">
+                    <ion-col class="col padding-0 text-small">
+                        Search
+                    </ion-col>
+                </ion-row>
+            </span>
+            <span class="footer-col"  ng-click="footerLink(links)">
+                <ion-row class="padding-top-5">
+                    <ion-col class="col padding-0 text-x-large" >
+                        <ion-icon name="search"></ion-icon>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="">
+                    <ion-col class="col padding-0 text-small">
+                        Search
+                    </ion-col>
+                </ion-row>
+            </span>
+            <span class="footer-col"  ng-click="footerLink(links)">
+                <ion-row class="padding-top-5">
+                    <ion-col class="col padding-0 text-x-large" >
+                        <ion-icon name="search"></ion-icon>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="">
+                    <ion-col class="col padding-0 text-small">
+                        Search
+                    </ion-col>
+                </ion-row>
+            </span>
+            <span class="footer-col"  ng-click="footerLink(links)">
+                <ion-row class="padding-top-5">
+                    <ion-col class="col padding-0 text-x-large" >
+                        <ion-icon name="search"></ion-icon>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="">
+                    <ion-col class="col padding-0 text-small">
+                        Search
+                    </ion-col>
+                </ion-row>
+            </span>
+            <span class="footer-col"  ng-click="footerLink(links)">
+                <ion-row class="padding-top-5">
+                    <ion-col class="col padding-0 text-x-large" >
+                        <ion-icon name="search"></ion-icon>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="">
+                    <ion-col class="col padding-0 text-small">
+                        Search
+                    </ion-col>
+                </ion-row>
+            </span>
+        </ion-scroll>
+</ion-footer>
