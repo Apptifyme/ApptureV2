@@ -13,7 +13,9 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+    console.log("this is home ctrl");
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad HomePage');
