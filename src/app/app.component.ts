@@ -3,27 +3,52 @@ import { Nav, Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 
 import { HomePage } from '../pages/home/home';
+import { ArticlePage } from '../pages/article/article';
+import { API } from '../providers/api';
+import { commonServices } from '../providers/common-services';
 
 
 
 @Component({
-  templateUrl: 'app.html'
+  templateUrl: 'app.html',
+  styleUrls: ['/app.scss']
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = HomePage;
 
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{ title: string, component: any }>;
 
-  constructor(public platform: Platform) {
+  constructor(public platform: Platform, public commonServices: commonServices, public api: API) {
     this.initializeApp();
+    console.log(this.commonServices);
+
+    this.api.getAllFrontMenu().subscribe((data) => {
+      console.log(data);
+      data.menu.map(item => {
+        // console.log(item);
+        if (item.linktypename == "Pages" && this.commonServices.isURL(item.articlename)) {
+          this.commonServices.RSSarray.push(item);
+        }
+        else {
+          this.commonServices.menuData.push(item);
+        }
+      });
+      console.log(this.commonServices.menuData);
+    });
+
 
     // used for an example of ngFor and navigation
     this.pages = [
-      {title:'Home', component: HomePage}
+      { title: 'Home', component: HomePage }
     ];
 
+  }
+
+  gotoArticle(id: number, name, articlename) {
+    console.log(id, name, articlename);
+    this.nav.push(ArticlePage, { id: id, name: name, articleName: articlename });
   }
 
   initializeApp() {
@@ -40,4 +65,8 @@ export class MyApp {
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
   }
+
+  
+
+
 }
