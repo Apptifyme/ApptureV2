@@ -17,6 +17,8 @@ import { VideoCategoryPage } from '../pages/video-category/video-category';
 import { VideoGalleryPage } from '../pages/video-gallery/video-gallery';
 import { VideoModalPage } from '../pages/video-modal/video-modal';
 import { WalkthroughPage } from '../pages/walkthrough/walkthrough';
+import {HttpService} from "../pages/home/home.service";
+
 @NgModule({
   declarations: [
     MyApp,
@@ -60,6 +62,6 @@ import { WalkthroughPage } from '../pages/walkthrough/walkthrough';
     VideoModalPage,
     WalkthroughPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
+  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},HttpService]
 })
 export class AppModule {}
