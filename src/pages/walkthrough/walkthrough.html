@@ -1,18 +1,28 @@
-<!--
-  Generated template for the Walkthrough page.
+<ion-content [attr.noScroll]="shouldScroll">
+  <ion-slides pager class="walkthrough-slider ">
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
+    <ion-slide class="slide slide1">
+    </ion-slide>
 
-  <ion-navbar>
-    <ion-title>walkthrough</ion-title>
-  </ion-navbar>
+    <ion-slide class="slide slide2">
+    </ion-slide>
 
-</ion-header>
+    <ion-slide class="slide slide3">
+    </ion-slide>
 
+    <ion-slide class="slide slide4">
+    </ion-slide>
 
-<ion-content padding>
+    <ion-slide class="slide slide5">
+    </ion-slide>
 
+    <ion-slide class="slide slide6">
+    </ion-slide>
+
+    <ion-slide class="slide slide7">
+      <div class="enter-button">
+        <button ion-button outline color="light" (click)="goToHome()">Enter</button>
+      </div>
+    </ion-slide>
+  </ion-slides>
 </ion-content>

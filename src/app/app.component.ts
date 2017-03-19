@@ -6,6 +6,7 @@ import { HomePage } from '../pages/home/home';
 import { ArticlePage } from '../pages/article/article';
 import { API } from '../providers/api';
 import { commonServices } from '../providers/common-services';
+import { WalkthroughPage } from '../pages/walkthrough/walkthrough';
 
 
 
@@ -16,7 +17,7 @@ import { commonServices } from '../providers/common-services';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
+  rootPage: any = WalkthroughPage;
 
   pages: Array<{ title: string, component: any }>;
 

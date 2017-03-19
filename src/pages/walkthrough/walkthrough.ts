@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { HomePage } from '../../pages/home/home';
 
 /*
   Generated class for the Walkthrough page.
@@ -17,6 +18,10 @@ export class WalkthroughPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad WalkthroughPage');
+  }
+
+  goToHome(){
+    this.navCtrl.setRoot(HomePage);
   }
 
 }

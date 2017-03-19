@@ -1,3 +1,49 @@
 page-walkthrough {
 
+    [noScroll] {
+  overflow: hidden;
+}
+.walkthrough-slider {
+    background: linear-gradient(#000000, #666666);
+    height: 100%;
+}
+
+.slide {
+    background-position: center;
+    background-size: cover;
+}
+
+.slide1 {
+    background-image: url('../../assets/img/walkthrough/1.png');
+}
+
+.slide2 {
+    background-image: url('../../assets/img/walkthrough/2.png');
+}
+
+.slide3 {
+    background-image: url('../../assets/img/walkthrough/3.png');
+}
+
+.slide4 {
+    background-image: url('../../assets/img/walkthrough/4.png');
+}
+
+.slide5 {
+    background-image: url('../../assets/img/walkthrough/5.png');
+}
+
+.slide6 {
+    background-image: url('../../assets/img/walkthrough/6.png');
+}
+
+.slide7 {
+    background-image: url('../../assets/img/appture.jpg');
+}
+.enter-button {
+    position: absolute;
+    top: 80%;
+    text-align: center;
+    width: 100%;
+}
 }
