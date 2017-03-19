@@ -17,6 +17,14 @@ import { VideoCategoryPage } from '../pages/video-category/video-category';
 import { VideoGalleryPage } from '../pages/video-gallery/video-gallery';
 import { VideoModalPage } from '../pages/video-modal/video-modal';
 import { WalkthroughPage } from '../pages/walkthrough/walkthrough';
+import { HttpModule } from '@angular/http';
+import { API } from '../providers/api';
+import { commonServices } from '../providers/common-services';
+import { ServerImage } from '../pipes/server-image.pipe';
+
+import { WindowRef } from './windows-ref';
+
+
 @NgModule({
   declarations: [
     MyApp,
@@ -35,10 +43,11 @@ import { WalkthroughPage } from '../pages/walkthrough/walkthrough';
     VideoCategoryPage,
     VideoGalleryPage,
     VideoModalPage,
-    WalkthroughPage
+    WalkthroughPage,
+    ServerImage
   ],
   imports: [
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp), HttpModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -60,6 +69,11 @@ import { WalkthroughPage } from '../pages/walkthrough/walkthrough';
     VideoModalPage,
     WalkthroughPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
+  providers: [
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    API,
+    commonServices,
+    WindowRef
+  ]
 })
-export class AppModule {}
+export class AppModule { }

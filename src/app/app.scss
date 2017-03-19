@@ -65,3 +65,40 @@ color: white;
     white-space: nowrap !important;
     width: 100%;
 }
+
+@font-face {
+    font-family: 'Raleway';
+    src: url('../fonts/Raleway-Light.eot');
+    src: url('../fonts/Raleway-Light.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/Raleway-Light.woff2') format('woff2'),
+    url('../fonts/Raleway-Light.woff') format('woff'),
+    url('../fonts/Raleway-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+.raleway{
+    font-family: "Raleway",sans-serif ;
+    font-weight: 300;
+    font-style: normal;
+}
+
+.menu-set a {
+    background-color: transparent !important;
+    color: white !important;
+}
+
+.menu-set ion-item  {
+    background-color: transparent;
+}
+
+.platform-ios.platform-cordova .menu-set ion-item:first-child {
+    margin-top: 20px !important;
+}
+
+.menu-set .item.scheduler-item{
+    height: 53px!important;
+    color: white!important;
+    font-size: 18px!important;
+    padding: 16px 16px 16px 55px!important;
+}

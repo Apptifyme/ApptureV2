@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
+import { commonServices } from '../../providers/common-services';
+
 /*
   Generated class for the Article page.
 
@@ -13,7 +15,10 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class ArticlePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public commonServices: commonServices) {
+    console.log(this.commonServices);
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ArticlePage');
