@@ -24,6 +24,9 @@ export class API {
   getImageCategories() {
     return this.http.get(this.commonServices.adminUrl + 'getAllGallery');
   }
+  getGalleryImages(id) {
+    return this.http.get(this.commonServices.adminUrl + 'getAllGalleryImage?id=' + id );
+  }
   getAllFrontMenu(): Observable<any> {
     return this.http.get(this.commonServices.adminUrl + 'getAllFrontmenu')
       .map(res => res.json());

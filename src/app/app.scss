@@ -107,3 +107,18 @@ color: white;
     font-size: 18px!important;
     padding: 16px 16px 16px 55px!important;
 }
+.row-wrap{
+    width: 100%;
+    white-space: normal;
+}
+.col-wrap{
+    display: inline-block;
+}
+.full-dim{
+    width: 100%;
+    height: 100%;
+}
+.bg-cover{
+    background-size: cover;
+    background-position: center;
+}

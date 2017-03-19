@@ -1,29 +1,23 @@
 <ion-header>
-  <ion-toolbar class="bar-appture">
-    <ion-buttons left>
-      <button ion-button icon-only menuToggle>
-        <ion-icon ios="ios-menu" md="md-menu"></ion-icon>
-      </button>
-    </ion-buttons>
+  <ion-navbar class="bar-appture">
+
     <ion-title class="text-center">
       <h1 [ngStyle]="{'background': 'url(' + commonServices.headerLogo + ') no-repeat center', 'background-size': 'cover'}" class="title company-logo article-header-logo">&nbsp;</h1>
       <!--<img src="{{commonServices.headerLogo}}">-->
     </ion-title>
-    <ion-buttons end>
-      <button ion-button icon-only>
-        <ion-icon name="md-refresh"></ion-icon>
-      </button>
-    </ion-buttons>
 
-  </ion-toolbar>
+  </ion-navbar>
 
 </ion-header>
 
 
 <ion-content>
-  <div *ngFor="let photo of photoCategories" class="lightgray-bg" (click)="openImageModal(photo.src)">
-    <img [src]="photo.src">
+  <div class="row-wrap text-center" style="padding: 3px;">
+    <div class="col-wrap border-lightgray" [ngStyle]="imageInGallery" *ngFor="let image of galleryImages" (click)="openImageInModal(image.src)">
+        <div class="full-dim bg-cover" [ngStyle]="{'background-image':'url('+image.src+')'}"></div>
+    </div>
   </div>
+
 </ion-content>
 
 <ion-footer class="footer-appture">
