@@ -1,75 +1,83 @@
-import { Component, Injectable } from '@angular/core';
-import { NavController, NavParams, Platform } from 'ionic-angular';
-import { Device, Splashscreen } from 'ionic-native';
-//import { Config } from '../../providers/config.ts';
-//import { MyServices } from "../../providers/my-services";
+import {Component, Injectable} from '@angular/core';
+import {NavController, NavParams, Platform} from 'ionic-angular';
+import {Device, Splashscreen} from 'ionic-native';
+import {API} from '../../providers/api';
+import {commonServices} from '../../providers/common-services';
+import {Observable} from 'rxjs/Rx';
 
-// declare var require: Function;
-// const localforage: LocalForage = require('localforage');
+import {HomePage} from '../../pages/home/home';
 
 @Component({
-  selector: 'page-landing',
-  templateUrl: 'landing.html',
-  providers:[]
+    selector: 'page-landing',
+    templateUrl: 'landing.html',
+    providers: []
 })
 export class LandingPage {
+    public allDataPromise:any = [];
+    public allObservableData:any = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public platform: Platform) {
-    this.platform = platform;
-    // localforage.config({
-    //   name: 'MyApp'
-    // });
-  }
+    constructor(public navCtrl:NavController, public navParams:NavParams, public platform:Platform, public api:API, public commonServices:commonServices) {
+        this.platform = platform;
+    }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LandingPage');
-    this.getConfigData();
-  }
+    /*fetch all data and hit all API*/
 
-  checkHomeScreen() {
+    ionViewDidLoad() {
+        let headerPromise = this.api.getHeaderLogo();
+        this.allDataPromise.push(headerPromise);
+        let sliderPromise = this.api.getallsliders()
+        this.allDataPromise.push(sliderPromise);
+        let promotionsPromise = this.api.getAllPromotions()
+        this.allDataPromise.push(promotionsPromise);
+        //this.fetchRSSData();
+        let frontMenuPromise = this.api.getAllFrontMenu()
+        this.allDataPromise.push(frontMenuPromise);
+        this.api.getAllFootermenu()
+            .subscribe((data) => {
+                console.log(data);
+                this.commonServices.footerLinks = data.menu;
+            });
+        this.checkHomeScreen();
+    }
 
-  }
+    checkHomeScreen() {
+        console.log(this.allDataPromise);
+        Observable.forkJoin(this.allDataPromise).subscribe((resPromise) => {
 
-  getConfigData() {
-    this.platform.ready().then(() => {
-      setTimeout(() => {
-        if (Device.platform == "iOS" || Device.platform == "Android") {
-          Splashscreen.hide();
-        }
-      }, 500);
-    })
-
-
-
-
-    /*setTimeout(() => {
-
-      localforage.getItem('config').then((foragedata) => {
-        if (foragedata) {
-          // MyServices.setconfigdata(foragedata);
-          Config.data = foragedata;
-          // configreload.func();
-          this.checkHomeScreen();
-        }
-        else {
-          console.log('else');
-
-          this.myServices.getallfrontmenu().map(response => response.json()).subscribe(data => {
-            // MyServices.setconfigdata(data);
-            Config.data = data;
-            // configreload.func();
-            console.log(data);
-            localforage.setItem('config', data);
-            console.log('landing page');
-            this.checkHomeScreen();
-          }, err =>{
-            console.log(err);
-            // $state.go('access.offline')
-          })
-        }
-      })
-    }, 3500);*/
-  }
-
+            console.log("all data aa gya bhai");
+            this.allObservableData = resPromise;
+            console.log(this.allObservableData[0]);
+            this.allObservableData[0]
+                .map(item => {
+                    if (item.title == 'Header Logo') {
+                        console.log(item);
+                        this.commonServices.headerLogo = 'http://business.staging.appturemarket.com/uploads/header-logo/' + item.image;
+                    }
+                });
+            console.log(this.allObservableData[1]);
+            console.log(this.allObservableData[2]);
+            this.commonServices.slides =  this.allObservableData[1];
+            this.commonServices.banners = this.allObservableData[2].menu;
+            console.log(this.allObservableData[3]);
+            this.commonServices.AllMenuData = this.allObservableData[3];
+            this.allObservableData[3].menu.map(item => {
+                if (item.linktypename == "Pages" && this.commonServices.isURL(item.articlename)) {
+                    this.commonServices.RSSarray.push(item);
+                }
+                else {
+                    this.commonServices.menuData.push(item);
+                }
+            });
+            console.log(this.commonServices.menuData);
+            this.navCtrl.setRoot(HomePage);
+            this.platform.ready().then(() => {
+                setTimeout(() => {
+                    if (Device.platform == "iOS" || Device.platform == "Android") {
+                        Splashscreen.hide();
+                    }
+                }, 500);
+            })
+        });
+    }
 
 }

@@ -22,58 +22,13 @@ export class HomePage {
   }
 
   ionViewDidLoad() {
-    this.api.getHeaderLogo()
-      .map(data => data.json())
-      .subscribe((data) => {
-        console.log(data);
-        data.map(item => {
-          if (item.title == 'Header Logo') {
-            console.log(item);
-            this.commonServices.headerLogo = 'http://business.staging.appturemarket.com/uploads/header-logo/' + item.image;
-            this.headerLogo = this.commonServices.headerLogo;
-            console.log(this.headerLogo);
-          }
-        });
-      });
+    console.log("Header in Home form service",this.commonServices.headerLogo);
+    this.headerLogo = this.commonServices.headerLogo;
     console.log('ionViewDidLoad HomePage');
-
-    this.api.getallsliders()
-      .subscribe((data) => {
-        console.log(data);
-        this.commonServices.slides = data;
-        this.slides = data;
-        this.slider1Loading = false;
-        console.log(this.commonServices.adminImage);
-      });
-
-    this.api.getAllPromotions()
-      .subscribe((data) => {
-        console.log(data.menu);
-        this.banners = data.menu;
-      });
-    
+    this.slides = this.commonServices.slides;
+    this.slider1Loading = false;
     this.fetchRSSData();
-
-    this.api.getAllFrontMenu().subscribe((data) => {
-      console.log(data);
-      data.menu.map(item => {
-        // console.log(item);
-        if (item.linktypename == "Pages" && this.commonServices.isURL(item.articlename)) {
-          this.commonServices.RSSarray.push(item);
-        }
-        else {
-          this.commonServices.menuData.push(item);
-        }
-      });
-      console.log(this.commonServices.menuData);
-      this.sortRssLinks(data);
-    });
-
-    this.api.getAllFootermenu()
-      .subscribe((data) => {
-        console.log(data);
-        this.commonServices.footerLinks = data.menu;
-      });
+    this.sortRssLinks(this.commonServices.AllMenuData);
   }
 
 
@@ -170,15 +125,6 @@ export class HomePage {
         console.log(this.categories);
 
       });
-
-    //   $localForage.setItem('rssData', $scope.RSS);
-    //   $localForage.getItem('rssData').then(function (data) {
-    //     // console.log(data);
-    //   });
-    //   $scope.RSSLoading = false;
-    // });
   }
-
-
 
 }

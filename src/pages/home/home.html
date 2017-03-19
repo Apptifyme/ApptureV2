@@ -38,7 +38,7 @@
 
     <!--2nd Slide-->
     <ion-slides autoplay="1500" loop="true" *ngIf="!slider1Loading" [ngStyle]="commonServices.promo_banner" class="padding-separation valign-parent">
-        <ion-slide *ngFor="let banner of banners" class="text-center slider2-bg" [ngStyle]="{'background': 'url(' + (banner.image | serverImage) + ') no-repeat center','background-size': 'cover'}">
+        <ion-slide *ngFor="let banner of commonServices.banners" class="text-center slider2-bg" [ngStyle]="{'background': 'url(' + (banner.image | serverImage) + ') no-repeat center','background-size': 'cover'}">
             <!--<img src="{{banner.image | serverImage}}">-->
         </ion-slide>
     </ion-slides>

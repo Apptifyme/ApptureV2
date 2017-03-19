@@ -3,6 +3,7 @@ import { Nav, Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 
 import { HomePage } from '../pages/home/home';
+import { LandingPage } from '../pages/landing/landing';
 import { ArticlePage } from '../pages/article/article';
 import { API } from '../providers/api';
 import { commonServices } from '../providers/common-services';
@@ -16,9 +17,7 @@ import { ImageCategoryPage } from '../pages/image-category/image-category';
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-
-  rootPage: any = ImageCategoryPage;
-
+  rootPage: any = LandingPage;
   pages: Array<{ title: string, component: any }>;
 
   constructor(public platform: Platform, public commonServices: commonServices, public api: API) {
