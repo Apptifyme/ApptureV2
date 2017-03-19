@@ -25,7 +25,10 @@ export class commonServices {
   headerLogo: string;
   menuData = [];
   RSSarray = [];
+  imageCategories = [];
   adminUrl = 'http://business.staging.appturemarket.com/index.php/json/';
+  adminImages = 'http://business.staging.appturemarket.com/uploads/';
+
   clickedMenuItem = '';
   slides: any;
   adminImage: string = 'http://business.staging.appturemarket.com/uploads/';

@@ -21,6 +21,9 @@ export class API {
   getHeaderLogo() {
     return this.http.get(this.commonServices.adminUrl + 'getAppConfig');
   }
+  getImageCategories() {
+    return this.http.get(this.commonServices.adminUrl + 'getAllGallery');
+  }
   getAllFrontMenu(): Observable<any> {
     return this.http.get(this.commonServices.adminUrl + 'getAllFrontmenu')
       .map(res => res.json());

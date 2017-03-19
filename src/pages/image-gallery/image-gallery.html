@@ -1,18 +1,45 @@
-<!--
-  Generated template for the ImageGallery page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
+  <ion-toolbar class="bar-appture">
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon ios="ios-menu" md="md-menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title class="text-center">
+      <h1 [ngStyle]="{'background': 'url(' + commonServices.headerLogo + ') no-repeat center', 'background-size': 'cover'}" class="title company-logo article-header-logo">&nbsp;</h1>
+      <!--<img src="{{commonServices.headerLogo}}">-->
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only>
+        <ion-icon name="md-refresh"></ion-icon>
+      </button>
+    </ion-buttons>
 
-  <ion-navbar>
-    <ion-title>imageGallery</ion-title>
-  </ion-navbar>
+  </ion-toolbar>
 
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content>
+  <div *ngFor="let photo of photoCategories" class="lightgray-bg" (click)="openImageModal(photo.src)">
+    <img [src]="photo.src">
+  </div>
 </ion-content>
+
+<ion-footer class="footer-appture">
+  <ion-scroll zoom="false" scrollX="true" style="height: 60px" class="categories-filter">
+    <span class="footer-col" ng-click="footerLink(links)" *ngFor="let links of commonServices.footerLinks">
+                <ion-row class="padding-top-5">
+                    <ion-col class="col padding-0 text-x-large" >
+                        <i class="icon" [ngClass]="links.icon"></i>
+                        <!--<ion-icon name="search"></ion-icon>-->
+                    </ion-col>
+                </ion-row>
+                <ion-row class="">
+                    <ion-col class="col padding-0 text-small">
+                        {{links.name}}
+                    </ion-col>
+                </ion-row>
+            </span>
+  </ion-scroll>
+</ion-footer>
