@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, ModalController } from 'ionic-angular';
 import { commonServices } from '../../providers/common-services';
 import { API } from '../../providers/api';
+import { ImageModalPage } from '../../pages/image-modal/image-modal';
 
 /*
   Generated class for the ImageGallery page.
@@ -14,17 +15,40 @@ import { API } from '../../providers/api';
   templateUrl: 'image-gallery.html'
 })
 export class ImageGalleryPage {
-  photoCategories:any = [];
-  constructor(public navCtrl: NavController, public navParams: NavParams, public api: API, public commonServices: commonServices) {
+  galleryImages: any = [];
+  galleryId: any;
+  imageInGallery: any = {};
+  public loading: any = {};
 
+  constructor(public navCtrl: NavController, public loadingCtrl: LoadingController,
+    public navParams: NavParams, public api: API, public commonServices: commonServices,
+    public modalCtrl: ModalController) {
+    this.galleryId = navParams.get('galleryId');
+    console.log(this.galleryId);
+    this.loading = this.loadingCtrl.create({
+      content: 'Please wait...'
+    });
   }
 
-  getAllImageCategories(){
-    this.api.getImageCategories()
+  processGalleryImages(images) {
+
+    for (let i = 0; i < images.length; i++) {
+      images[i].src = this.commonServices.adminImages + images[i].src;
+    }
+    this.galleryImages = images;
+    console.log(this.galleryImages);
+    this.loading.dismiss();
+  }
+
+
+  getGalleryImages() {
+    this.api.getGalleryImages(this.galleryId)
       .map(data => data.json())
       .subscribe((data) => {
         console.log(data);
-        this.photoCategories = data;
+        this.processGalleryImages(data.queryresult);
+
+        // this.photoCategories = data;
         // data.map(item => {
         //   if (item.title == 'Header Logo') {
         //     console.log(item);
@@ -38,7 +62,14 @@ export class ImageGalleryPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ImageGalleryPage');
-    this.getAllImageCategories();
+    this.loading.present();
+    this.imageInGallery = { 'width': 0.32 * (this.commonServices.devW - 4) + 'px', 'height': 0.32 * (this.commonServices.devW - 4) + 'px' };
+    this.getGalleryImages();
+  }
+
+  openImageInModal(image) {
+    let profileModal = this.modalCtrl.create(ImageModalPage, { imagesrc: image });
+    profileModal.present();
   }
 
 }

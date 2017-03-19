@@ -21,7 +21,7 @@
 
 
 <ion-content>
-  <div *ngFor="let photo of photoCategories" class="lightgray-bg" (click)="openImageModal(photo.src)">
+  <div *ngFor="let photo of photoCategories" class="lightgray-bg" (click)="goToGallery(photo.id)">
     <img [src]="photo.image">
   </div>
 </ion-content>

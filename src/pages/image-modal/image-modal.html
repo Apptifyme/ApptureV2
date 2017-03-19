@@ -6,13 +6,25 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>imageModal</ion-title>
-  </ion-navbar>
-
+  <ion-toolbar class="bar-transparent">
+    <ion-buttons end class="no-header-button">
+      <button ion-button icon-only (click)="closeModal()" color="light">
+        <ion-icon ios="ios-close" md="md-close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
 </ion-header>
 
-
-<ion-content padding>
-
+<ion-content class="no-header black-bg">
+  <div class="valign-parent full-height">
+    <ion-grid class="valign-child">
+      <ion-row>
+        <ion-col class="valign-parent">
+          <div class="valign-child">
+            <img [src]="imageLink" class="full-image">
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
 </ion-content>

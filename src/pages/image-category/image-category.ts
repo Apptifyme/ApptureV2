@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { commonServices } from '../../providers/common-services';
 import { API } from '../../providers/api';
+import { ImageGalleryPage } from '../../pages/image-gallery/image-gallery';
 
 /*
   Generated class for the ImageGallery page.
@@ -54,6 +55,12 @@ export class ImageCategoryPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ImageGalleryPage');
     this.getAllImageCategories();
+  }
+
+  goToGallery(id){
+    this.navCtrl.push(ImageGalleryPage, {
+        galleryId: id
+    });
   }
 
 }

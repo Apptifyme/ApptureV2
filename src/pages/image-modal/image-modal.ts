@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ViewController } from 'ionic-angular';
 
 /*
   Generated class for the ImageModal page.
@@ -12,11 +12,16 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'image-modal.html'
 })
 export class ImageModalPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  imageLink:any;
+  constructor(public navCtrl: NavController, public navParams: NavParams,public viewCtrl: ViewController) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ImageModalPage');
+    this.imageLink = this.navParams.get('imagesrc');
   }
+
+  closeModal() {
+   this.viewCtrl.dismiss();
+ }
 
 }
