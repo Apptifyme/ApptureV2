@@ -18,8 +18,9 @@ export class API {
     console.log('Hello API Provider');
   }
 
-  getHeaderLogo() {
-    return this.http.get(this.commonServices.adminUrl + 'getAppConfig');
+  getHeaderLogo() : Observable<any> {
+    return this.http.get(this.commonServices.adminUrl + 'getAppConfig')
+        .map(res => res.json());
   }
   getAllFrontMenu(): Observable<any> {
     return this.http.get(this.commonServices.adminUrl + 'getAllFrontmenu')
