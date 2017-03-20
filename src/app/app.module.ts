@@ -28,6 +28,7 @@ import {HttpService} from '../pages/home/home.service'
 import {ContactPage} from '../pages/contact/contact';
 import {HttpServiceOfEvent} from '../pages/events/event.service'
 import {HttpServiceOfSocial} from '../pages/social/social.service';
+import {HttpServiceOfVideoGallary} from '../pages/video-gallery/video-gallery.service';
 //import {HttpServiceOfVideoCategory} from '../pages/video-category/video-category.service'
 @NgModule({
   declarations: [
@@ -82,7 +83,8 @@ import {HttpServiceOfSocial} from '../pages/social/social.service';
     HttpServiceOfActicle,
       HttpService,
       HttpServiceOfEvent,
-      HttpServiceOfSocial
+      HttpServiceOfSocial,
+      HttpServiceOfVideoGallary
 
 
   ]

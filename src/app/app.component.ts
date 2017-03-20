@@ -7,7 +7,7 @@ import { LandingPage } from '../pages/landing/landing';
 import { ArticlePage } from '../pages/article/article';
 import { API } from '../providers/api';
 import { commonServices } from '../providers/common-services';
-import { ImageCategoryPage } from '../pages/image-category/image-category';
+import {ImageCategoryPage} from '../pages/image-category/image-category';
 import {SocialPage} from '../pages/social/social.ts';
 import {EventsPage} from '../pages/events/events.ts';
 import {VideoCategoryPage} from '../pages/video-category/video-category'

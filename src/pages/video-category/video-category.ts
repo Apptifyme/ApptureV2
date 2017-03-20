@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import {HttpServiceOfVideoCategory} from '../video-category/video-category.service'
 
 /*
   Generated class for the VideoCategory page.
@@ -12,11 +13,25 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'video-category.html'
 })
 export class VideoCategoryPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  videodata:any=[];
+  constructor(public navCtrl: NavController, public navParams: NavParams ,private httpServiceOfVideoCategory:HttpServiceOfVideoCategory) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad VideoCategoryPage');
+  }
+
+  getVideoCategorydata(){
+    this.httpServiceOfVideoCategory.getVideocategoryData(1)
+        .subscribe(
+            responce => {
+              this.videodata = responce;
+              console.log("my Videogallary data loaded");
+              console.log(this.videodata);
+
+
+            },
+            error => console.log(error)
+        )
   }
 
 }

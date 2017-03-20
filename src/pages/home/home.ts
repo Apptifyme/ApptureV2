@@ -9,7 +9,8 @@ import {ContactPage} from '../contact/contact';
 import {VideoCategoryPage} from '../video-category/video-category'
 import {EventsPage} from "../events/events";
 import {VideoGalleryPage} from "../video-gallery/video-gallery.ts";
-import {ImageCategoryPage} from "../image-category/image-category"
+import {ImageCategoryPage} from "../image-category/image-category";
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
