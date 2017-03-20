@@ -4,6 +4,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { API } from '../../providers/api';
 import { commonServices } from '../../providers/common-services';
 import { Observable } from 'rxjs/Rx';
+import {ArticlePage} from '../article/article'
 
 @Component({
   selector: 'page-home',
@@ -124,7 +125,15 @@ export class HomePage {
         this.categories.unshift('All');
         console.log(this.categories);
 
+
+
       });
+
+  }
+  goToInside(id:number){
+    console.log("page Change Article");
+    console.log(id);
+    this.navCtrl.push(ArticlePage,{id:id});
   }
 
 }

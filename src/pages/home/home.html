@@ -30,7 +30,7 @@
 
     <!--1st Slide-->
     <ion-slides autoplay="2000" loop="true" *ngIf="!slider1Loading" [ngStyle]="commonServices.sliderheight" class="valign-parent">
-        <ion-slide *ngFor="let slide of slides.menu" class="text-center slider-bg lightgray-bg" [ngStyle]="{'background': 'url(' + (slide.image | serverImage) + ') no-repeat center', 'background-size': 'cover'}">
+        <ion-slide *ngFor="let slide of slides.menu" class="text-center slider-bg lightgray-bg" (click)="goToInside(slide.article)" [ngStyle]="{'background': 'url(' + (slide.image | serverImage) + ') no-repeat center', 'background-size': 'cover'}">
             <!--<img src="{{slide.image | serverImage}}">-->
         </ion-slide>
     </ion-slides>

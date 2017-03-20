@@ -46,9 +46,15 @@ export class MyApp {
 
   }
 
-  gotoArticle(id: number, name, articlename) {
-    console.log(id, name, articlename);
-    this.nav.push(ArticlePage, { id: id, name: name, articleName: articlename });
+  gotoArticle(id: number, name, articlename, article) {
+    console.log(id, name, articlename,article);
+    if(article!="null")
+    {
+      this.nav.push(ArticlePage, {id: article, name: name, articleName: articlename});
+    }
+    else{
+      console.log("null article");
+    }
   }
 
   initializeApp() {

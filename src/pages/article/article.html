@@ -6,19 +6,51 @@
 -->
 <ion-header>
 
-  <ion-navbar class="bar-appture">
+
+  <ion-toolbar class="bar-appture">
+    <ion-buttons start>
+      <button ion-button icon-only menuToggle>
+        <ion-icon class="bar-appture" ios="ios-menu" md="md-menu"></ion-icon>
+      </button>
+    </ion-buttons>
     <ion-title>
-      <!--<h1 cache-src="{{commonServices.headerLogo}}"
-            src-is="background"
-            background-loading-style=" no-repeat center"
-            class="title company-logo article-header-logo"></h1>-->
-      <img src="{{commonServices.headerLogo}}" style="height: 20px">
+      <img src="http://business.staging.appturemarket.com/uploads/header-logo/appture_software_logo_reverse_247x361.png">
     </ion-title>
-  </ion-navbar>
+    <ion-buttons end>
+      <button ion-button icon-only>
+        <ion-icon name="refresh"></ion-icon>
+      </button>
+    </ion-buttons>
+
+
+  </ion-toolbar>
 
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content padding class="bar-appture">
+  <img src={{articlebaseurl}}{{article.image}}>
+        <h1 [innerHTML]="article.title"></h1>
+        <div [innerHTML]="article.content"></div>
 </ion-content>
+
+<ion-footer class="footer-appture">
+  <ion-scroll zoom="false" scrollX="true" style="height: 60px" class="categories-filter">
+
+			<span *ngFor="let item of httpServiceOfHome.footerArray.menu" class="footer-col"  ng-click="footerLink(links)">
+                <ion-row style="margin:0px; padding:0px"class="padding-top-5">
+                    <ion-col style="margin:0px; padding:0px" class="col padding-0 text-x-large" >
+                        <ion-icon name={{item.icon}}></ion-icon>
+                        <i [ngClass]="item.icon"  class="icon"></i>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="">
+                    <ion-col class="col padding-0 text-small">
+                        {{item.name}}
+                    </ion-col>
+                </ion-row>
+            </span>
+
+
+  </ion-scroll>
+</ion-footer>

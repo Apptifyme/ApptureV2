@@ -23,7 +23,8 @@ import { commonServices } from '../providers/common-services';
 import { ServerImage } from '../pipes/server-image.pipe';
 
 import { WindowRef } from './windows-ref';
-
+import {HttpServiceOfActicle} from '../pages/article/article.service';
+import {HttpService} from '../pages/home/home.service'
 
 @NgModule({
   declarations: [
@@ -69,11 +70,14 @@ import { WindowRef } from './windows-ref';
     VideoModalPage,
     WalkthroughPage
   ],
-  providers: [
-    { provide: ErrorHandler, useClass: IonicErrorHandler },
+  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},
     API,
     commonServices,
-    WindowRef
+    WindowRef,
+    HttpServiceOfActicle,
+      HttpService
+
+
   ]
 })
 export class AppModule { }

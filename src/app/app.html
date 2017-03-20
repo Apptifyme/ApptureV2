@@ -8,7 +8,7 @@
   <ion-content class="no-header raleway"> 
     <ion-list class="menu-set">
       <ion-item class="font-18" *ngFor="let menu of commonServices.menuData"
-        (click)="gotoArticle(menu.id, menu.name, menu.articlename)">
+        (click)="gotoArticle(menu.id, menu.name, menu.articlename , menu.article)">
         <i class="icon {{menu.icon}}" item-left></i>
         <span>{{menu.name}}</span>
       </ion-item>
