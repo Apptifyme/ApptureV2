@@ -16,7 +16,7 @@ export class HttpServiceOfVideoCategory {
     }
     getVideocategoryData(pageno:number): Observable<any>{
         console.log("Service Method");
-        return this.http.get('http://business.staging.appturemarket.com/index.php/json/getAllVideoGallery?pageno='+1+'&maxrow='+15)
+        return this.http.get('http://business.staging.appturemarket.com/index.php/json/getAllVideoGalleryVideo?id='+pageno+'&pageno=1&maxrow=15')
             .map(res=>res.json());
     }
 }

@@ -14,14 +14,17 @@ import {HttpServiceOfVideoCategory} from '../video-category/video-category.servi
 })
 export class VideoCategoryPage {
   videodata:any=[];
-  constructor(public navCtrl: NavController, public navParams: NavParams ,private httpServiceOfVideoCategory:HttpServiceOfVideoCategory) {}
+  id:any;
+  constructor(public navCtrl: NavController, public navParams: NavParams ,private httpServiceOfVideoCategory:HttpServiceOfVideoCategory) {
+      this.id=navParams.get('id');
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad VideoCategoryPage');
   }
 
   getVideoCategorydata(){
-    this.httpServiceOfVideoCategory.getVideocategoryData(1)
+    this.httpServiceOfVideoCategory.getVideocategoryData(this.id)
         .subscribe(
             responce => {
               this.videodata = responce;

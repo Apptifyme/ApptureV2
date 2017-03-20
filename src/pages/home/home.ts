@@ -76,8 +76,13 @@ export class HomePage {
 
         //If there is URL in page name, it means it contains RSS feed links
         if (n.linktypename == "Pages" && this.commonServices.isURL(n.articlename)) {
+          console.log(this.commonServices.RSSarray);
 
+        //  this.commonServices.RSSarray=[];
+            console.log(this.commonServices.RSSarray);
           this.commonServices.RSSarray.push(newmenu);
+          console.log(this.commonServices.RSSarray);
+
           console.log(n);
 
         }

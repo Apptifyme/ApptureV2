@@ -81,7 +81,7 @@ export class VideoGalleryPage {
     }
     goToImages(id:number){
         console.log(" Inside video category");
-        this.navCtrl.push(VideoCategoryPage,{});
+        this.navCtrl.push(VideoCategoryPage,{id:id});
     }
 
 }

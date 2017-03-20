@@ -29,7 +29,7 @@ import {ContactPage} from '../pages/contact/contact';
 import {HttpServiceOfEvent} from '../pages/events/event.service'
 import {HttpServiceOfSocial} from '../pages/social/social.service';
 import {HttpServiceOfVideoGallary} from '../pages/video-gallery/video-gallery.service';
-//import {HttpServiceOfVideoCategory} from '../pages/video-category/video-category.service'
+import {HttpServiceOfVideoCategory} from '../pages/video-category/video-category.service'
 @NgModule({
   declarations: [
     MyApp,
@@ -84,9 +84,8 @@ import {HttpServiceOfVideoGallary} from '../pages/video-gallery/video-gallery.se
       HttpService,
       HttpServiceOfEvent,
       HttpServiceOfSocial,
-      HttpServiceOfVideoGallary
-
-
+      HttpServiceOfVideoGallary,
+      HttpServiceOfVideoCategory
   ]
 })
 export class AppModule { }
