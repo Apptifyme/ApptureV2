@@ -7,7 +7,7 @@ import {ArticlePage} from '../article/article'
 import {ContactPage} from '../contact/contact';
 import {EventsPage} from "../events/events";
 import {ImageCategoryPage} from "../image-category/image-category";
-import {HomePage} from '../home/home'
+import {HomePage} from '../home/home';
 
 /*
   Generated class for the VideoGallery page.
@@ -58,7 +58,7 @@ export class VideoGalleryPage {
 //      window.open('tel:' + ('+1' + $rootScope.phoneNumber), '_system');
         }
         else if (links.linktypelink == "home") {
-            this.navCtrl.push("HomePage",{});
+            this.navCtrl.push(HomePage,{});
 
         }
         else {

@@ -11,6 +11,8 @@ import {ImageCategoryPage} from '../pages/image-category/image-category';
 import {SocialPage} from '../pages/social/social.ts';
 import {EventsPage} from '../pages/events/events.ts';
 import {VideoCategoryPage} from '../pages/video-category/video-category'
+import {VideoGalleryPage} from '../pages/video-gallery/video-gallery.ts'
+
 @Component({
   templateUrl: 'app.html',
   styleUrls: ['/app.scss']
@@ -66,7 +68,7 @@ export class MyApp {
               str= EventsPage;
               break;
             case 'videogallerycategory':
-              str=VideoCategoryPage;
+              str=VideoGalleryPage;
               break;
             case 'social':
               str=SocialPage;

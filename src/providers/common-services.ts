@@ -30,6 +30,7 @@ export class commonServices {
   imageCategories = [];
   adminUrl = 'http://business.staging.appturemarket.com/index.php/json/';
   adminImages = 'http://business.staging.appturemarket.com/uploads/';
+  appConfig=[];
 
   clickedMenuItem = '';
   slides: any;

@@ -14,6 +14,7 @@ export class HttpService{
     menudata=[];
     RssArrayData=[];
     RssArray=[];
+    appConfig=[];
     constructor(private http: Http){
         console.log("Service Constructor jn");
 

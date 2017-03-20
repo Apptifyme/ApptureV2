@@ -35,8 +35,23 @@ export class HomePage {
     this.slider1Loading = false;
     this.fetchRSSData();
     this.sortRssLinks(this.commonServices.AllMenuData);
+    this.getAppconfig();
   }
 
+  getAppconfig(){
+
+      this.api.getHeaderLogo()
+          .subscribe(
+              responce => {
+                this.commonServices.appConfig = responce;
+                console.log("my Social Data data");
+                console.log(this.commonServices.appConfig);
+
+              },
+              error => console.log(error)
+          )
+
+  }
 
   sortRssLinks(data: any): any {
     // console.log(data);
@@ -81,6 +96,7 @@ export class HomePage {
         //  this.commonServices.RSSarray=[];
             console.log(this.commonServices.RSSarray);
           this.commonServices.RSSarray.push(newmenu);
+
           console.log(this.commonServices.RSSarray);
 
           console.log(n);

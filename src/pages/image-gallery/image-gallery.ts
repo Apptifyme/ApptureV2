@@ -3,6 +3,13 @@ import { NavController, NavParams, LoadingController, ModalController } from 'io
 import { commonServices } from '../../providers/common-services';
 import { API } from '../../providers/api';
 import { ImageModalPage } from '../../pages/image-modal/image-modal';
+import {HomePage} from '../home/home';
+import {EventsPage} from '../events/events';
+import {ContactPage} from '../contact/contact';
+import {VideoCategoryPage} from '../video-category/video-category'
+import {VideoGalleryPage} from "../video-gallery/video-gallery.ts";
+import {ArticlePage} from '../article/article';
+import {ImageCategoryPage} from '../image-category/image-category'
 
 /*
   Generated class for the ImageGallery page.
@@ -70,6 +77,41 @@ export class ImageGalleryPage {
   openImageInModal(image) {
     let profileModal = this.modalCtrl.create(ImageModalPage, { imagesrc: image });
     profileModal.present();
+  }
+  goToFfooterInside(links:any){
+    console.log(links);
+    var str:any;
+    switch(links.linktypelink){
+      case 'home':
+        str = HomePage;
+        break;
+      case 'contact':
+        str = ContactPage;
+        break;
+      case 'photogallerycategory':
+        str = ImageCategoryPage;
+        break;
+      case 'videogallerycategory':
+        str = VideoGalleryPage;
+        break;
+      case '2':
+        str = ArticlePage;
+        break;
+      default:
+        links.typeid = 0;
+
+    }
+    if(links.linktypelink=="Phone Call"){
+//      window.open('tel:' + ('+1' + $rootScope.phoneNumber), '_system');
+    }
+    else if (links.linktypelink == "home") {
+      this.navCtrl.push("HomePage",{});
+
+    }
+    else {
+      console.log("page Change");
+      this.navCtrl.push(str,{});
+    }
   }
 
 }

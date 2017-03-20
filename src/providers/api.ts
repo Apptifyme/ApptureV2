@@ -14,6 +14,7 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class API {
 
+
   constructor(private http: Http, public commonServices: commonServices) {
     console.log('Hello API Provider');
   }

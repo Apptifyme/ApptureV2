@@ -17,14 +17,15 @@ export class VideoCategoryPage {
   id:any;
   constructor(public navCtrl: NavController, public navParams: NavParams ,private httpServiceOfVideoCategory:HttpServiceOfVideoCategory) {
       this.id=navParams.get('id');
+      this.getVideoCategorydata(this.id)
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad VideoCategoryPage');
   }
 
-  getVideoCategorydata(){
-    this.httpServiceOfVideoCategory.getVideocategoryData(this.id)
+  getVideoCategorydata(id:number){
+    this.httpServiceOfVideoCategory.getVideocategoryData(id)
         .subscribe(
             responce => {
               this.videodata = responce;
