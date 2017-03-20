@@ -1,11 +1,12 @@
 import {Component, Injectable} from '@angular/core';
 import {NavController, NavParams, Platform} from 'ionic-angular';
-import {Device, Splashscreen} from 'ionic-native';
+import {Device, Splashscreen, NativeStorage} from 'ionic-native';
 import {API} from '../../providers/api';
 import {commonServices} from '../../providers/common-services';
 import {Observable} from 'rxjs/Rx';
 
 import {HomePage} from '../../pages/home/home';
+import {WalkthroughPage} from '../../pages/walkthrough/walkthrough';
 
 @Component({
     selector: 'page-landing',
@@ -56,7 +57,7 @@ export class LandingPage {
                 });
             console.log(this.allObservableData[1]);
             console.log(this.allObservableData[2]);
-            this.commonServices.slides =  this.allObservableData[1];
+            this.commonServices.slides = this.allObservableData[1];
             this.commonServices.banners = this.allObservableData[2].menu;
             console.log(this.allObservableData[3]);
             this.commonServices.AllMenuData = this.allObservableData[3];
@@ -69,7 +70,7 @@ export class LandingPage {
                 }
             });
             console.log(this.commonServices.menuData);
-            this.navCtrl.setRoot(HomePage);
+            this.checkWalkThroughFlag();
             this.platform.ready().then(() => {
                 setTimeout(() => {
                     if (Device.platform == "iOS" || Device.platform == "Android") {
@@ -78,6 +79,30 @@ export class LandingPage {
                 }, 500);
             })
         });
+    }
+
+    checkWalkThroughFlag() {
+        if (this.platform.is('cordova')) {
+            // This will only print when on iOS
+            console.log("I'm on device!");
+            NativeStorage.getItem('walkThroughFlag')
+                .then(
+                    data => {
+                        console.log(data);
+                        if (data) {
+                            this.navCtrl.setRoot(HomePage);
+                        } else {
+                            this.navCtrl.setRoot(WalkthroughPage);
+                        }
+                    },
+                    error => {
+                        console.error(error);
+                        this.navCtrl.setRoot(WalkthroughPage);
+                    }
+                );
+        } else {
+            this.navCtrl.setRoot(HomePage);
+        }
     }
 
 }

@@ -37,7 +37,8 @@
     "cordova-plugin-console",
     "cordova-plugin-statusbar",
     "cordova-plugin-device",
-    "ionic-plugin-keyboard"
+    "ionic-plugin-keyboard",
+    "cordova-plugin-nativestorage"
   ],
   "cordovaPlatforms": [
     "ios",
