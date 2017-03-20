@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import {Nav, Platform, Events} from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 
 import { HomePage } from '../pages/home/home';
@@ -8,9 +8,9 @@ import { ArticlePage } from '../pages/article/article';
 import { API } from '../providers/api';
 import { commonServices } from '../providers/common-services';
 import { ImageCategoryPage } from '../pages/image-category/image-category';
-
-
-
+import {SocialPage} from '../pages/social/social.ts';
+import {EventsPage} from '../pages/events/events.ts';
+import {VideoCategoryPage} from '../pages/video-category/video-category'
 @Component({
   templateUrl: 'app.html',
   styleUrls: ['/app.scss']
@@ -46,14 +46,38 @@ export class MyApp {
 
   }
 
-  gotoArticle(id: number, name, articlename, article) {
+  gotoArticle(id: number, name, articlename, article ,linktypelink) {
     console.log(id, name, articlename,article);
-    if(article!="null")
+    if(linktypelink=="article")
     {
       this.nav.push(ArticlePage, {id: article, name: name, articleName: articlename});
+      articlename=null;
     }
-    else{
-      console.log("null article");
+    else {
+      var str:any;
+          switch(linktypelink){
+            case 'home':
+              str=HomePage;
+                  break;
+            case 'photogallertcategory':
+              str=ImageCategoryPage;
+                  break;
+            case 'event':
+              str= EventsPage;
+              break;
+            case 'videogallerycategory':
+              str=VideoCategoryPage;
+              break;
+            case 'social':
+              str=SocialPage;
+              break;
+            default:
+              break;
+
+
+          }
+          console.log(str);
+          this.nav.push(str,{});
     }
   }
 

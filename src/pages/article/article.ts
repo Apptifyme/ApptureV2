@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import {HttpServiceOfActicle} from '../article/article.service'
 import {HttpService} from '../home/home.service';
+import { commonServices } from '../../providers/common-services';
+
 /*
   Generated class for the Article page.
 
@@ -16,7 +18,7 @@ export class ArticlePage {
    public id:number;
    public article={};
    public articlebaseurl="http://business.staging.appturemarket.com/uploads/";
-  constructor(public navCtrl: NavController, public navParams: NavParams , private httpServiceOfArticle:HttpServiceOfActicle, private httpServiceOfHome: HttpService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams , private httpServiceOfArticle:HttpServiceOfActicle, private httpServiceOfHome: HttpService,private commonServices:commonServices) {
      this.id=this.navParams.get('id');
      this.getPageContent(this.id);
   }

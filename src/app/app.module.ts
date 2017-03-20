@@ -3,7 +3,7 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ArticlePage } from '../pages/article/article';
-import { EventDetailsPage } from '../pages/event-details/event-details';
+import { EventsPage } from '../pages/events/events';
 import { ImageCategoryPage } from '../pages/image-category/image-category';
 import { ImageGalleryPage } from '../pages/image-gallery/image-gallery';
 import { ImageModalPage } from '../pages/image-modal/image-modal';
@@ -25,13 +25,16 @@ import { ServerImage } from '../pipes/server-image.pipe';
 import { WindowRef } from './windows-ref';
 import {HttpServiceOfActicle} from '../pages/article/article.service';
 import {HttpService} from '../pages/home/home.service'
-
+import {ContactPage} from '../pages/contact/contact';
+import {HttpServiceOfEvent} from '../pages/events/event.service'
+import {HttpServiceOfSocial} from '../pages/social/social.service';
+//import {HttpServiceOfVideoCategory} from '../pages/video-category/video-category.service'
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     ArticlePage,
-    EventDetailsPage,
+    EventsPage,
     ImageCategoryPage,
     ImageGalleryPage,
     ImageModalPage,
@@ -45,7 +48,8 @@ import {HttpService} from '../pages/home/home.service'
     VideoGalleryPage,
     VideoModalPage,
     WalkthroughPage,
-    ServerImage
+    ServerImage,
+      ContactPage
   ],
   imports: [
     IonicModule.forRoot(MyApp), HttpModule
@@ -55,7 +59,7 @@ import {HttpService} from '../pages/home/home.service'
     MyApp,
     HomePage,
     ArticlePage,
-    EventDetailsPage,
+    EventsPage,
     ImageCategoryPage,
     ImageGalleryPage,
     ImageModalPage,
@@ -68,14 +72,17 @@ import {HttpService} from '../pages/home/home.service'
     VideoCategoryPage,
     VideoGalleryPage,
     VideoModalPage,
-    WalkthroughPage
+    WalkthroughPage,
+      ContactPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},
     API,
     commonServices,
     WindowRef,
     HttpServiceOfActicle,
-      HttpService
+      HttpService,
+      HttpServiceOfEvent,
+      HttpServiceOfSocial
 
 
   ]

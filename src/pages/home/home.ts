@@ -5,7 +5,11 @@ import { API } from '../../providers/api';
 import { commonServices } from '../../providers/common-services';
 import { Observable } from 'rxjs/Rx';
 import {ArticlePage} from '../article/article'
-
+import {ContactPage} from '../contact/contact';
+import {VideoCategoryPage} from '../video-category/video-category'
+import {EventsPage} from "../events/events";
+import {VideoGalleryPage} from "../video-gallery/video-gallery.ts";
+import {ImageCategoryPage} from "../image-category/image-category"
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
@@ -135,5 +139,39 @@ export class HomePage {
     console.log(id);
     this.navCtrl.push(ArticlePage,{id:id});
   }
+  goToFfooterInside(links:any){
+    console.log(links);
+    var str:any;
+    switch(links.linktypelink){
+      case 'home':
+        str = HomePage;
+        break;
+      case 'contact':
+        str = ContactPage;
+        break;
+      case 'photogallerycategory':
+        str = ImageCategoryPage;
+        break;
+      case 'videogallerycategory':
+        str = VideoGalleryPage;
+        break;
+      case '2':
+        str = ArticlePage;
+        break;
+      default:
+        links.typeid = 0;
 
+    }
+    if(links.linktypelink=="Phone Call"){
+//      window.open('tel:' + ('+1' + $rootScope.phoneNumber), '_system');
+    }
+    else if (links.linktypelink == "home") {
+      this.navCtrl.push("HomePage",{});
+
+    }
+    else {
+      console.log("page Change");
+      this.navCtrl.push(str,{});
+    }
+  }
 }

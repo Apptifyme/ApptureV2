@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-
+import {HttpServiceOfSocial} from "../social/social.service"
 /*
   Generated class for the Social page.
 
@@ -12,11 +12,27 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'social.html'
 })
 export class SocialPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+   social=[];
+  constructor(public navCtrl: NavController, public navParams: NavParams , private httpServiceOfSocial : HttpServiceOfSocial) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SocialPage');
   }
 
+
+
+
+  getSocialContent(){
+    this.httpServiceOfSocial.getSocialData()
+        .subscribe(
+            responce => {
+              this.social = responce;
+              console.log("my social data fathes");
+              console.log(this.social);
+
+            },
+            error => console.log(error)
+        )
+
+  }
 }

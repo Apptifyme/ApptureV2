@@ -5,14 +5,27 @@
   Ionic pages and navigation.
 -->
 <ion-header>
+  <ion-toolbar class="bar-appture">
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle class="bar-appture">
+        <ion-icon ios="ios-menu" md="md-menu"></ion-icon>
+      </button>
+    </ion-buttons>
 
-  <ion-navbar>
-    <ion-title>social</ion-title>
-  </ion-navbar>
 
+    <ion-title class="bar-appture">social Feeds</ion-title>
+
+  </ion-toolbar>
 </ion-header>
 
 
 <ion-content padding>
+  <ion-grid>
+    <ion-row *ngFor="let p of SocialData" style="padding:0px; margin:0px;">
+      <ion-col col-12 style="padding:0px; margin:0px;" class="lightgray-bg">
+        <img style="padding:0px; margin:0px; " src="">
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
 </ion-content>
