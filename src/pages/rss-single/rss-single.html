@@ -6,13 +6,22 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>rssSingle</ion-title>
+  <ion-navbar class="bar-appture">
+    <ion-title >RssSingle </ion-title>
   </ion-navbar>
+    <ion-toolbar class="bar-appture">
+        <ion-title>{{title}}</ion-title>
+    </ion-toolbar>
+
 
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content>
+  <ion-slides>
+   <ion-slide *ngFor="let p of rssData[i].items">
+      <div [innerHTML]="p.content"></div>
+       <div [innerHTML]="p.description"></div>
+   </ion-slide>
+  </ion-slides>
 </ion-content>

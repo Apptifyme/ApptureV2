@@ -11,12 +11,13 @@ export class HttpServiceOfVideoCategory {
 
 
     constructor(private http: Http) {
-        console.log("Service Constructor Design Port Folio");
+        console.log("Service Constructor");
 
     }
-    getVideocategoryData(pageno:number): Observable<any>{
+    getVideocategoryData(id:number): Observable<any>{
         console.log("Service Method");
-        return this.http.get('http://business.staging.appturemarket.com/index.php/json/getAllVideoGalleryVideo?id='+pageno+'&pageno=1&maxrow=15')
+        return this.http.get('http://business.staging.appturemarket.com/index.php/json/getAllVideoGalleryVideo?id='+id+'&pageno=1&maxrow=15')
+     //   return this.http.get('http://business.staging.appturemarket.com/index.php/json/getAllVideoGalleryVideo?id='+pageno+'&pageno=1&maxrow=15')
             .map(res=>res.json());
     }
 }

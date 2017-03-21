@@ -24,13 +24,16 @@
 </ion-header>
 
 
-<ion-content padding style="padding: 0px; margin: 0px">
-  <ion-card  style="padding: 0px; margin: 0px"
-             *ngFor="let p of video.queryresult">
-    <img src="http://img.youtube.com/vi/Li7m4gON_Ww/default.jpg" (click)="goToImages(p.id)">
-    <ion-card-title align="center"> {{p.name}} </ion-card-title>
-    <p>{{p.subtitle}}</p>
-  </ion-card>
+<ion-content style="padding: 0px; margin: 0px">
+  <ion-list *ngFor="let p of video.queryresult,let i=index" style="margin: 0px; padding:0px;">
+      <ion-item style="margin: 0px; padding:0px;">
+          <ion-thumbnail item-left>
+    <img style="height: 60px; width:80px" src="{{baseImageUrl}}{{p.url | getImage}}{{baseImageUrl2}}" (click)="goToImages(p,i)">
+          </ion-thumbnail>
+          <h2> {{p.name}} </h2>
+          <p>{{p.subtitle}}</p>
+      </ion-item>
+  </ion-list>
 
 </ion-content>
 <ion-footer class="footer-appture">
@@ -50,5 +53,3 @@
             </span>
   </ion-scroll>
 </ion-footer>
-
-

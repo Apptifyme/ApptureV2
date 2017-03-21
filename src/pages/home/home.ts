@@ -10,6 +10,7 @@ import {VideoCategoryPage} from '../video-category/video-category'
 import {EventsPage} from "../events/events";
 import {VideoGalleryPage} from "../video-gallery/video-gallery.ts";
 import {ImageCategoryPage} from "../image-category/image-category";
+import {RssArticlePage} from "../rss-article/rss-article"
 
 @Component({
   selector: 'page-home',
@@ -145,9 +146,10 @@ export class HomePage {
         categories.map( category => {
           if(this.categories.indexOf(category) === -1){
             this.categories.push(category);
+
           }
         });
-
+        this.commonServices.RssData=this.RSS;
         this.categories.unshift('All');
         console.log(this.categories);
 
@@ -195,5 +197,9 @@ export class HomePage {
       console.log("page Change");
       this.navCtrl.push(str,{});
     }
+  }
+  gotoRss(i:number){
+    console.log(i);
+    this.navCtrl.push(RssArticlePage,{id:i})
   }
 }

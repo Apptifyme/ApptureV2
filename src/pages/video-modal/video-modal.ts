@@ -12,8 +12,14 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'video-modal.html'
 })
 export class VideoModalPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+   id:any;
+   baseUrl:any;
+  constructor(public navCtrl: NavController, public navParams: NavParams ) {
+    this.id=this.navParams.get('id');
+    console.log(this.id);
+    console.log(this.id.url);
+    this.baseUrl="https://www.youtube.com/embed/WWFLRAh7aUs";
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad VideoModalPage');

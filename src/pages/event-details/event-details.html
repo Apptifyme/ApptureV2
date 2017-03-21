@@ -6,14 +6,34 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title class="bar-appture">Events</ion-title>
+  <ion-navbar class="bar-appture">
+    <ion-title >Event</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-  <img src="">
-  <div [innerHtml]="{}"></div>
+<ion-content>
+  <img src={{imageurl}}{{id.image}}>
+    <h1>{{id.title}}</h1>
+    <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>  <p>{{id.startdate|date }}</p>
+  <div [innerHtml]="id.content"></div>
 </ion-content>
+
+<ion-footer class="footer-appture">
+  <ion-scroll zoom="false" scrollX="true" style="height: 60px" class="categories-filter">
+    <span class="footer-col" ng-click="footerLink(links)" *ngFor="let links of commonServices.footerLinks">
+                <ion-row class="padding-top-5">
+                    <ion-col class="col padding-0 text-x-large" (click)="goToFfooterInside(links)">
+                        <i class="icon" [ngClass]="links.icon"></i>
+                      <!--<ion-icon name="search"></ion-icon>-->
+                    </ion-col>
+                </ion-row>
+                <ion-row class="">
+                    <ion-col class="col padding-0 text-small" (click)="goToFfooterInside(links)">
+                        {{links.name}}
+                    </ion-col>
+                </ion-row>
+            </span>
+  </ion-scroll>
+</ion-footer>

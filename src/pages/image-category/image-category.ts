@@ -96,7 +96,7 @@ export class ImageCategoryPage {
 //      window.open('tel:' + ('+1' + $rootScope.phoneNumber), '_system');
     }
     else if (links.linktypelink == "home") {
-      this.navCtrl.push("HomePage",{});
+      this.navCtrl.push(HomePage,{});
 
     }
     else {

@@ -17,6 +17,7 @@ import {ImageCategoryPage} from "../image-category/image-category";
 export class ArticlePage {
    public id:number;
    public article={};
+   phoneNumber:any;
    public articlebaseurl="http://business.staging.appturemarket.com/uploads/";
   constructor(public navCtrl: NavController, public navParams: NavParams , private httpServiceOfArticle:HttpServiceOfActicle, private httpServiceOfHome: HttpService,private commonServices:commonServices) {
      this.id=this.navParams.get('id');
@@ -63,10 +64,10 @@ export class ArticlePage {
 
         }
         if(links.linktypelink=="Phone Call"){
-//      window.open('tel:' + ('+1' + $rootScope.phoneNumber), '_system');
+       window.open('tel:' + ('+1' + this.phoneNumber), '_system');
         }
         else if (links.linktypelink == "home") {
-            this.navCtrl.push("HomePage",{});
+            this.navCtrl.push(HomePage,{});
 
         }
         else {

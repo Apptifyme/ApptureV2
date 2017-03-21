@@ -64,7 +64,8 @@ export class MyApp {
             case 'photogallertcategory':
               str=ImageCategoryPage;
                   break;
-            case 'event':
+            case 'events':
+              console.log("event");
               str= EventsPage;
               break;
             case 'videogallerycategory':

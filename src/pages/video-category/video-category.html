@@ -7,17 +7,42 @@
 <ion-header>
 
   <ion-navbar class="bar-appture">
-    <ion-title >videoCategory</ion-title>
+    <ion-title class="text-center">
+
+    </ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-  <img src="">
-  <ion-card *ngFor="let p of videodata.elements">
-
-
-  </ion-card>
+<ion-content>
+  <img src={{videoimage}}{{id.image}}>
+  <ion-list style="margin: 0px; padding:0px;" *ngFor="let p of videodata.queryresult,let i=index" (click)="openVideo(p)">
+      <ion-item>
+      <ion-thumbnail item-left styele="padding: 0px">
+    <img src={{baseImageUrl}}{{arr[i]}}{{baseImageUrl2}}>
+      </ion-thumbnail>
+      <h2>{{p.alt}}</h2>
+      <p>{{p.publisheddate}}</p>
+      </ion-item>
+  </ion-list>
 
 </ion-content>
+
+<ion-footer class="footer-appture">
+  <ion-scroll zoom="false" scrollX="true" style="height: 60px" class="categories-filter">
+    <span class="footer-col" ng-click="footerLink(links)" *ngFor="let links of commonServices.footerLinks">
+                <ion-row class="padding-top-5">
+                    <ion-col class="col padding-0 text-x-large" (click)="goToFfooterInside(links)">
+                        <i class="icon" [ngClass]="links.icon"></i>
+                      <!--<ion-icon name="search"></ion-icon>-->
+                    </ion-col>
+                </ion-row>
+                <ion-row class="">
+                    <ion-col class="col padding-0 text-small" (click)="goToFfooterInside(links)">
+                        {{links.name}}
+                    </ion-col>
+                </ion-row>
+            </span>
+  </ion-scroll>
+</ion-footer>

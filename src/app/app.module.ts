@@ -1,5 +1,6 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import {EventDetailsPage} from '../pages/event-details/event-details'
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ArticlePage } from '../pages/article/article';
@@ -21,7 +22,7 @@ import { HttpModule } from '@angular/http';
 import { API } from '../providers/api';
 import { commonServices } from '../providers/common-services';
 import { ServerImage } from '../pipes/server-image.pipe';
-
+import {GetImage} from '../pipes/get.images.pipes'
 import { WindowRef } from './windows-ref';
 import {HttpServiceOfActicle} from '../pages/article/article.service';
 import {HttpService} from '../pages/home/home.service'
@@ -29,7 +30,10 @@ import {ContactPage} from '../pages/contact/contact';
 import {HttpServiceOfEvent} from '../pages/events/event.service'
 import {HttpServiceOfSocial} from '../pages/social/social.service';
 import {HttpServiceOfVideoGallary} from '../pages/video-gallery/video-gallery.service';
-import {HttpServiceOfVideoCategory} from '../pages/video-category/video-category.service'
+import {HttpServiceOfVideoCategory} from '../pages/video-category/video-category.service';
+import {HttpServiceOfEventDetails} from '../pages/event-details/event-deatails.service'
+import {HttpServiceOfRss} from '../pages/rss-article/rss.service';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -50,7 +54,10 @@ import {HttpServiceOfVideoCategory} from '../pages/video-category/video-category
     VideoModalPage,
     WalkthroughPage,
     ServerImage,
-      ContactPage
+    GetImage,
+    ContactPage,
+    EventDetailsPage
+
   ],
   imports: [
     IonicModule.forRoot(MyApp), HttpModule
@@ -74,7 +81,8 @@ import {HttpServiceOfVideoCategory} from '../pages/video-category/video-category
     VideoGalleryPage,
     VideoModalPage,
     WalkthroughPage,
-      ContactPage
+      ContactPage,
+    EventDetailsPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},
     API,
@@ -85,7 +93,9 @@ import {HttpServiceOfVideoCategory} from '../pages/video-category/video-category
       HttpServiceOfEvent,
       HttpServiceOfSocial,
       HttpServiceOfVideoGallary,
-      HttpServiceOfVideoCategory
+      HttpServiceOfVideoCategory,
+    HttpServiceOfEventDetails,
+    HttpServiceOfRss
   ]
 })
 export class AppModule { }

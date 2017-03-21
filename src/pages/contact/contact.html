@@ -26,13 +26,23 @@
         <ion-list *ngSwitchCase="'Contact Us'">
 
         <ion-item>
-            <ion-label fixed>Password</ion-label>
-            <ion-input type="text"></ion-input>
+            <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>
+
+            <ion-label fixed>{{data.content}}</ion-label>
+            <ion-input type="text"   [readonly]="isReadonly"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label fixed>Password</ion-label>
-            <ion-input type="text"></ion-input>
+            <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>
+
+            <ion-label fixed>{{data.text}}</ion-label>
+            <ion-input type="text"  [readonly]="isReadonly"></ion-input>
         </ion-item>
+            <ion-item>
+                <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>
+
+                <ion-label fixed>{{data.type}}</ion-label>
+                <ion-input type="readonly"  [readonly]="isReadonly"></ion-input>
+            </ion-item>
             <div [innerHTML]=""></div>
     </ion-list>
 

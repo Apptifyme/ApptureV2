@@ -16,7 +16,7 @@ export class HttpServiceOfEvent {
     }
     getEventData(pageno:number): Observable<any>{
         console.log("Service Method");
-        return this.http.get('http://business.staging.appturemarket.com/index.php/json/getAllEvent?pageno='+pageno+'&maxrow='+15)
+        return this.http.get('http://business.staging.appturemarket.com/index.php/json/getAllEvents?pageno=1&maxrow=15')
             .map(res=>res.json());
     }
 }

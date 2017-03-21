@@ -9,6 +9,7 @@ import {EventsPage} from "../events/events";
 import {ImageCategoryPage} from "../image-category/image-category";
 import {HomePage} from '../home/home';
 
+
 /*
   Generated class for the VideoGallery page.
 
@@ -79,9 +80,9 @@ export class VideoGalleryPage {
               error => console.log(error)
           )
     }
-    goToImages(id:number){
+    goToImages(id:any,i:number){
         console.log(" Inside video category");
-        this.navCtrl.push(VideoCategoryPage,{id:id});
+        this.navCtrl.push(VideoCategoryPage,{id:id,i:i});
     }
 
 }

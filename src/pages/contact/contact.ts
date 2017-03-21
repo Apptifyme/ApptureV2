@@ -3,6 +3,7 @@
  */
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import {commonServices} from '../../providers/common-services';
 
 /*
  Generated class for the Conatct page.
@@ -15,10 +16,18 @@ import { NavController, NavParams } from 'ionic-angular';
     templateUrl: 'contact.html'
 })
 export class ContactPage {
+    data:any;
 
-    constructor(public navCtrl: NavController, public navParams: NavParams) {}
+    constructor(public navCtrl: NavController, public navParams: NavParams , private commonService :commonServices) {
+        console.log(this.commonService.appConfig);
+        this.data=this.commonService.appConfig[5];
+        console.log(this.data);
+        this.getmap();
+    }
+     getmap(){
 
-    ionViewDidLoad() {
+
+     }    ionViewDidLoad() {
         console.log('ionViewDidLoad EventsPage');
     }
 
