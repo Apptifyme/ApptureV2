@@ -155,7 +155,7 @@ export class RssArticlePage {
 
   }
   goRight(){
-      this.loading.present();
+      //this.loading.present();
       console.log("go right");
       console.log(this.index);
       if(this.index<this.commonServices.RssData.length) {
@@ -171,7 +171,6 @@ export class RssArticlePage {
   slideChanged(){
       this.title="";
       this.prev=this.currentIndex;
-
       this.currentIndex=this.slides.getActiveIndex();
          console.log("slide Change");
          if(this.currentIndex<this.prev){
