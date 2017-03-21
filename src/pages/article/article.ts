@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams ,LoadingController ,ModalController} from 'ionic-angular';
 import {HttpServiceOfActicle} from '../article/article.service'
 import {HttpService} from '../home/home.service';
 import { commonServices } from '../../providers/common-services';
@@ -18,14 +18,19 @@ export class ArticlePage {
    public id:number;
    public article={};
    phoneNumber:any;
+   loading:any;
    public articlebaseurl="http://business.staging.appturemarket.com/uploads/";
-  constructor(public navCtrl: NavController, public navParams: NavParams , private httpServiceOfArticle:HttpServiceOfActicle, private httpServiceOfHome: HttpService,private commonServices:commonServices) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public loadingCtrl:LoadingController,public modalCtrl:ModalController, private httpServiceOfArticle:HttpServiceOfActicle, private httpServiceOfHome: HttpService,private commonServices:commonServices) {
      this.id=this.navParams.get('id');
      this.getPageContent(this.id);
+      this.loading = this.loadingCtrl.create({
+          content: 'Please wait...'
+      });
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ArticlePage');
+    this.loading.present();
   }
   getPageContent(id:number){
     this.httpServiceOfArticle.getArticleData(id)
@@ -34,6 +39,7 @@ export class ArticlePage {
               this.article = responce;
               console.log("my Article data fathes");
               console.log(this.article);
+              this.loading.dismiss();
 
             },
             error => console.log(error)

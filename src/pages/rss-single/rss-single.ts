@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import {HttpServiceOfRss} from '../rss-article/rss.service'
+import {HttpServiceOfRss} from '../rss-article/rss.service';
+import {commonServices} from '../../providers/common-services'
 
 /*
   Generated class for the RssSingle page.
@@ -17,7 +18,7 @@ export class RssSinglePage {
  rssData=[];
  i:any;
  title:any;
-  constructor(public navCtrl: NavController, public navParams: NavParams , public httpserviceofRss:HttpServiceOfRss) {
+  constructor(public navCtrl: NavController, public navParams: NavParams , public httpserviceofRss:HttpServiceOfRss , public commonServices:commonServices) {
     this.id=this.navParams.get('id');
     console.log(this.id);
     this.i=this.navParams.get('i');

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams ,ViewController} from 'ionic-angular';
 
 /*
   Generated class for the VideoModal page.
@@ -14,7 +14,7 @@ import { NavController, NavParams } from 'ionic-angular';
 export class VideoModalPage {
    id:any;
    baseUrl:any;
-  constructor(public navCtrl: NavController, public navParams: NavParams ) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl:ViewController) {
     this.id=this.navParams.get('id');
     console.log(this.id);
     console.log(this.id.url);
@@ -24,5 +24,7 @@ export class VideoModalPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad VideoModalPage');
   }
-
+  closeModal() {
+    this.viewCtrl.dismiss();
+  }
 }

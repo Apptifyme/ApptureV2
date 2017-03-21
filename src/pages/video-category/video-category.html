@@ -17,13 +17,13 @@
 
 <ion-content>
   <img src={{videoimage}}{{id.image}}>
-  <ion-list style="margin: 0px; padding:0px;" *ngFor="let p of videodata.queryresult,let i=index" (click)="openVideo(p)">
-      <ion-item>
-      <ion-thumbnail item-left styele="padding: 0px">
-    <img src={{baseImageUrl}}{{arr[i]}}{{baseImageUrl2}}>
+  <ion-list style="margin: 0px; padding:0px; height:80px" *ngFor="let p of videodata.queryresult,let i=index" (click)="openVideo(p)">
+      <ion-item style="margin: 0px;padding: 0px; height:80px">
+      <ion-thumbnail item-left style="padding: 0px; margin-top:0px ; margin-bottom: 0px; height:80px">
+    <img style="height:80px; width:80px" src={{baseImageUrl}}{{arr[i]}}{{baseImageUrl2}}>
       </ion-thumbnail>
-      <h2>{{p.alt}}</h2>
-      <p>{{p.publisheddate}}</p>
+          <h2>{{p.alt}}</h2>
+          <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon> <p>{{p.publisheddate}}</p>
       </ion-item>
   </ion-list>
 

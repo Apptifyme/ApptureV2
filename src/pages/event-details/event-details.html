@@ -7,7 +7,10 @@
 <ion-header>
 
   <ion-navbar class="bar-appture">
-    <ion-title >Event</ion-title>
+      <ion-title class="text-center">
+          <h1 [ngStyle]="{'background': 'url(' + commonServices.headerLogo + ') no-repeat center', 'background-size': 'cover'}" class="title company-logo article-header-logo">&nbsp;</h1>
+          <!--<img src="{{commonServices.headerLogo}}">-->
+      </ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -15,9 +18,9 @@
 
 <ion-content>
   <img src={{imageurl}}{{id.image}}>
-    <h1>{{id.title}}</h1>
-    <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>  <p>{{id.startdate|date }}</p>
-  <div [innerHtml]="id.content"></div>
+    <h1 style="margin:10px; padding:10px">{{id.title}}</h1>
+    <ion-icon style="margin: 10px; padding: 0px" ios="ios-calendar" md="md-calendar"></ion-icon>  <p style="margin: 10px; padding: 0px">{{id.startdate|date }}</p>
+  <div style="margin: 10px; padding: 0px" [innerHtml]="id.content"></div>
 </ion-content>
 
 <ion-footer class="footer-appture">

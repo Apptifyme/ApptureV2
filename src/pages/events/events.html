@@ -13,8 +13,10 @@
   </ion-buttons>
 
 
-
-  <ion-title>Event</ion-title>
+     <ion-title class="text-center">
+      <h1 [ngStyle]="{'background': 'url(' + commonServices.headerLogo + ') no-repeat center', 'background-size': 'cover'}" class="title company-logo article-header-logo">&nbsp;</h1>
+      <!--<img src="{{commonServices.headerLogo}}">-->
+      </ion-title>
     <ion-buttons end>
       <button ion-button icon-only>
         <ion-icon name="md-refresh"></ion-icon>
@@ -24,9 +26,9 @@
 </ion-header>
 <ion-content>
   <ion-list *ngFor="let p of event.queryresult" (click)="gointoEventDetails(p)" style="margin: 0px;padding: 0px">
-      <ion-item style="margin:0px; padding:0px">
-      <ion-thumbnail item-left>
-        <img style="height: 60px; width:80px" src={{imageurl}}{{p.image}}>
+      <ion-item style="margin:0px; padding:0px; height:100px;">
+      <ion-thumbnail item-left style="margin-bottom: 0px; margin-top: 0px; height:100px">
+        <img style="height: 100px; width:80px" src={{imageurl}}{{p.image}}>
       </ion-thumbnail>
       <h6> {{p.title}}</h6>
           <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>  <p>{{p.startdate|date }}</p>

@@ -7,7 +7,11 @@
 <ion-header>
 
   <ion-navbar class="bar-appture">
-    <ion-title >RssSingle </ion-title>
+    <ion-title >
+        <ion-title class="text-center">
+            <h1 [ngStyle]="{'background': 'url(' + commonServices.headerLogo + ') no-repeat center', 'background-size': 'cover'}" class="title company-logo article-header-logo">&nbsp;</h1>
+            <!--<img src="{{commonServices.headerLogo}}">-->
+        </ion-title> </ion-title>
   </ion-navbar>
     <ion-toolbar class="bar-appture">
         <ion-title>{{title}}</ion-title>

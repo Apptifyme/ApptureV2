@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams ,LoadingController,ModalController} from 'ionic-angular';
 import {HttpServiceOfVideoGallary} from '../video-gallery/video-gallery.service';
 import {VideoCategoryPage} from '../video-category/video-category'
 import { commonServices } from '../../providers/common-services';
@@ -25,12 +25,20 @@ export class VideoGalleryPage {
   public baseImageUrl2="/default.jpg";
     public video:any=[];
     public image=[];
-  constructor(public navCtrl: NavController, public navParams: NavParams , private httpServiceOfVideocategory:HttpServiceOfVideoGallary,public commonServices:commonServices) {
+    loading:any;
+  constructor(public navCtrl: NavController, public loadCtrl:LoadingController,public modalCtrl:ModalController,public navParams: NavParams , private httpServiceOfVideocategory:HttpServiceOfVideoGallary,public commonServices:commonServices) {
      this.getVideoCategorydata();
+
+      this.loading = this.loadCtrl.create({
+          content: 'Please wait...'
+      });
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad VideoGalleryPage');
+
+    this.loading.present();
   }
     goToFfooterInside(links:any){
         console.log(links);
@@ -74,6 +82,7 @@ export class VideoGalleryPage {
                 this.video = responce;
                 console.log("my Videogallary data loaded");
                 console.log(this.video);
+                this.loading.dismiss();
                 this.image=this.video.queryresult[1].url.split(',');
                 console.log(this.image);
               },

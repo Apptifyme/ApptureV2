@@ -26,9 +26,9 @@
 
 <ion-content style="padding: 0px; margin: 0px">
   <ion-list *ngFor="let p of video.queryresult,let i=index" style="margin: 0px; padding:0px;">
-      <ion-item style="margin: 0px; padding:0px;">
-          <ion-thumbnail item-left>
-    <img style="height: 60px; width:80px" src="{{baseImageUrl}}{{p.url | getImage}}{{baseImageUrl2}}" (click)="goToImages(p,i)">
+      <ion-item style="margin: 0px; padding:0px; style:100px">
+          <ion-thumbnail item-left style="height:100px; margin-top: 0px; margin-bottom: 0px">
+    <img style="height: 100px; width:90px" src="{{baseImageUrl}}{{p.url | getImage}}{{baseImageUrl2}}" (click)="goToImages(p,i)">
           </ion-thumbnail>
           <h2> {{p.name}} </h2>
           <p>{{p.subtitle}}</p>

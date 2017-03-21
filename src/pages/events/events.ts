@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, LoadingController,ModalController } from 'ionic-angular';
 import {HttpServiceOfEvent} from '../events/event.service'
 import { commonServices } from '../../providers/common-services';
 import {HomePage} from '../home/home';
@@ -9,6 +9,8 @@ import {VideoGalleryPage} from "../video-gallery/video-gallery.ts";
 import {ImageCategoryPage} from "../image-category/image-category";
 import {ArticlePage} from '../article/article'
 import {EventDetailsPage} from '../event-details/event-details';
+
+
 
 /*
   Generated class for the Events page.
@@ -23,12 +25,17 @@ import {EventDetailsPage} from '../event-details/event-details';
 export class EventsPage {
     imageurl="http://business.staging.appturemarket.com/uploads/";
    public event:any=[];
-  constructor(public navCtrl: NavController, public navParams: NavParams , private httpServiceOfEvent:HttpServiceOfEvent ,public commonServices:commonServices) {
+   loading:any;
+  constructor(public navCtrl: NavController, public navParams: NavParams ,public loadingCtrl:LoadingController,public modalCtrl:ModalController, private httpServiceOfEvent:HttpServiceOfEvent ,public commonServices:commonServices) {
       this.onGetData();
+      this.loading = this.loadingCtrl.create({
+          content: 'Please wait...'
+      });
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad EventsPage');
+    this.loading.present();
   }
 
   onGetData(){
@@ -38,7 +45,7 @@ export class EventsPage {
               this.event = responce;
               console.log("my Event data");
               console.log(this.event);
-
+              this.loading.dismiss();
             },
             error => console.log(error)
         )

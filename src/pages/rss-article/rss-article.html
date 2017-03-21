@@ -7,31 +7,35 @@
 <ion-header>
 
   <ion-navbar class="bar-appture">
-    <ion-title>rssArticle</ion-title>
+
+      <ion-title class="text-center">
+          <h1 [ngStyle]="{'background': 'url(' + commonServices.headerLogo + ') no-repeat center', 'background-size': 'cover'}" class="title company-logo article-header-logo">&nbsp;</h1>
+          <!--<img src="{{commonServices.headerLogo}}">-->
+      </ion-title>
   </ion-navbar>
   <ion-toolbar class="bar-appture">
     <ion-buttons start>
-      <button ion-button icon-only>
-        <ion-icon name="md-leftIcon" (click)="goLeft()"></ion-icon>
+      <button ion-button icon-only (click)="goLeft()">Left
+        <ion-icon name="md-left" (click)="goLeft()"></ion-icon>
       </button>
     </ion-buttons>
     <ion-title>{{title}}</ion-title>
     <ion-buttons end>
-      <button ion-button icon-only>
-        <ion-icon name="md-rightIcon" (click)="goRight()"></ion-icon>
+      <button ion-button icon-only (click)="goRight()">Right
+        <ion-icon name="md-right" (click)="goRight()"></ion-icon>
       </button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content scrollY="true">
-  <ion-slides (ionSlideDidChange)="slideChanged()" scrollY="true">
+  <ion-slides overlay="true" (ionSlideDidChange)="slideChanged()" scrollY="true">
 
-    <ion-slide *ngFor="let p of commonServices.RssData" scrollY="true">
-      <ion-list *ngFor="let q of Rsscontent[i].items" (click)="goinsideRSS(q,i)" style="margin:0px; padding:0px">
-        <ion-item style="margin:0px; padding:0px">
-          <ion-thumbnail item-left style=" padding: 0px; margin-top: 0px; margin-bottom: 0px">
-            <img src={{q.imageLink}}>
+    <ion-slide overlay="true" *ngFor="let p of commonServices.RssData" scrollY="true">
+      <ion-list *ngFor="let q of Rsscontent[i].items" (click)="goinsideRSS(q,i)" style="margin:0px; padding:0px; height:100px">
+        <ion-item style="margin:0px; padding:0px; height:100px">
+          <ion-thumbnail item-left style=" padding: 0px; margin-top: 0px; margin-bottom: 0px; height:100px">
+            <img style="height:100px; width:90px" src={{q.imageLink}}>
           </ion-thumbnail>
           <h3> {{q.title}} </h3>
 

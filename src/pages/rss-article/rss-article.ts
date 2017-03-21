@@ -1,5 +1,5 @@
 import { Component ,ViewChild} from '@angular/core';
-import { NavController, NavParams,Slides } from 'ionic-angular';
+import { NavController, NavParams,Slides,LoadingController, ModalController } from 'ionic-angular';
 import {commonServices} from '../../providers/common-services'
 import {HttpServiceOfRss} from '../rss-article/rss.service'
 import {RssSinglePage} from '../rss-single/rss-single';
@@ -33,7 +33,8 @@ export class RssArticlePage {
   url="";
   currentIndex=0;
   prev=0;
-    constructor(public navCtrl: NavController, public navParams: NavParams , public commonServices:commonServices , public httpserviceOfRss:HttpServiceOfRss) {
+  loading:any;
+    constructor(public navCtrl: NavController, public navParams: NavParams ,public loadingController:LoadingController,public modalController:ModalController , public commonServices:commonServices , public httpserviceOfRss:HttpServiceOfRss) {
     console.log(this.commonServices.RssData);
     this.index=this.navParams.get('id');
     this.i=this.index;
@@ -44,7 +45,9 @@ export class RssArticlePage {
     this.url=this.commonServices.RssData[this.index].title;
     console.log(this.url);
      this.loadRssdata(this.url);
-
+        this.loading = this.loadingController.create({
+            content: 'Please wait...'
+        });
 
   }
   loadRssdata(url){
@@ -57,8 +60,9 @@ export class RssArticlePage {
               this.RssData = responce;
               console.log("my Rss data Loaded");
               console.log(this.RssData);
+                this.loading.dismiss();
 
-              if(this.RssData[this.index]==null) {
+                if(this.RssData[this.index]==null) {
                 this.Rsscontent[this.index]=this.RssData;
                 console.log(this.index);
                 console.log(this.Rsscontent);
@@ -122,6 +126,8 @@ export class RssArticlePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RssArticlePage');
+      this.loading.present();
+
   }
     getBlogImage(htmlString) {
     var string1 = htmlString.substring(htmlString.indexOf('src="'), htmlString.indexOf('"', htmlString.indexOf('src="') + 5));
@@ -135,6 +141,7 @@ export class RssArticlePage {
     return imageString;
     }
   goLeft(){
+
       console.log("go left");
       console.log(this.index);
          if(this.index>0) {
@@ -148,7 +155,7 @@ export class RssArticlePage {
 
   }
   goRight(){
-
+      this.loading.present();
       console.log("go right");
       console.log(this.index);
       if(this.index<this.commonServices.RssData.length) {
@@ -164,6 +171,7 @@ export class RssArticlePage {
   slideChanged(){
       this.title="";
       this.prev=this.currentIndex;
+
       this.currentIndex=this.slides.getActiveIndex();
          console.log("slide Change");
          if(this.currentIndex<this.prev){

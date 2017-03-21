@@ -7,12 +7,41 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>rss</ion-title>
+    <ion-title class="text-center">
+      <h1 [ngStyle]="{'background': 'url(' + commonServices.headerLogo + ') no-repeat center', 'background-size': 'cover'}" class="title company-logo article-header-logo">&nbsp;</h1>
+      <!--<img src="{{commonServices.headerLogo}}">-->
+    </ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+  <ion-grid>
+  <ion-row *ngFor="let p of commonService.RssData">
+    <ion-col col-12 *ngIf="i % 2 == 0" style="padding:0; margin: 0">
+      <img class="full-image" alt="" src="{{p.image | serverImage}}" (click)="gotoRss(i)">
+    </ion-col>
+  </ion-row>
+  </ion-grid>
 
 </ion-content>
+
+
+<ion-footer class="footer-appture">
+  <ion-scroll zoom="false" scrollX="true" style="height: 60px" class="categories-filter">
+    <span class="footer-col" ng-click="footerLink(links)" *ngFor="let links of commonServices.footerLinks">
+                <ion-row class="padding-top-5">
+                    <ion-col class="col padding-0 text-x-large" (click)="goToFfooterInside(links)">
+                        <i class="icon" [ngClass]="links.icon"></i>
+                      <!--<ion-icon name="search"></ion-icon>-->
+                    </ion-col>
+                </ion-row>
+                <ion-row class="">
+                    <ion-col class="col padding-0 text-small" (click)="goToFfooterInside(links)">
+                        {{links.name}}
+                    </ion-col>
+                </ion-row>
+            </span>
+  </ion-scroll>
+</ion-footer>
