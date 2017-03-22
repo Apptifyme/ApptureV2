@@ -17,7 +17,8 @@ export class LandingPage {
     public allDataPromise:any = [];
     public allObservableData:any = [];
 
-    constructor(public navCtrl:NavController, public navParams:NavParams, public platform:Platform, public api:API, public commonServices:commonServices) {
+    constructor(public navCtrl:NavController, public navParams:NavParams, 
+    public platform:Platform, public api:API, public commonServices:commonServices) {
         this.platform = platform;
     }
 

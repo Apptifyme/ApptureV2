@@ -145,3 +145,24 @@ color: white;
 .black-bg{
     background: black;
 }
+.list-ios > .item-block:last-child, .list-ios > .item-wrapper:last-child .item-block{
+    border-bottom:none!important;
+}
+.item-block{
+    min-height: 5rem!important;
+}
+.translucent-menu{
+    background: transparent!important;
+    .menu-inner{
+        background: rgba(0,0,0,0.8)!important;
+        ion-content{
+            background: transparent!important;
+            ion-list{
+                background: transparent!important;
+                ion-item{
+                    background: transparent!important;
+                }
+            }
+        }
+    }
+}

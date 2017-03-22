@@ -25,28 +25,28 @@ export class MyApp {
   constructor(public platform: Platform, public commonServices: commonServices, public api: API) {
     this.initializeApp();
     console.log(this.commonServices);
-     if(this.commonServices.RSSarray.length==0) {
-       this.api.getAllFrontMenu().subscribe((data) => {
-         console.log(data);
-         data.menu.map(item => {
-           // console.log(item);
-           if (item.linktypename == "Pages" && this.commonServices.isURL(item.articlename)) {
+    //  if(this.commonServices.RSSarray.length==0) {
+    //    this.api.getAllFrontMenu().subscribe((data) => {
+    //      console.log(data);
+    //      data.menu.map(item => {
+    //        // console.log(item);
+    //        if (item.linktypename == "Pages" && this.commonServices.isURL(item.articlename)) {
 
-             this.commonServices.RSSarray.push(item);
-           }
-           else {
-             this.commonServices.menuData.push(item);
-           }
-         });
-         console.log(this.commonServices.menuData);
-         for(var i=0;i<this.commonServices.menuData.length;i++){
-                       if(this.commonServices.menuData[i].name=="My Profile"){
-                         this.commonServices.menuData[i].name="BreakingNews";
-                       }
-         }
-       });
-       console.log(this.commonServices.RSSarray);
-     }
+    //          this.commonServices.RSSarray.push(item);
+    //        }
+    //        else {
+    //          this.commonServices.menuData.push(item);
+    //        }
+    //      });
+    //      console.log(this.commonServices.menuData);
+    //      for(var i=0;i<this.commonServices.menuData.length;i++){
+    //                    if(this.commonServices.menuData[i].name=="My Profile"){
+    //                      this.commonServices.menuData[i].name="BreakingNews";
+    //                    }
+    //      }
+    //    });
+    //    console.log(this.commonServices.RSSarray);
+    //  }
 
     // used for an example of ngFor and navigation
     this.pages = [
