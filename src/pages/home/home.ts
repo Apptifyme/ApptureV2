@@ -29,9 +29,9 @@ export class HomePage {
   }
 
   ionViewDidLoad() {
-    console.log("Header in Home form service",this.commonServices.headerLogo);
+    // console.log("Header in Home form service",this.commonServices.headerLogo);
     this.headerLogo = this.commonServices.headerLogo;
-    console.log('ionViewDidLoad HomePage');
+    // console.log('ionViewDidLoad HomePage');
     this.slides = this.commonServices.slides;
     this.slider1Loading = false;
     this.fetchRSSData();
@@ -92,21 +92,21 @@ export class HomePage {
 
         //If there is URL in page name, it means it contains RSS feed links
         if (n.linktypename == "Pages" && this.commonServices.isURL(n.articlename)) {
-          console.log(this.commonServices.RSSarray);
+          // console.log(this.commonServices.RSSarray);
 
         //  this.commonServices.RSSarray=[];
             console.log(this.commonServices.RSSarray);
           this.commonServices.RSSarray.push(newmenu);
 
-          console.log(this.commonServices.RSSarray);
+          // console.log(this.commonServices.RSSarray);
 
-          console.log(n);
+          // console.log(n);
 
         }
-        console.log(this.commonServices.RSSarray);
+        // console.log(this.commonServices.RSSarray);
       }
     });
-    console.log('from sortlinks');
+    // console.log('from sortlinks');
     if(this.RSS.length == 0){
       this.fetchRSSData();
     }
@@ -129,13 +129,13 @@ export class HomePage {
     let categories = [];
     Observable.forkJoin(promise)
       .subscribe((response) => {
-        console.log("Response:", response);
+        // console.log("Response:", response);
         this.RSS = [];
         for(var i = 0; i< response.length; i++){
-          console.log(response[i]);
+          // console.log(response[i]);
           if(this.RSS.indexOf(response[i]) === -1){
             this.RSS.push(response[i]);
-            console.log(response[i]);
+            // console.log(response[i]);
           }
         }
 
@@ -170,8 +170,8 @@ export class HomePage {
 
   }
   goToInside(id:number){
-    console.log("page Change Article");
-    console.log(id);
+    // console.log("page Change Article");
+    // console.log(id);
     this.navCtrl.push(ArticlePage,{id:id});
   }
   goToFfooterInside(links:any){
@@ -210,7 +210,7 @@ export class HomePage {
     }
   }
   gotoRss(i:number){
-    console.log(i);
+    // console.log( i);
     this.navCtrl.push(RssArticlePage,{id:i})
   }
 }

@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import {commonServices} from '../../providers/common-services'
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, Platform } from 'ionic-angular';
 import {HttpServiceOfSocial} from "../social/social.service";
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+
 /*
   Generated class for the Social page.
 
@@ -10,44 +12,47 @@ import {HttpServiceOfSocial} from "../social/social.service";
 */
 @Component({
   selector: 'page-social',
-  templateUrl: 'social.html'
+  templateUrl: 'social.html',
+  providers:[InAppBrowser]
 })
 export class SocialPage {
     m=[];
    social=[];
-   n:any=[];
-  constructor(public navCtrl: NavController, public navParams: NavParams , private httpServiceOfSocial : HttpServiceOfSocial ,public commonService:commonServices) {
-      this.n=this.commonService.appConfig[6].text;
-       console.log(this.n);
+   socialData:any=[];
+  constructor(public navCtrl: NavController, public navParams: NavParams , 
+  private httpServiceOfSocial : HttpServiceOfSocial ,public commonService:commonServices,
+  private iab: InAppBrowser, public plt: Platform) {
+      this.socialData=JSON.parse(this.commonService.appConfig[6].text);
+       console.log( this.socialData);
       console.log(this.commonService.appConfig[6].text);
-      for(var i=0;i<this.n.length;i++)
+      for(var i=0;i<this.socialData.length;i++)
       {
           console.log("in for");
 
-          switch(this.n[i].name){
+          switch(this.socialData[i].name){
               case 'facebookappid':
                //   this.m[i].image = 'img/social/facebook.jpg';
                   console.log("hey");
-                  this.n[i].image='img/social/facebook.jpg';
+                  this.socialData[i].image='assets/img/social/facebook.jpg';
                   break;
               case 'twitterappid':
                  // this.m[i].image = 'img/social/twitter.jpg';
-                  this.n[i].image=('img/social/twitter.jpg');
+                  this.socialData[i].image=('assets/img/social/twitter.jpg');
                   break;
               case 'tumblrappid':
                 //  this.m[i].image = 'img/social/tumblr.jpg';
-                  this.n[i].image=('img/social/tumblr.jpg');
+                  this.socialData[i].image=('assets/img/social/tumblr.jpg');
                   break;
               case 'youtubeappid':
               //    this.m[i].image = 'img/social/youtube.jpg';
-                  this.n[i].image=('img/social/youtube.jpg');
+                  this.socialData[i].image=('assets/img/social/youtube.jpg');
                   break;
               case 'googleplusappid':
             //      this.m[i].image = 'img/social/googleplus.jpg';
-                  this.n[i].image=('img/social/googleplus.jpg');
+                  this.socialData[i].image=('assets/img/social/googleplus.jpg');
                   break;
               case "instagramappid":
-                  this.n[i].image=('img/social/instagram.jpg');
+                  this.socialData[i].image=('assets/img/social/instagram.jpg');
                   break;
           }
       }
@@ -72,5 +77,15 @@ export class SocialPage {
             error => console.log(error)
         )
 
+  }
+
+  goSocial(link){
+      if (this.plt.is('cordova')) {
+            const browser = this.iab.create(link, '_blank', 'location=yes');
+            browser.show();
+    }
+    else{
+        window.open(link, "_blank");
+    }
   }
 }

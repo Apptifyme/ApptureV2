@@ -13,20 +13,21 @@
     </ion-buttons>
 
 
-    <ion-title class="bar-appture">social Feeds</ion-title>
+    <ion-title class="bar-appture">Social Feeds</ion-title>
 
   </ion-toolbar>
 </ion-header>
 
 
-<ion-content padding>
-  <ion-grid>
-    <ion-row *ngFor="let p of n" style="padding:0px; margin:0px;">
-      <ion-col col-12 style="padding:0px; margin:0px;" class="lightgray-bg">
-        <img style="padding:0px; margin:0px; " src={{n.image}}>
-
-        <h1> HII </h1>
-       </ion-col>
+<ion-content>
+  <ion-grid class="padding-0">
+    <ion-row  class="padding-0">
+      <ion-col *ngFor="let p of socialData;let i=index;" col-6 class="lightgray-bg" class="padding-0">
+        <img [src]=p.image *ngIf="(index%2)" class="block" (click)="goSocial(p.value)">
+      </ion-col>
+      <ion-col *ngFor="let p of socialData" col-6 class="lightgray-bg" class="padding-0">
+        <img [src]=p.image *ngIf="!(index%2)" class="block" (click)="goSocial(p.value)">
+      </ion-col>
     </ion-row>
   </ion-grid>
 

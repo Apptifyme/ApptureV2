@@ -36,19 +36,18 @@ export class LandingPage {
         this.allDataPromise.push(frontMenuPromise);
         this.api.getAllFootermenu()
             .subscribe((data) => {
-                console.log(data);
+                // console.log(data);
                 this.commonServices.footerLinks = data.menu;
             });
         this.checkHomeScreen();
     }
 
     checkHomeScreen() {
-        console.log(this.allDataPromise);
+        // console.log(this.allDataPromise);
         Observable.forkJoin(this.allDataPromise).subscribe((resPromise) => {
 
-            console.log("all data aa gya bhai");
             this.allObservableData = resPromise;
-            console.log(this.allObservableData[0]);
+            // console.log(this.allObservableData[0]);
             this.allObservableData[0]
                 .map(item => {
                     if (item.title == 'Header Logo') {
@@ -56,11 +55,11 @@ export class LandingPage {
                         this.commonServices.headerLogo = 'http://business.staging.appturemarket.com/uploads/header-logo/' + item.image;
                     }
                 });
-            console.log(this.allObservableData[1]);
-            console.log(this.allObservableData[2]);
+            // console.log(this.allObservableData[1]);
+            // console.log(this.allObservableData[2]);
             this.commonServices.slides = this.allObservableData[1];
             this.commonServices.banners = this.allObservableData[2].menu;
-            console.log(this.allObservableData[3]);
+            // console.log(this.allObservableData[3]);
             this.commonServices.AllMenuData = this.allObservableData[3];
             this.allObservableData[3].menu.map(item => {
                 if (item.linktypename == "Pages" && this.commonServices.isURL(item.articlename)) {
@@ -70,7 +69,7 @@ export class LandingPage {
                     this.commonServices.menuData.push(item);
                 }
             });
-            console.log(this.commonServices.menuData);
+            // console.log(this.commonServices.menuData);
             this.checkWalkThroughFlag();
             this.platform.ready().then(() => {
                 setTimeout(() => {
