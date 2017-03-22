@@ -34,6 +34,9 @@ import {HttpServiceOfVideoCategory} from '../pages/video-category/video-category
 import {HttpServiceOfEventDetails} from '../pages/event-details/event-deatails.service'
 import {HttpServiceOfRss} from '../pages/rss-article/rss.service';
 import {GetTime} from '../pipes/get.time.pipes'
+//import {SafePipe} from '../pipes/get.trust.pipes'
+import {SafeBase} from '../pipes/get.base.pipe'
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -58,7 +61,9 @@ import {GetTime} from '../pipes/get.time.pipes'
     GetImage,
     ContactPage,
     EventDetailsPage,
-    GetTime
+    GetTime,
+   // SafePipe,
+      SafeBase
 
   ],
   imports: [
@@ -97,7 +102,8 @@ import {GetTime} from '../pipes/get.time.pipes'
       HttpServiceOfVideoGallary,
       HttpServiceOfVideoCategory,
     HttpServiceOfEventDetails,
-    HttpServiceOfRss
+    HttpServiceOfRss,
+      DatePipe
   ]
 })
 export class AppModule { }
