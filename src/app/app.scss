@@ -354,3 +354,25 @@ color: white;
 .article-image{
     min-height: 200px;
 }
+.item-border-full-bottom{
+    border: 1px solid #ccc;
+    .item-inner{
+        border: none!important;
+    }
+}
+.item-border-none{
+    .item-inner{
+        border: none!important;
+    }
+}
+.item-small{
+    min-height: 10px!important;
+    ion-icon{
+        margin-top: 0!important;
+        margin-bottom: 0!important;
+    }
+    ion-label{
+         margin-top: 0!important;
+        margin-bottom: 0!important;
+    }
+}

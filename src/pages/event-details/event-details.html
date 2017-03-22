@@ -7,10 +7,10 @@
 <ion-header>
 
   <ion-navbar class="bar-appture">
-      <ion-title class="text-center">
-          <h1 [ngStyle]="{'background': 'url(' + commonServices.headerLogo + ') no-repeat center', 'background-size': 'cover'}" class="title company-logo article-header-logo">&nbsp;</h1>
-          <!--<img src="{{commonServices.headerLogo}}">-->
-      </ion-title>
+    <ion-title class="text-center">
+      <h1 [ngStyle]="{'background': 'url(' + commonServices.headerLogo + ') no-repeat center', 'background-size': 'cover'}" class="title company-logo article-header-logo">&nbsp;</h1>
+      <!--<img src="{{commonServices.headerLogo}}">-->
+    </ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -18,11 +18,16 @@
 
 <ion-content>
   <img src={{imageurl}}{{id.image}}>
-    <h1 style="margin:10px; padding:10px">{{id.title}}</h1>
-    <ion-item>
-    <ion-icon item-left style="margin: 10px; padding: 0px" ios="ios-calendar" md="md-calendar"></ion-icon>  <p style="margin: 10px; padding: 0px">{{id.startdate|date }}</p>
+  <h2 class="margin-0 padding-10 playfair">{{id.title}}</h2>
+    <ion-item class="item-border-none item-small">
+      <ion-icon class="assertive" item-left ios="ios-calendar" md="md-calendar"></ion-icon>
+      <h2 class="gray">{{id.startdate|date }}</h2>
     </ion-item>
-  <div style="margin: 10px; padding: 0px" [innerHtml]="id.content"></div>
+    <ion-item class="item-border-full-bottom padding-bottom-5 item-small">
+      <ion-icon class="assertive" item-left ios="ios-locate-outline" md="md-locate"></ion-icon>
+      <h2 class="gray">{{id.venue }}</h2>
+    </ion-item>
+    <div style="margin: 10px; padding: 0px" [innerHtml]="id.content"></div>
 </ion-content>
 
 <ion-footer class="footer-appture">

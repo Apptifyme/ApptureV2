@@ -6,36 +6,40 @@
 -->
 <ion-header>
   <ion-toolbar class="bar-appture">
-  <ion-buttons start>
-    <button ion-button icon-only menuToggle>
+    <ion-buttons start>
+      <button ion-button icon-only menuToggle>
       <ion-icon class="bar-appture" ios="ios-menu" md="md-menu"></ion-icon>
     </button>
-  </ion-buttons>
+    </ion-buttons>
 
 
-     <ion-title class="text-center">
+    <ion-title class="text-center">
       <h1 [ngStyle]="{'background': 'url(' + commonServices.headerLogo + ') no-repeat center', 'background-size': 'cover'}" class="title company-logo article-header-logo">&nbsp;</h1>
       <!--<img src="{{commonServices.headerLogo}}">-->
-      </ion-title>
+    </ion-title>
     <ion-buttons end>
       <button ion-button icon-only>
         <ion-icon name="md-refresh"></ion-icon>
       </button>
     </ion-buttons>
-    </ion-toolbar>
+  </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-list *ngFor="let p of event.queryresult" (click)="gointoEventDetails(p)" style="margin: 0px;padding: 0px">
-      <ion-item style="margin:0px; padding:0px; height:100px;">
-      <ion-thumbnail item-left style="margin-bottom: 0px; margin-top: 0px; height:100px">
-        <img style="height: 100px; width:80px" src={{imageurl}}{{p.image}}>
+  <ion-list>
+    <ion-item *ngFor="let p of event.queryresult" (click)="gointoEventDetails(p)" class="event-item">
+      <ion-thumbnail item-left>
+        <img src={{imageurl}}{{p.image}}>
       </ion-thumbnail>
-      <h6> {{p.title}}</h6>
-          <ion-item>
-          <ion-icon item-left ios="ios-calendar" md="md-calendar"></ion-icon>  <p>{{p.startdate|date }}</p>
-          </ion-item>
-  </ion-item>
-          <!--<p>{{p.starttime| date:'shortTime'}}</p>-->
+      <h2> {{p.title}}</h2>
+      <p>
+        <span>    
+              <ion-icon ios="ios-calendar-outline" md="md-calendar"></ion-icon>
+        </span> 
+        {{p.startdate|date}}
+        </p>
+
+    </ion-item>
+    <!--<p>{{p.starttime| date:'shortTime'}}</p>-->
   </ion-list>
 </ion-content>
 

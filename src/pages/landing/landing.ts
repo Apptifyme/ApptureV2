@@ -1,12 +1,12 @@
-import {Component, Injectable} from '@angular/core';
-import {NavController, NavParams, Platform} from 'ionic-angular';
-import {Device, Splashscreen, NativeStorage} from 'ionic-native';
-import {API} from '../../providers/api';
-import {commonServices} from '../../providers/common-services';
-import {Observable} from 'rxjs/Rx';
+import { Component, Injectable } from '@angular/core';
+import { NavController, NavParams, Platform } from 'ionic-angular';
+import { Device, Splashscreen, NativeStorage } from 'ionic-native';
+import { API } from '../../providers/api';
+import { commonServices } from '../../providers/common-services';
+import { Observable } from 'rxjs/Rx';
 
-import {HomePage} from '../../pages/home/home';
-import {WalkthroughPage} from '../../pages/walkthrough/walkthrough';
+import { HomePage } from '../../pages/home/home';
+import { WalkthroughPage } from '../../pages/walkthrough/walkthrough';
 
 @Component({
     selector: 'page-landing',
@@ -14,11 +14,11 @@ import {WalkthroughPage} from '../../pages/walkthrough/walkthrough';
     providers: []
 })
 export class LandingPage {
-    public allDataPromise:any = [];
-    public allObservableData:any = [];
+    public allDataPromise: any = [];
+    public allObservableData: any = [];
 
-    constructor(public navCtrl:NavController, public navParams:NavParams, 
-    public platform:Platform, public api:API, public commonServices:commonServices) {
+    constructor(public navCtrl: NavController, public navParams: NavParams,
+        public platform: Platform, public api: API, public commonServices: commonServices) {
         this.platform = platform;
     }
 
@@ -71,22 +71,25 @@ export class LandingPage {
             });
             // console.log(this.commonServices.menuData);
             this.checkWalkThroughFlag();
-            this.platform.ready().then(() => {
-                setTimeout(() => {
-                    if (Device.platform == "iOS" || Device.platform == "Android") {
-                        Splashscreen.hide();
-                    }
-                }, 500);
-            })
+            // this.platform.ready().then(() => {
+            //     setTimeout(() => {
+            //         if (Device.platform == "iOS" || Device.platform == "Android") {
+            //             Splashscreen.hide();
+            //         }
+            //     }, 500);
+            // })
         });
     }
 
     checkWalkThroughFlag() {
         if (this.platform.is('cordova')) {
             // This will only print when on iOS
-            console.log("I'm on device!");
-            NativeStorage.getItem('walkThroughFlag')
-                .then(
+            // console.log("I'm on device!");
+            Splashscreen.hide();
+
+            setTimeout(() => {
+                NativeStorage.getItem('walkThroughFlag')
+                    .then(
                     data => {
                         console.log(data);
                         if (data) {
@@ -99,8 +102,11 @@ export class LandingPage {
                         console.error(error);
                         this.navCtrl.setRoot(WalkthroughPage);
                     }
-                );
-        } else {
+                    );
+            }, 1000);
+
+        }
+         else {
             this.navCtrl.setRoot(HomePage);
         }
     }
