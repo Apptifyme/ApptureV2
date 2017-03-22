@@ -4,13 +4,13 @@ import { NavController, NavParams } from 'ionic-angular';
 import { API } from '../../providers/api';
 import { commonServices } from '../../providers/common-services';
 import { Observable } from 'rxjs/Rx';
-import {ArticlePage} from '../article/article'
-import {ContactPage} from '../contact/contact';
-import {VideoCategoryPage} from '../video-category/video-category'
-import {EventsPage} from "../events/events";
-import {VideoGalleryPage} from "../video-gallery/video-gallery.ts";
-import {ImageCategoryPage} from "../image-category/image-category";
-import {RssArticlePage} from "../rss-article/rss-article"
+import { ArticlePage } from '../article/article'
+import { ContactPage } from '../contact/contact';
+import { VideoCategoryPage } from '../video-category/video-category'
+import { EventsPage } from "../events/events";
+import { VideoGalleryPage } from "../video-gallery/video-gallery.ts";
+import { ImageCategoryPage } from "../image-category/image-category";
+import { RssArticlePage } from "../rss-article/rss-article"
 
 @Component({
   selector: 'page-home',
@@ -34,23 +34,26 @@ export class HomePage {
     // console.log('ionViewDidLoad HomePage');
     this.slides = this.commonServices.slides;
     this.slider1Loading = false;
+    this.RSS = this.commonServices.RSSarray;
+    this.banners = this.commonServices.banners;
+    console.log(this.commonServices.RSSarray);
     this.fetchRSSData();
-    this.sortRssLinks(this.commonServices.AllMenuData);
-    this.getAppconfig();
+    // this.sortRssLinks(this.commonServices.AllMenuData);
+    // this.getAppconfig();
   }
 
-  getAppconfig(){
+  getAppconfig() {
 
-      this.api.getHeaderLogo()
-          .subscribe(
-              responce => {
-                this.commonServices.appConfig = responce;
-                console.log("my Social Data data");
-                console.log(this.commonServices.appConfig);
+    this.api.getHeaderLogo()
+      .subscribe(
+      responce => {
+        this.commonServices.appConfig = responce;
+        console.log("my Social Data data");
+        console.log(this.commonServices.appConfig);
 
-              },
-              error => console.log(error)
-          )
+      },
+      error => console.log(error)
+      )
 
   }
 
@@ -94,8 +97,8 @@ export class HomePage {
         if (n.linktypename == "Pages" && this.commonServices.isURL(n.articlename)) {
           // console.log(this.commonServices.RSSarray);
 
-        //  this.commonServices.RSSarray=[];
-            console.log(this.commonServices.RSSarray);
+          //  this.commonServices.RSSarray=[];
+          console.log(this.commonServices.RSSarray);
           this.commonServices.RSSarray.push(newmenu);
 
           // console.log(this.commonServices.RSSarray);
@@ -107,77 +110,82 @@ export class HomePage {
       }
     });
     // console.log('from sortlinks');
-    if(this.RSS.length == 0){
+    if (this.RSS.length == 0) {
       this.fetchRSSData();
     }
   }
 
 
-  fetchRSSData(): void {
-    let i = 0;
+  fetchRSSData() {
     let promise = [];
-    this.commonServices.RSSarray.map((n) => {
-      if (n.typeid) {
-        promise[i] = this.api.getSingleArticle(n.typeid)
-        i++;
-        // .subscribe((data) => {
-        //   this.RSS.push(data);
-        //   this.commonServices.RSS.feeds.push({});
-        // });
-      }
-    });
+    for (let i = 0; i < this.commonServices.RSSarray.length; i++) {
+      promise[i] = this.api.getSingleArticle(this.commonServices.RSSarray[i].article)
+    }
+    console.log(promise)
+    // this.commonServices.RSSarray.map((n) => {
+    //   if (n.typeid) {
+    //     promise[i] = this.api.getSingleArticle(n.typeid)
+    //     i++;
+    // .subscribe((data) => {
+    //   this.RSS.push(data);
+    //   this.commonServices.RSS.feeds.push({});
+    // });
+    //   }
+    // });
     let categories = [];
     Observable.forkJoin(promise)
       .subscribe((response) => {
         // console.log("Response:", response);
         this.RSS = [];
-        for(var i = 0; i< response.length; i++){
+        for (var i = 0; i < response.length; i++) {
           // console.log(response[i]);
-          if(this.RSS.indexOf(response[i]) === -1){
+          if (this.RSS.indexOf(response[i]) === -1) {
             this.RSS.push(response[i]);
             // console.log(response[i]);
           }
         }
+        console.log(this.RSS);
+
 
         // this.RSS = response;
         let index = 0;
-        this.RSS.map(n => {
-          n.name = this.commonServices.RSSarray[index].name;
-          n.typeid = this.commonServices.RSSarray[index].typeid;
-          var content = n.content.replace(/<[^>]*>/g, '');
-          content = content.replace(' ', '').toLowerCase();
-          content = content.replace('nbsp', '');
-          content = content.replace(/[^a-zA-Z,]/g, "");
-          n.categories = content.split(',');
+        // this.RSS.map(n => {
+        //   n.name = this.commonServices.RSSarray[index].name;
+        //   n.typeid = this.commonServices.RSSarray[index].typeid;
+        //   var content = n.content.replace(/<[^>]*>/g, '');
+        //   content = content.replace(' ', '').toLowerCase();
+        //   content = content.replace('nbsp', '');
+        //   content = content.replace(/[^a-zA-Z,]/g, "");
+        //   n.categories = content.split(',');
 
-          n.categories.map(category => categories.push(category));
+        //   n.categories.map(category => categories.push(category));
 
-        });
+        // });
 
-        categories.map( category => {
-          if(this.categories.indexOf(category) === -1){
-            this.categories.push(category);
+        // categories.map(category => {
+        //   if (this.categories.indexOf(category) === -1) {
+        //     this.categories.push(category);
 
-          }
-        });
-        this.commonServices.RssData=this.RSS;
-        this.categories.unshift('All');
-        console.log(this.categories);
+        //   }
+        // });
+        this.commonServices.RssData = this.RSS;
+        // this.categories.unshift('All');
+        // console.log(this.categories);
 
 
 
       });
 
   }
-  goToInside(id:number){
+  goToInside(id: number) {
     // console.log("page Change Article");
     // console.log(id);
-    this.navCtrl.push(ArticlePage,{id:id});
+    this.navCtrl.push(ArticlePage, { id: id });
   }
-  goToFfooterInside(links:any){
+  goToFfooterInside(links: any) {
     console.log(links);
-    var str:any;
-    switch(links.linktypelink){
+    var str: any;
+    switch (links.linktypelink) {
       case 'home':
         str = HomePage;
         break;
@@ -197,20 +205,20 @@ export class HomePage {
         links.typeid = 0;
 
     }
-    if(links.linktypelink=="Phone Call"){
-//      window.open('tel:' + ('+1' + $rootScope.phoneNumber), '_system');
+    if (links.linktypelink == "Phone Call") {
+      //      window.open('tel:' + ('+1' + $rootScope.phoneNumber), '_system');
     }
     else if (links.linktypelink == "home") {
-      this.navCtrl.push(HomePage,{});
+      this.navCtrl.push(HomePage, {});
 
     }
     else {
       console.log("page Change");
-      this.navCtrl.push(str,{});
+      this.navCtrl.push(str, {});
     }
   }
-  gotoRss(i:number){
+  gotoRss(i: number) {
     // console.log( i);
-    this.navCtrl.push(RssArticlePage,{id:i})
+    this.navCtrl.push(RssArticlePage, { id: i })
   }
 }
