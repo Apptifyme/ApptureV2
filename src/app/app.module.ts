@@ -67,7 +67,9 @@ import { DatePipe } from '@angular/common';
 
   ],
   imports: [
-    IonicModule.forRoot(MyApp), HttpModule
+    IonicModule.forRoot(MyApp,{
+      backButtonText: ''
+    }), HttpModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
