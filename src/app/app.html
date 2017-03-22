@@ -5,12 +5,12 @@
     </ion-toolbar>
   </ion-header>-->
 
-  <ion-content class="no-header raleway"> 
-    <ion-list class="menu-set">
-      <ion-item class="font-18" *ngFor="let menu of commonServices.menuData"
+  <ion-content style="background-color:black" class="no-header raleway">
+    <ion-list style="background-color:black" class="menu-set">
+      <ion-item menuClose style="background-color:black" class="font-18" *ngFor="let menu of commonServices.menuData"
         (click)="gotoArticle(menu.id, menu.name, menu.articlename , menu.article , menu.linktypelink)">
-        <i class="icon {{menu.icon}}" item-left></i>
-        <span>{{menu.name}}</span>
+        <i style="color:white" class="icon {{menu.icon}}" item-left></i>
+        <span style="color:white">{{menu.name}}</span>
       </ion-item>
     </ion-list>
   </ion-content>

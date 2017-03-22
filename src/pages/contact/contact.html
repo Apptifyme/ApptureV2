@@ -43,7 +43,7 @@
                 <ion-label fixed>{{data.type}}</ion-label>
                 <ion-input type="readonly"  [readonly]="isReadonly"></ion-input>
             </ion-item>
-            <div [innerHTML]=""></div>
+            <div class="map" [innerHTML]="data.discription"></div>
     </ion-list>
 
         <ion-list *ngSwitchCase="'Contact From'">

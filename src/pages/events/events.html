@@ -31,7 +31,9 @@
         <img style="height: 100px; width:80px" src={{imageurl}}{{p.image}}>
       </ion-thumbnail>
       <h6> {{p.title}}</h6>
-          <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>  <p>{{p.startdate|date }}</p>
+          <ion-item>
+          <ion-icon item-left ios="ios-calendar" md="md-calendar"></ion-icon>  <p>{{p.startdate|date }}</p>
+          </ion-item>
   </ion-item>
           <!--<p>{{p.starttime| date:'shortTime'}}</p>-->
   </ion-list>

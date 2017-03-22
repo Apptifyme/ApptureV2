@@ -33,7 +33,7 @@ export class RssArticlePage {
   url="";
   currentIndex=0;
   prev=0;
-  loading:any;
+  public loading:any;
     constructor(public navCtrl: NavController, public navParams: NavParams ,public loadingController:LoadingController,public modalController:ModalController , public commonServices:commonServices , public httpserviceOfRss:HttpServiceOfRss) {
     console.log(this.commonServices.RssData);
     this.index=this.navParams.get('id');
@@ -45,10 +45,14 @@ export class RssArticlePage {
     this.url=this.commonServices.RssData[this.index].title;
     console.log(this.url);
      this.loadRssdata(this.url);
-        this.loading = this.loadingController.create({
-            content: 'Please wait...'
-        });
+    this.showLoader();
 
+  }
+  showLoader() {
+      this.loading = this.loadingController.create({
+          content: 'Please wait...'
+      });
+      this.loading.present();
   }
   loadRssdata(url){
     var flag=false;
@@ -143,6 +147,7 @@ export class RssArticlePage {
   goLeft(){
 
       console.log("go left");
+      this.showLoader();
       console.log(this.index);
          if(this.index>0) {
              this.index--;
@@ -155,7 +160,7 @@ export class RssArticlePage {
 
   }
   goRight(){
-      //this.loading.present();
+      this.showLoader();
       console.log("go right");
       console.log(this.index);
       if(this.index<this.commonServices.RssData.length) {
@@ -181,9 +186,10 @@ export class RssArticlePage {
              this.goRight();
          }
   }
-  goinsideRSS(id:any,i:number){
+  goinsideRSS(id:any,i:number,j:number){
       console.log("Inside RSS");
       console.log(id);
-      this.navCtrl.push(RssSinglePage,{id:id,i:i,title:this.title});
+      console.log(j);
+      this.navCtrl.push(RssSinglePage,{id:id,i:i,title:this.title,j:j});
   }
 }

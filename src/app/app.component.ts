@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import {Nav, Platform, Events} from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
-
+import {RssPage} from '../pages/rss/rss';
 import { HomePage } from '../pages/home/home';
 import { LandingPage } from '../pages/landing/landing';
 import { ArticlePage } from '../pages/article/article';
@@ -25,21 +25,28 @@ export class MyApp {
   constructor(public platform: Platform, public commonServices: commonServices, public api: API) {
     this.initializeApp();
     console.log(this.commonServices);
+     if(this.commonServices.RSSarray.length==0) {
+       this.api.getAllFrontMenu().subscribe((data) => {
+         console.log(data);
+         data.menu.map(item => {
+           // console.log(item);
+           if (item.linktypename == "Pages" && this.commonServices.isURL(item.articlename)) {
 
-    this.api.getAllFrontMenu().subscribe((data) => {
-      console.log(data);
-      data.menu.map(item => {
-        // console.log(item);
-        if (item.linktypename == "Pages" && this.commonServices.isURL(item.articlename)) {
-          this.commonServices.RSSarray.push(item);
-        }
-        else {
-          this.commonServices.menuData.push(item);
-        }
-      });
-      console.log(this.commonServices.menuData);
-    });
-
+             this.commonServices.RSSarray.push(item);
+           }
+           else {
+             this.commonServices.menuData.push(item);
+           }
+         });
+         console.log(this.commonServices.menuData);
+         for(var i=0;i<this.commonServices.menuData.length;i++){
+                       if(this.commonServices.menuData[i].name=="My Profile"){
+                         this.commonServices.menuData[i].name="BreakingNews";
+                       }
+         }
+       });
+       console.log(this.commonServices.RSSarray);
+     }
 
     // used for an example of ngFor and navigation
     this.pages = [
@@ -61,7 +68,7 @@ export class MyApp {
             case 'home':
               str=HomePage;
                   break;
-            case 'photogallertcategory':
+            case 'photogallerycategory':
               str=ImageCategoryPage;
                   break;
             case 'events':
@@ -70,6 +77,9 @@ export class MyApp {
               break;
             case 'videogallerycategory':
               str=VideoGalleryPage;
+              break;
+            case 'profile':
+              str=RssPage;
               break;
             case 'social':
               str=SocialPage;

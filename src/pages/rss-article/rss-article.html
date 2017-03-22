@@ -4,43 +4,52 @@
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 -->
+
 <ion-header>
 
-  <ion-navbar class="bar-appture">
+    <ion-navbar class="bar-appture">
 
-      <ion-title class="text-center">
-          <h1 [ngStyle]="{'background': 'url(' + commonServices.headerLogo + ') no-repeat center', 'background-size': 'cover'}" class="title company-logo article-header-logo">&nbsp;</h1>
-          <!--<img src="{{commonServices.headerLogo}}">-->
-      </ion-title>
-  </ion-navbar>
-  <ion-toolbar class="bar-appture">
-    <ion-buttons start>
-      <button ion-button icon-only (click)="goLeft()">Left
-        <ion-icon name="md-left" (click)="goLeft()"></ion-icon>
-      </button>
-    </ion-buttons>
-    <ion-title>{{title}}</ion-title>
-    <ion-buttons end>
-      <button ion-button icon-only (click)="goRight()">Right
-        <ion-icon name="md-right" (click)="goRight()"></ion-icon>
-      </button>
-    </ion-buttons>
-  </ion-toolbar>
+        <ion-title class="text-center">
+            <h1 [ngStyle]="{'background': 'url(' + commonServices.headerLogo + ') no-repeat center', 'background-size': 'cover'}" class="title company-logo article-header-logo">&nbsp;</h1>
+            <!--<img src="{{commonServices.headerLogo}}">-->
+        </ion-title>
+    </ion-navbar>
+    <ion-toolbar class="bar-appture">
+        <ion-buttons start>
+            <button ion-button icon-only (click)="goLeft()">Left
+                <ion-icon name="md-left" (click)="goLeft()"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title>{{title}}</ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="goRight()">Right
+                <ion-icon name="md-right" (click)="goRight()"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-toolbar>
+
 </ion-header>
 
-<ion-content scrollY="true">
-  <ion-slides overlay="true" (ionSlideDidChange)="slideChanged()" scrollY="true">
 
-    <ion-slide overlay="true" *ngFor="let p of commonServices.RssData" scrollY="true">
-      <ion-list *ngFor="let q of Rsscontent[i].items" (click)="goinsideRSS(q,i)" style="margin:0px; padding:0px; height:100px">
-        <ion-item style="margin:0px; padding:0px; height:100px">
-          <ion-thumbnail item-left style=" padding: 0px; margin-top: 0px; margin-bottom: 0px; height:100px">
-            <img style="height:100px; width:90px" src={{q.imageLink}}>
+<ion-content style="overflow: scroll" class="has-header">
+
+  <ion-slides style="overflow:scroll " (ionSlideDidChange)="slideChanged()" scrollY="true">
+
+    <ion-slide style="overflow:scroll" *ngFor="let p of commonServices.RssData" scrollY="true">
+      <ion-list *ngFor="let q of Rsscontent[i].items,let j=index" (click)="goinsideRSS(q,i,j)" style="margin:0px; padding:0px; height:130px">
+        <ion-item style="margin:0px; padding:0px; height:130px">
+          <ion-thumbnail item-left style=" padding: 0px; margin-top: 0px; margin-bottom: 0px; height:130px">
+            <img style="height:130px; width:90px" src={{q.imageLink}}>
           </ion-thumbnail>
           <h3> {{q.title}} </h3>
-
-          <p> {{q.author}} </p>
-          <p> {{q.pubDate | date}}</p>
+              <ion-item style="margin:0px; padding: 0px">
+                  <ion-icon style="margin:0px; padding:0px;" item-left ios="ios-calendar" md="md-calendar"></ion-icon>
+                                   <p style="margin:0px; padding: 0px"> {{q.author}} </p>
+              </ion-item>
+            <ion-item style="margin:0px; padding: 0px">
+                <ion-icon style="margin:0px; padding:0px;"item-left ios="ios-calendar" md="md-calendar"></ion-icon>
+                                        <p style="margin:0px; padding: 0px"> {{q.pubDate | date}}</p>
+            </ion-item>
 
         </ion-item>
       </ion-list>

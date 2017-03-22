@@ -19,7 +19,9 @@
 <ion-content>
   <img src={{imageurl}}{{id.image}}>
     <h1 style="margin:10px; padding:10px">{{id.title}}</h1>
-    <ion-icon style="margin: 10px; padding: 0px" ios="ios-calendar" md="md-calendar"></ion-icon>  <p style="margin: 10px; padding: 0px">{{id.startdate|date }}</p>
+    <ion-item>
+    <ion-icon item-left style="margin: 10px; padding: 0px" ios="ios-calendar" md="md-calendar"></ion-icon>  <p style="margin: 10px; padding: 0px">{{id.startdate|date }}</p>
+    </ion-item>
   <div style="margin: 10px; padding: 0px" [innerHtml]="id.content"></div>
 </ion-content>
 

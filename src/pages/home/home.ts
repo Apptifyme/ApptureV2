@@ -107,7 +107,9 @@ export class HomePage {
       }
     });
     console.log('from sortlinks');
-    this.fetchRSSData();
+    if(this.RSS.length == 0){
+      this.fetchRSSData();
+    }
   }
 
 
@@ -128,7 +130,16 @@ export class HomePage {
     Observable.forkJoin(promise)
       .subscribe((response) => {
         console.log("Response:", response);
-        this.RSS = response;
+        this.RSS = [];
+        for(var i = 0; i< response.length; i++){
+          console.log(response[i]);
+          if(this.RSS.indexOf(response[i]) === -1){
+            this.RSS.push(response[i]);
+            console.log(response[i]);
+          }
+        }
+
+        // this.RSS = response;
         let index = 0;
         this.RSS.map(n => {
           n.name = this.commonServices.RSSarray[index].name;
@@ -190,7 +201,7 @@ export class HomePage {
 //      window.open('tel:' + ('+1' + $rootScope.phoneNumber), '_system');
     }
     else if (links.linktypelink == "home") {
-      this.navCtrl.push("HomePage",{});
+      this.navCtrl.push(HomePage,{});
 
     }
     else {

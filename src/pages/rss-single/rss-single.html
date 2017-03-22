@@ -4,7 +4,7 @@
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
+<ion-header style="overflow: scroll">
 
   <ion-navbar class="bar-appture">
     <ion-title >
@@ -14,18 +14,46 @@
         </ion-title> </ion-title>
   </ion-navbar>
     <ion-toolbar class="bar-appture">
+
+        <ion-buttons start>
+            <button ion-button icon-only (click)="goLeft()">Left
+                <ion-icon name="md-left" (click)="goLeft()"></ion-icon>
+            </button>
+        </ion-buttons>
         <ion-title>{{title}}</ion-title>
+
+            <ion-buttons end>
+                <button ion-button icon-only (click)="goRight()">Right
+                    <ion-icon name="md-right" (click)="goRight()"></ion-icon>
+                </button>
+            </ion-buttons>
     </ion-toolbar>
 
 
 </ion-header>
 
 
-<ion-content>
-  <ion-slides>
-   <ion-slide *ngFor="let p of rssData[i].items">
-      <div [innerHTML]="p.content"></div>
-       <div [innerHTML]="p.description"></div>
+<ion-content style="overflow: scroll">
+
+  <ion-slides style="overflow: scroll">
+   <ion-slide style="overflow: scroll" *ngFor="let p of rssData[i].items">
+      <ion-item>
+     <img [ngStyle]="{'width':commonServices.width,'height':commonServices.height/2}" src="p.imageLink">
+
+       <p style="margin-top:-20px">{{p.title}}
+           </ion-item>
+       <ion-item>
+           <ion-item item-left>
+               <ion-icon style="margin:0px; padding:0px;"item-left ios="ios-calendar" md="md-calendar"></ion-icon>
+       <p>{{p.author}}</p>
+        </ion-item>
+       <ion-item item-right>
+           <ion-icon item-left style="margin:0px; padding:0px;"item-left ios="ios-calendar" md="md-calendar"></ion-icon>
+           <p>{{p.pubdate}}</p>
+       </ion-item>
+       </ion-item>
+      <div style="margin: 10px; padding:10px " [innerHTML]="p.content"></div>
+       <div style="margin:10px; padding:10px" [innerHTML]="p.description"></div>
    </ion-slide>
   </ion-slides>
 </ion-content>

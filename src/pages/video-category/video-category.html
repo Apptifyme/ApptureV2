@@ -24,7 +24,10 @@
     <img style="height:80px; width:80px" src={{baseImageUrl}}{{arr[i]}}{{baseImageUrl2}}>
       </ion-thumbnail>
           <h2>{{p.alt}}</h2>
-          <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon> <p>{{p.publisheddate}}</p>
+
+          <ion-item>
+          <ion-icon item-left ios="ios-calendar" md="md-calendar"></ion-icon> <p>"{{p.publisheddate | getTime}}"</p>
+          </ion-item>
       </ion-item>
   </ion-list>
 

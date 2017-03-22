@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { Component ,ViewChild} from '@angular/core';
+import { NavController, NavParams,Slides } from 'ionic-angular';
 import {HttpServiceOfRss} from '../rss-article/rss.service';
 import {commonServices} from '../../providers/common-services'
 
@@ -14,23 +14,56 @@ import {commonServices} from '../../providers/common-services'
   templateUrl: 'rss-single.html'
 })
 export class RssSinglePage {
- id:any;
- rssData=[];
- i:any;
- title:any;
-  constructor(public navCtrl: NavController, public navParams: NavParams , public httpserviceofRss:HttpServiceOfRss , public commonServices:commonServices) {
-    this.id=this.navParams.get('id');
-    console.log(this.id);
-    this.i=this.navParams.get('i');
-    this.title=this.navParams.get('title');
-    console.log(this.title);
-     this.rssData=this.httpserviceofRss.RssContent;
-     console.log(this.rssData);
-  }
+    id: any;
+    rssData = [];
+    i: any;
+    title: any;
+    j:number;
+    @ViewChild(Slides) slides: Slides;
+
+    constructor(public navCtrl: NavController, public navParams: NavParams, public httpserviceofRss: HttpServiceOfRss, public commonServices: commonServices) {
+        this.id = this.navParams.get('id');
+        console.log(this.id);
+        console.log("in cons");
+        this.j = this.navParams.get('j');
+        console.log(this.j);
+        this.i = this.navParams.get('i');
+        this.title = this.navParams.get('title');
+        console.log(this.title);
+        this.rssData = this.httpserviceofRss.RssContent;
+        console.log(this.rssData);
+     //      this.slides.slideTo(this.j);
+
+    }
 
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad RssSinglePage');
-  }
+    ionViewDidLoad() {
+        console.log('ionViewDidLoad RssSinglePage');
+        console.log(this.j);
+        for(var i=0;i<this.j;i++) {
+            console.log("data load");
+            this.slides.slideNext();
+        }
+    }
+    goRight(){
+        var i=this.slides.getActiveIndex();
+        if(i>this.rssData[this.i].length){
+            console.log("last slide");
+        }
+        else{
+            console.log("slide Right");
+            this.slides.slideNext();
+        }
+    }
+    goLeft(){
+             var i=this.slides.getActiveIndex();
+             if(i<=0){
+                 console.log("last slide");
+              }
+             else{
+                 console.log("slide Left")
+             this.slides.slidePrev();
+              }
+       }
 
 }

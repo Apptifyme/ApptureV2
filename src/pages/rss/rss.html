@@ -6,31 +6,32 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title class="text-center">
-      <h1 [ngStyle]="{'background': 'url(' + commonServices.headerLogo + ') no-repeat center', 'background-size': 'cover'}" class="title company-logo article-header-logo">&nbsp;</h1>
-      <!--<img src="{{commonServices.headerLogo}}">-->
-    </ion-title>
-  </ion-navbar>
+    <ion-navbar class="bar-appture">
+
+        <ion-title class="text-center">
+            <h1 [ngStyle]="{'background': 'url(' + commonService.headerLogo + ') no-repeat center', 'background-size': 'cover'}" class="title company-logo article-header-logo">&nbsp;</h1>
+            <!--<img src="{{commonServices.headerLogo}}">-->
+        </ion-title>
+    </ion-navbar>
 
 </ion-header>
 
 
-<ion-content>
-  <ion-grid>
-  <ion-row *ngFor="let p of commonService.RssData">
-    <ion-col col-12 *ngIf="i % 2 == 0" style="padding:0; margin: 0">
-      <img class="full-image" alt="" src="{{p.image | serverImage}}" (click)="gotoRss(i)">
-    </ion-col>
-  </ion-row>
-  </ion-grid>
+<ion-content style="overflow:scroll; background-color:black">
+    <ion-grid style="margin:0px; padding:0px">
+        <ion-row style="margin:0px; padding:0px">
+            <ion-col style="margin:0px; padding:0px" col-6 *ngFor="let image of commonService.RSSarray,let i=index">
+                <img style="margin:0px; padding:0px" src="{{image.image | serverImage}}" (click)="gotoRss(i)">
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 
 </ion-content>
 
 
 <ion-footer class="footer-appture">
   <ion-scroll zoom="false" scrollX="true" style="height: 60px" class="categories-filter">
-    <span class="footer-col" ng-click="footerLink(links)" *ngFor="let links of commonServices.footerLinks">
+    <span class="footer-col" ng-click="footerLink(links)" *ngFor="let links of commonService.footerLinks">
                 <ion-row class="padding-top-5">
                     <ion-col class="col padding-0 text-x-large" (click)="goToFfooterInside(links)">
                         <i class="icon" [ngClass]="links.icon"></i>

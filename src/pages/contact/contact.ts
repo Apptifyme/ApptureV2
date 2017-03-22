@@ -23,6 +23,10 @@ export class ContactPage {
         this.data=this.commonService.appConfig[5];
         console.log(this.data);
         this.getmap();
+        console.log(commonService.menuData);
+        console.log(commonService.AllMenuData);
+        this.data.discription=this.commonService.AllMenuData.config[5].description;
+        console.log(this.data.discription);
     }
      getmap(){
 
