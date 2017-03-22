@@ -3,27 +3,31 @@
  */
 import {Pipe, PipeTransform} from '@angular/core';
 import { commonServices} from '../providers/common-services';
+import { DatePipe } from '@angular/common';
+
 
 @Pipe({
     name: 'getTime'
 })
 
 export class GetTime implements PipeTransform{
-
+   val:any;
     constructor(
-        private commonServices: commonServices
+        private commonServices: commonServices,private datePipe: DatePipe
     ){}
 
-    transform(image: string){
+    transform(date: string){
 
-
-        if(image="00:00:00 00:00:00"){
+          console.log(date);
+          console.log("In Pipe");
+        if(date="0000-00-00 00:00:00"){
+            console.log("return null");
             return null;
         }
         else{
-            console.log("bhau bhai");
-            return null;
-
+             console.log("return date");
+           this.val=this.datePipe.transform(date, 'yyyy-MM-dd');
+            return this.val;
         }
 
     }
