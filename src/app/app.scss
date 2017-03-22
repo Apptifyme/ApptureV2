@@ -14,6 +14,191 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+@font-face {
+    font-family: 'Cutive';
+    src: url('../../assets/fonts/Cutive-Regular.eot');
+    src: url('../../assets/fonts/Cutive-Regular.eot?#iefix') format('embedded-opentype'),
+    url('../../assets/fonts/Cutive-Regular.woff2') format('woff2'),
+    url('../../assets/fonts/Cutive-Regular.woff') format('woff'),
+    url('../../assets/fonts/Cutive-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Raleway';
+    src: url('../../assets/fonts/Raleway-Light.eot');
+    src: url('../../assets/fonts/Raleway-Light.eot?#iefix') format('embedded-opentype'),
+    url('../../assets/fonts/Raleway-Light.woff2') format('woff2'),
+    url('../../assets/fonts/Raleway-Light.woff') format('woff'),
+    url('../../assets/fonts/Raleway-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Myriad Pro';
+    src: url('../../assets/fonts/MyriadPro-Bold.eot');
+    src: url('../../assets/fonts/MyriadPro-Bold.eot?#iefix') format('embedded-opentype'),
+    url('../../assets/fonts/MyriadPro-Bold.woff2') format('woff2'),
+    url('../../assets/fonts/MyriadPro-Bold.woff') format('woff'),
+    url('../../assets/fonts/MyriadPro-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Playfair Display';
+    src: url('../../assets/fonts/PlayfairDisplay-Regular.eot');
+    src: url('../../assets/fonts/PlayfairDisplay-Regular.eot?#iefix') format('embedded-opentype'),
+    url('../../assets/fonts/PlayfairDisplay-Regular.woff2') format('woff2'),
+    url('../../assets/fonts/PlayfairDisplay-Regular.woff') format('woff'),
+    url('fonts/PlayfairDisplay-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+.playfair{
+    font-family: "Playfair Display",sans-serif ;
+}
+.cutive{
+    font-family: "Cutive",sans-serif ;
+    font-weight: normal;
+    font-style: normal;
+}
+.raleway{
+    font-family: "Raleway",sans-serif ;
+    font-weight: 300;
+    font-style: normal;
+}
+.myriad{
+    font-family: "Myriad Pro",sans-serif ;
+    font-weight: bold;
+    font-style: normal;
+}
+
+.article-content {
+  p, strong {
+    white-space: normal !important;
+    overflow: visible !important;
+    font-size: 16px;
+    line-height: 24px;
+    color: #222;
+    font-family: sans-serif;
+  }
+}
+
+.app-article-content {
+    text-align: left!important;
+  p, strong {
+    white-space: normal !important;
+    overflow: visible !important;
+    font-size: 16px;
+    line-height: 24px;
+    color: #222;
+    font-family: sans-serif;
+  }
+}
+
+.article-content {
+  p:first-child {
+    font-size: 17px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  h1 {
+    white-space: normal !important;
+    font-size: 28px !important;
+    margin-bottom: 10px;
+    margin-top: 14px;
+    font-family: "Myriad Pro", sans-serif;
+    font-weight: bold;
+    font-style: normal;
+    line-height: 1em;
+  }
+}
+
+.app-article-content h1, .article-content h1 strong, .app-article-content h1 strong {
+  white-space: normal !important;
+  font-size: 28px !important;
+  margin-bottom: 10px;
+  margin-top: 14px;
+  font-family: "Myriad Pro", sans-serif;
+  font-weight: bold;
+  font-style: normal;
+  line-height: 1em;
+}
+
+.article-content h2, .app-article-content h2, .article-content h2 strong, .app-article-content h2 strong {
+  white-space: normal !important;
+  font-size: 24px !important;
+  margin-bottom: 10px;
+  margin-top: 12px;
+  font-family: "Myriad Pro", sans-serif;
+  font-weight: bold;
+  font-style: normal;
+  line-height: 1em;
+}
+
+.article-content h3 {
+  white-space: normal !important;
+  font-size: 20px !important;
+  margin-bottom: 0px;
+  margin-top: 10px;
+  font-family: "Myriad Pro", sans-serif;
+  font-weight: bold;
+  font-style: normal;
+  line-height: 1em;
+  strong {
+    white-space: normal !important;
+    font-size: 20px !important;
+    margin-bottom: 0px;
+    margin-top: 10px;
+    font-family: "Myriad Pro", sans-serif;
+    font-weight: bold;
+    font-style: normal;
+    line-height: 1em;
+  }
+}
+
+.app-article-content h3 {
+  white-space: normal !important;
+  font-size: 20px !important;
+  margin-bottom: 20px;
+  font-family: "Myriad Pro", sans-serif;
+  font-weight: bold;
+  font-style: normal;
+  line-height: 1em;
+  strong {
+    white-space: normal !important;
+    font-size: 20px !important;
+    margin-bottom: 20px;
+    font-family: "Myriad Pro", sans-serif;
+    font-weight: bold;
+    font-style: normal;
+    line-height: 1em;
+  }
+}
+
+.article-content h4, .app-article-content h4, .article-content h4 strong, .app-article-content h4 strong {
+  white-space: normal !important;
+  font-size: 18px !important;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  font-family: "Myriad Pro", sans-serif;
+  font-weight: bold;
+  font-style: normal;
+  line-height: 1em;
+}
+
+.article-content h5, .app-article-content h5, .article-content h5 strong, .app-article-content h5 strong {
+  white-space: normal !important;
+  font-size: 1em !important;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  font-family: "Myriad Pro", sans-serif;
+  font-weight: bold;
+  font-style: normal;
+  line-height: 1em;
+}
+
+
 .bar-appture .toolbar-background{
     border-color: transparent!important;
     background: linear-gradient( #000000, #666666)!important;
@@ -76,11 +261,11 @@ color: white;
 
 @font-face {
     font-family: 'Raleway';
-    src: url('../fonts/Raleway-Light.eot');
-    src: url('../fonts/Raleway-Light.eot?#iefix') format('embedded-opentype'),
-    url('../fonts/Raleway-Light.woff2') format('woff2'),
-    url('../fonts/Raleway-Light.woff') format('woff'),
-    url('../fonts/Raleway-Light.ttf') format('truetype');
+    src: url('../../assets/fonts/Raleway-Light.eot');
+    src: url('../../assets/fonts/Raleway-Light.eot?#iefix') format('embedded-opentype'),
+    url('../../assets/fonts/Raleway-Light.woff2') format('woff2'),
+    url('../../assets/fonts/Raleway-Light.woff') format('woff'),
+    url('../../assets/fonts/Raleway-Light.ttf') format('truetype');
     font-weight: 300;
     font-style: normal;
 }
@@ -165,4 +350,7 @@ color: white;
             }
         }
     }
+}
+.article-image{
+    min-height: 200px;
 }

@@ -29,14 +29,18 @@
 
 
 <ion-content class="bar-appture">
-  <img src={{articlebaseurl}}{{article.image}}>
-        <h1 class="padding" style="margin-right:10px;margin-left: 10px;" [innerHTML]="article.title"></h1>
-        <div class="padding" style="margin-left:10px; margin-right: 10px;" [innerHTML]="article.content"></div>
+  <div class="app-article-content">
+    <img src={{articlebaseurl}}{{article.image}} class="article-image">
+    <div class="padding-10">
+      <h1 class="padding margin-0" [innerHTML]="article.title"></h1>
+      <div class="padding" [innerHTML]="article.content"></div>
+    </div>
+  </div>
 </ion-content>
 
 
 <ion-footer class="footer-appture">
-    <ion-scroll zoom="false" scrollX="true" style="height: 60px" class="categories-filter">
+  <ion-scroll zoom="false" scrollX="true" style="height: 60px" class="categories-filter">
     <span class="footer-col" ng-click="footerLink(links)" *ngFor="let links of commonServices.footerLinks">
                 <ion-row class="padding-top-5">
                     <ion-col class="col padding-0 text-x-large" (click)="goToFfooterInside(links)">
@@ -50,5 +54,5 @@
                     </ion-col>
                 </ion-row>
             </span>
-    </ion-scroll>
+  </ion-scroll>
 </ion-footer>
