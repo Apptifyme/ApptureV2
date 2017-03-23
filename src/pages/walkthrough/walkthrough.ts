@@ -23,6 +23,7 @@ export class WalkthroughPage {
     }
 
     goToHome() {
+        console.log("in walkthrough");
         if (this.platform.is('cordova')) {
             NativeStorage.setItem('walkThroughFlag', true)
                 .then(
