@@ -38,27 +38,36 @@ export class ImageCategoryPage {
       }
     }
     this.photoCategories = categories;
+    this.commonServices.DesingPortFolio=this.photoCategories;
     console.log(this.photoCategories )
+    console.log(this.commonServices.DesingPortFolio);
   }
 
   getAllImageCategories() {
-    this.api.getImageCategories()
-      .map(data => data.json())
-      .subscribe((data) => {
-        console.log(data);
-        this.processImageCategoryResults(data.queryresult);
+    if (this.commonServices.DesingPortFolio == null) {
+      console.log("data not exist")
+      this.api.getImageCategories()
+          .map(data => data.json())
+          .subscribe((data) => {
+            console.log(data);
+            this.processImageCategoryResults(data.queryresult);
 
-        // data.map(item => {
-        //   if (item.title == 'Header Logo') {
-        //     console.log(item);
-        //     this.commonServices.headerLogo = 'http://business.staging.appturemarket.com/uploads/header-logo/' + item.image;
-        //     this.headerLogo = this.commonServices.headerLogo;
-        //     console.log(this.headerLogo);
-        //   }
-        // });
-      });
+            // data.map(item => {
+            //   if (item.title == 'Header Logo') {
+            //     console.log(item);
+            //     this.commonServices.headerLogo = 'http://business.staging.appturemarket.com/uploads/header-logo/' + item.image;
+            //     this.headerLogo = this.commonServices.headerLogo;
+            //     console.log(this.headerLogo);
+            //   }
+            // });
+          });
+    }
+    else{
+      this.photoCategories=this.commonServices.DesingPortFolio;
+      console.log("data Already exist");
+      console.log(this.commonServices.DesingPortFolio);
+    }
   }
-
   ionViewDidLoad() {
     console.log('ionViewDidLoad ImageGalleryPage');
     this.getAllImageCategories();

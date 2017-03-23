@@ -28,6 +28,7 @@ export class VideoCategoryPage {
   par1:any;
   url1:any;
   arr=[];
+    watching={id:0,article:{}};
     public baseImageUrl="http://img.youtube.com/vi/";
     public baseImageUrl2="/default.jpg";
   videoimage='http://business.staging.appturemarket.com/uploads/video-image/';
@@ -40,30 +41,38 @@ export class VideoCategoryPage {
       console.log(this.url1);
       this.i=this.navParams.get('i');
       console.log(this.i);
-
-
-      this.getVideoCategorydata(this.par1);
-
       this.loading = this.loadingCtrl.create({
           content: 'Please wait...'
       });
-
-
-
+      this.getVideoCategorydata(this.par1);
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad VideoCategoryPage');
-    this.loading.present();
   }
 
   getVideoCategorydata(id:number){
-    this.httpServiceOfVideoCategory.getVideocategoryData(id)
+      for(var i=0;i<this.commonServices.AllVideoCategory.length;i++){
+          if(this.commonServices.AllVideoCategory[i].id==id){
+              console.log("data already exist");
+              this.videodata=this.commonServices.AllVideoCategory[i].article;
+              return;
+          }
+
+      }
+      this.loading.present();
+
+      this.httpServiceOfVideoCategory.getVideocategoryData(id)
         .subscribe(
             responce => {
               this.videodata = responce;
               console.log("my Videogallary data loaded");
               console.log(this.videodata);
+              this.watching.id=id;
+              this.watching.article=this.videodata;
+
+              this.commonServices.AllVideoCategory.push(this.watching);
+              console.log(this.commonServices.AllVideoCategory);
               this.arr=this.url1.split(",",this.videodata.queryresult.length);
               console.log(this.arr);
                 console.log(this.arr);

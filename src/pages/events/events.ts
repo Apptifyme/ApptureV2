@@ -27,28 +27,37 @@ export class EventsPage {
    public event:any=[];
    loading:any;
   constructor(public navCtrl: NavController, public navParams: NavParams ,public loadingCtrl:LoadingController,public modalCtrl:ModalController, private httpServiceOfEvent:HttpServiceOfEvent ,public commonServices:commonServices) {
-      this.onGetData();
       this.loading = this.loadingCtrl.create({
           content: 'Please wait...'
       });
+      this.onGetData();
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad EventsPage');
-    this.loading.present();
   }
 
   onGetData(){
-    this.httpServiceOfEvent.getEventData(1)
+      if(this.commonServices.AllEventData==null){
+          this.loading.present();
+
+          this.httpServiceOfEvent.getEventData(1)
         .subscribe(
             responce => {
               this.event = responce;
               console.log("my Event data");
               console.log(this.event);
+              this.commonServices.AllEventData=this.event;
               this.loading.dismiss();
             },
             error => console.log(error)
         )
+  }
+  else{
+          console.log("data already exist");
+          this.event=this.commonServices.AllEventData;
+      }
   }
     gointoEventDetails(id:any){
       console.log("Event Deatails Page");

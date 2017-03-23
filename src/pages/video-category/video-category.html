@@ -21,13 +21,13 @@
   <ion-list class="margin-padding-0-height-80" *ngFor="let p of videodata.queryresult,let i=index" (click)="openVideo(p)">
       <ion-item class="margin-padding-0-height-80">
       <ion-thumbnail item-left class="margin-top-bottom-0-height-80">
-    <img class="height-80-width-80" src={{baseImageUrl}}{{arr[i]}}{{baseImageUrl2}}>
+    <img class="height-80-width-80" src={{baseImageUrl}}{{p.url}}{{baseImageUrl2}}>
       </ion-thumbnail>
-          <h2>{{p.alt}}</h2>
-
-          <ion-item>
-              <ion-icon item-left item-left ios="ios-calendar-outline" md="md-calendar"></ion-icon> <p>{{p.publisheddate | getTime}}</p>
-          </ion-item>
+          <h2 >{{p.alt}}</h2>
+          <p>{{p.subtitle}}</p>
+           <ion-item>
+          <ion-icon item-left item-left ios="ios-calendar-outline" md="md-calendar"></ion-icon> <p>{{p.publisheddate | getTime}}</p>
+           </ion-item>
       </ion-item>
   </ion-list>
 

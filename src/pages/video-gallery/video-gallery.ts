@@ -27,18 +27,17 @@ export class VideoGalleryPage {
     public image=[];
     loading:any;
   constructor(public navCtrl: NavController, public loadCtrl:LoadingController,public modalCtrl:ModalController,public navParams: NavParams , private httpServiceOfVideocategory:HttpServiceOfVideoGallary,public commonServices:commonServices) {
-     this.getVideoCategorydata();
 
       this.loading = this.loadCtrl.create({
           content: 'Please wait...'
       });
+      this.getVideoCategorydata();
 
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad VideoGalleryPage');
 
-    this.loading.present();
   }
     goToFfooterInside(links:any){
         console.log(links);
@@ -76,18 +75,30 @@ export class VideoGalleryPage {
         }
     }
     getVideoCategorydata(){
-      this.httpServiceOfVideocategory.getVideocategoryData(1)
-          .subscribe(
-              responce => {
-                this.video = responce;
-                console.log("my Videogallary data loaded");
-                console.log(this.video);
-                this.loading.dismiss();
-                this.image=this.video.queryresult[1].url.split(',');
-                console.log(this.image);
-              },
-              error => console.log(error)
-          )
+      if(this.commonServices.ALlVideodata==null) {
+          this.loading.present();
+
+          this.httpServiceOfVideocategory.getVideocategoryData(1)
+              .subscribe(
+                  responce => {
+                      this.video = responce;
+                      console.log("my Videogallary data loaded");
+                      console.log(this.video);
+                      this.commonServices.ALlVideodata = this.video;
+                      console.log(this.commonServices.ALlVideodata);
+                      this.loading.dismiss();
+                      this.image = this.video.queryresult[1].url.split(',');
+                      console.log(this.image);
+                  },
+                  error => console.log(error)
+              )
+      }
+      else{
+          console.log("data Already exist");
+          this.video=this.commonServices.ALlVideodata;
+       //   this.loading.dismiss();
+
+      }
     }
     goToImages(id:any,i:number){
         console.log(" Inside video category");

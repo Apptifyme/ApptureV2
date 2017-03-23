@@ -44,32 +44,42 @@ export class ImageGalleryPage {
     }
     this.galleryImages = images;
     console.log(this.galleryImages);
+    this.commonServices.AllGallaryImages=this.galleryImages;
     this.loading.dismiss();
+
   }
 
 
   getGalleryImages() {
-    this.api.getGalleryImages(this.galleryId)
-      .map(data => data.json())
-      .subscribe((data) => {
-        console.log(data);
-        this.processGalleryImages(data.queryresult);
+    if (this.commonServices.AllGallaryImages.length == 0)
+    {
+      this.loading.present();
+      this.api.getGalleryImages(this.galleryId)
+          .map(data => data.json())
+          .subscribe((data) => {
+            console.log(data);
+            this.processGalleryImages(data.queryresult);
 
-        // this.photoCategories = data;
-        // data.map(item => {
-        //   if (item.title == 'Header Logo') {
-        //     console.log(item);
-        //     this.commonServices.headerLogo = 'http://business.staging.appturemarket.com/uploads/header-logo/' + item.image;
-        //     this.headerLogo = this.commonServices.headerLogo;
-        //     console.log(this.headerLogo);
-        //   }
-        // });
-      });
+            // this.photoCategories = data;
+            // data.map(item => {
+            //   if (item.title == 'Header Logo') {
+            //     console.log(item);
+            //     this.commonServices.headerLogo = 'http://business.staging.appturemarket.com/uploads/header-logo/' + item.image;
+            //     this.headerLogo = this.commonServices.headerLogo;
+            //     console.log(this.headerLogo);
+            //   }
+            // });
+          });
+    }
+    else{
+      console.log("data already exist");
+      this.galleryImages=this.commonServices.AllGallaryImages;
+    }
   }
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ImageGalleryPage');
-    this.loading.present();
     this.imageInGallery = { 'width': 0.32 * (this.commonServices.devW - 4) + 'px', 'height': 0.32 * (this.commonServices.devW - 4) + 'px' };
     this.getGalleryImages();
   }
