@@ -48,6 +48,7 @@ export class MyApp {
     //    console.log(this.commonServices.RSSarray);
     //  }
 
+
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Home', component: HomePage }

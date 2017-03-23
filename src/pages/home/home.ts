@@ -24,6 +24,8 @@ export class HomePage {
   banners: any;
   RSS = [];
   categories = [];
+  baseImageUrl="http://business.staging.appturemarket.com/uploads/";
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public api: API, public commonServices: commonServices) {
 
   }

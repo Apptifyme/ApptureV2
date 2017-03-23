@@ -32,7 +32,7 @@ export class commonServices {
   adminImages = 'http://business.staging.appturemarket.com/uploads/';
   appConfig=[];
   RssData=[];
-
+  RssArticle=[];
   clickedMenuItem = '';
   slides: any;
   adminImage: string = 'http://business.staging.appturemarket.com/uploads/';

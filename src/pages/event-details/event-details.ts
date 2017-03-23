@@ -18,7 +18,7 @@ import {ArticlePage} from '../article/article'
 */
 @Component({
   selector: 'page-event-details',
-  templateUrl: 'event-details.html'
+  templateUrl: 'event-details.html',styleUrls:['/event-details.scss'],
 })
 export class EventDetailsPage {
    eventDetail:any=[];

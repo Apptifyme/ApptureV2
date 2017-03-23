@@ -20,7 +20,7 @@ import {EventDetailsPage} from '../event-details/event-details';
 */
 @Component({
   selector: 'page-events',
-  templateUrl: 'events.html'
+  templateUrl: 'events.html',styleUrls:['/events.scss'],
 })
 export class EventsPage {
     imageurl="http://business.staging.appturemarket.com/uploads/";

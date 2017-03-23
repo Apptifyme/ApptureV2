@@ -26,6 +26,8 @@ export class ArticlePage {
       this.loading = this.loadingCtrl.create({
           content: 'Please wait...'
       });
+      console.log("in article");
+      console.log(this.commonServices.RssArticle);
   }
 
   ionViewDidLoad() {

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {commonServices} from '../../providers/common-services'
 import { NavController, NavParams, Platform } from 'ionic-angular';
 import {HttpServiceOfSocial} from "../social/social.service";
-import { InAppBrowser } from '@ionic-native/in-app-browser';
+//import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 /*
   Generated class for the Social page.
@@ -13,7 +13,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 @Component({
   selector: 'page-social',
   templateUrl: 'social.html',
-  providers:[InAppBrowser]
+  //providers:[InAppBrowser]
 })
 export class SocialPage {
     m=[];
@@ -21,7 +21,7 @@ export class SocialPage {
    socialData:any=[];
   constructor(public navCtrl: NavController, public navParams: NavParams , 
   private httpServiceOfSocial : HttpServiceOfSocial ,public commonService:commonServices,
-  private iab: InAppBrowser, public plt: Platform) {
+  /*private iab: InAppBrowser,*/ public plt: Platform) {
       this.socialData=JSON.parse(this.commonService.appConfig[6]);
        console.log( this.socialData);
       console.log(this.commonService.appConfig[6]);
@@ -81,8 +81,8 @@ export class SocialPage {
 
   goSocial(link){
       if (this.plt.is('cordova')) {
-            const browser = this.iab.create(link, '_blank', 'location=yes');
-            browser.show();
+            //const browser = this.iab.create(link, '_blank', 'location=yes');
+            //browser.show();
     }
     else{
         window.open(link, "_blank");
