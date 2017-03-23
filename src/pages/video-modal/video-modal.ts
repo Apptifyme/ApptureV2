@@ -17,6 +17,7 @@ export class VideoModalPage {
    url:any;
    baseUrl1="https://www.youtube.com/embed/";
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl:ViewController) {
+      //window.screen.lockOrientation("landscape");
     this.id=this.navParams.get('id');
     console.log(this.id);
     console.log(this.id.url);

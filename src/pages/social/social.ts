@@ -1,7 +1,13 @@
 import { Component } from '@angular/core';
 import {commonServices} from '../../providers/common-services'
 import { NavController, NavParams, Platform } from 'ionic-angular';
-import {HttpServiceOfSocial} from "../social/social.service";
+import {HomePage} from '../home/home';
+import {EventsPage} from '../events/events';
+import {ContactPage} from '../contact/contact';
+import {VideoCategoryPage} from '../video-category/video-category'
+import {VideoGalleryPage} from "../video-gallery/video-gallery.ts";
+import {ImageCategoryPage} from "../image-category/image-category";
+import {ArticlePage} from '../article/article.ts';
 //import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 /*
@@ -19,11 +25,13 @@ export class SocialPage {
 
    social=[];
    socialData:any=[];
-  constructor(public navCtrl: NavController, public navParams: NavParams , 
-  private httpServiceOfSocial : HttpServiceOfSocial ,public commonService:commonServices,
-  /*private iab: InAppBrowser,*/ public plt: Platform) {
-      this.socialData=this.commonService.appConfig[6];
-       console.log( this.socialData);
+  constructor(public navCtrl: NavController, public navParams: NavParams ,public commonService:commonServices,
+    public plt: Platform) {
+
+      console.log(this.commonService.appConfig);
+      this.socialData=JSON.parse(this.commonService.appConfig[6].text);
+      console.log(this.commonService.appConfig);
+      console.log( this.socialData);
       console.log(this.commonService.appConfig[6]);
       for(var i=0;i<this.socialData.length;i++)
       {
@@ -56,27 +64,49 @@ export class SocialPage {
                   break;
           }
       }
+      console.log(this.socialData);
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SocialPage');
   }
+    goToFfooterInside(links:any){
+        console.log(links);
+        var str:any;
+        switch(links.linktypelink){
+            case 'home':
+                str = HomePage;
+                break;
+            case 'contact':
+                str = ContactPage;
+                break;
+            case 'photogallerycategory':
+                str = ImageCategoryPage;
+                break;
+            case 'videogallerycategory':
+                str = VideoGalleryPage;
+                break;
+            case '2':
+                str = ArticlePage;
+                break;
+            default:
+                links.typeid = 0;
+
+        }
+        if(links.linktypelink=="Phone Call"){
+//      window.open('tel:' + ('+1' + $rootScope.phoneNumber), '_system');
+        }
+        else if (links.linktypelink == "home") {
+            this.navCtrl.push(HomePage,{});
+
+        }
+        else {
+            console.log("page Change");
+            this.navCtrl.push(str,{});
+        }
+    }
 
 
-
-  getSocialContent(){
-    this.httpServiceOfSocial.getSocialData()
-        .subscribe(
-            responce => {
-              this.social = responce;
-              console.log("my social data fathes");
-              console.log(this.social);
-
-            },
-            error => console.log(error)
-        )
-
-  }
 
   goSocial(link){
       if (this.plt.is('cordova')) {

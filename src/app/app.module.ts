@@ -28,7 +28,6 @@ import {HttpServiceOfActicle} from '../pages/article/article.service';
 import {HttpService} from '../pages/home/home.service'
 import {ContactPage} from '../pages/contact/contact';
 import {HttpServiceOfEvent} from '../pages/events/event.service'
-import {HttpServiceOfSocial} from '../pages/social/social.service';
 import {HttpServiceOfVideoGallary} from '../pages/video-gallery/video-gallery.service';
 import {HttpServiceOfVideoCategory} from '../pages/video-category/video-category.service';
 import {HttpServiceOfEventDetails} from '../pages/event-details/event-deatails.service'
@@ -102,7 +101,6 @@ import { DatePipe } from '@angular/common';
     HttpServiceOfActicle,
       HttpService,
       HttpServiceOfEvent,
-      HttpServiceOfSocial,
       HttpServiceOfVideoGallary,
       HttpServiceOfVideoCategory,
     HttpServiceOfEventDetails,

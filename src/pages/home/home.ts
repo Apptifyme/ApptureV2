@@ -41,7 +41,7 @@ export class HomePage {
     console.log(this.commonServices.RSSarray);
     this.fetchRSSData();
     // this.sortRssLinks(this.commonServices.AllMenuData);
-    // this.getAppconfig();
+     this.getAppconfig();
   }
 
   getAppconfig() {

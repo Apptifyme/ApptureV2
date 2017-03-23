@@ -147,9 +147,10 @@ export class RssArticlePage {
   goLeft(){
 
       console.log("go left");
-      this.showLoader();
+
       console.log(this.index);
          if(this.index>0) {
+             this.showLoader();
              this.index--;
              this.i--;
              this.url=this.commonServices.RssData[this.index].title;
@@ -160,10 +161,11 @@ export class RssArticlePage {
 
   }
   goRight(){
-      this.showLoader();
+
       console.log("go right");
       console.log(this.index);
       if(this.index<this.commonServices.RssData.length) {
+          this.showLoader();
           this.index++;
           this.i++;
           this.url=this.commonServices.RssData[this.index].title;
@@ -179,7 +181,7 @@ export class RssArticlePage {
       this.currentIndex=this.slides.getActiveIndex();
          console.log("slide Change");
          if(this.currentIndex<this.prev){
-             this.goLeft();
+              this.goLeft()
 
          }
          else{

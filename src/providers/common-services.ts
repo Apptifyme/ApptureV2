@@ -23,6 +23,7 @@ export class commonServices {
   }
 
   headerLogo: string;
+  width:any;
   AllMenuData:any = [];
   banners:any = [];
   menuData = [];

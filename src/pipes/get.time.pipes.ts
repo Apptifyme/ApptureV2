@@ -20,13 +20,13 @@ export class GetTime implements PipeTransform{
 
           console.log(date);
           console.log("In Pipe");
-        if(date="0000-00-00 00:00:00"){
+        if(date=="0000-00-00 00:00:00"){
             console.log("return null");
-            return null;
+            return "null";
         }
         else{
              console.log("return date");
-           this.val=this.datePipe.transform(date, 'yyyy-MM-dd');
+           this.val=this.datePipe.transform(date, 'yyyy-MMMM-dd');
             return this.val;
         }
 

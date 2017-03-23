@@ -21,7 +21,7 @@
     <ion-grid class="margin-padding-0">
         <ion-row class="margin-padding-0">
             <ion-col class="margin-padding-0"*ngFor="let image of commonService.RssArticle,let i=index"  col-6 >
-                <img class="margin-padding-0" src={{baseImageUrl}}{{image.image}} (click)="gotoRss(i)">
+                <img [ngStyle]="{'width':commonService.width/2}" class="margin-padding-0" src={{baseImageUrl}}{{image.image}} (click)="gotoRss(i)">
             </ion-col>
         </ion-row>
     </ion-grid>
