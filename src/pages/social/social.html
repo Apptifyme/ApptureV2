@@ -22,10 +22,10 @@
 <ion-content>
   <ion-grid class="padding-0">
     <ion-row  class="padding-0">
-      <ion-col *ngFor="let p of socialData;let i=index;" col-6 class="lightgray-bg" class="padding-0">
+      <ion-col *ngFor="let p of socialData.text;let i=index;" col-6 class="lightgray-bg" class="padding-0">
         <img [src]=p.image *ngIf="(index%2)" class="block" (click)="goSocial(p.value)">
       </ion-col>
-      <ion-col *ngFor="let p of socialData" col-6 class="lightgray-bg" class="padding-0">
+      <ion-col *ngFor="let p of socialData.text" col-6 class="lightgray-bg" class="padding-0">
         <img [src]=p.image *ngIf="!(index%2)" class="block" (click)="goSocial(p.value)">
       </ion-col>
     </ion-row>

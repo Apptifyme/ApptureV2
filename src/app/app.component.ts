@@ -90,7 +90,7 @@ export class MyApp {
 
           }
           console.log(str);
-          this.nav.push(str,{});
+          this.nav.push(str);
     }
   }
 

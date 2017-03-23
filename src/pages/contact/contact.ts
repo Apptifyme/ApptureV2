@@ -16,7 +16,7 @@ import {commonServices} from '../../providers/common-services';
     templateUrl: 'contact.html'
 })
 export class ContactPage {
-    data:any;
+    data:any={};
 
     constructor(public navCtrl: NavController, public navParams: NavParams , private commonService :commonServices) {
         console.log(this.commonService.appConfig);
@@ -25,8 +25,8 @@ export class ContactPage {
         this.getmap();
         console.log(commonService.menuData);
         console.log(commonService.AllMenuData);
-        this.data.discription=this.commonService.AllMenuData.config[5].description;
-        console.log(this.data.discription);
+        this.data.description=this.commonService.AllMenuData.config[5];
+        console.log(this.data.description);
     }
      getmap(){
 
