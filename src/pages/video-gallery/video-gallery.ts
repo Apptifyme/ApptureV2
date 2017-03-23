@@ -18,7 +18,7 @@ import {HomePage} from '../home/home';
 */
 @Component({
   selector: 'page-video-gallery',
-  templateUrl: 'video-gallery.html'
+  templateUrl: 'video-gallery.html',styleUrls:['/video-gallary.scss'],
 })
 export class VideoGalleryPage {
   public baseImageUrl="http://img.youtube.com/vi/";

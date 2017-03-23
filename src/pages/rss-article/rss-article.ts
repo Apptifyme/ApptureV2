@@ -42,7 +42,7 @@ export class RssArticlePage {
     console.log(this.index);
     //this.title=this.commonServices.RssData[this.index].name;
     console.log(this.title);
-    this.url=this.commonServices.RssData[this.index].title;
+    this.url=this.commonServices.RssArticle[this.index].title;
     console.log(this.url);
      this.loadRssdata(this.url);
     this.showLoader();

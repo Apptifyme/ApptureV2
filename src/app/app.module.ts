@@ -35,6 +35,7 @@ import {HttpServiceOfEventDetails} from '../pages/event-details/event-deatails.s
 import {HttpServiceOfRss} from '../pages/rss-article/rss.service';
 import {GetTime} from '../pipes/get.time.pipes'
 //import {SafePipe} from '../pipes/get.trust.pipes'
+import {SafeHtmlUrl} from "../pipes/get.trust.url.pipes";
 import {SafeBase} from '../pipes/get.base.pipe'
 import { DatePipe } from '@angular/common';
 
@@ -63,7 +64,8 @@ import { DatePipe } from '@angular/common';
     EventDetailsPage,
     GetTime,
    // SafePipe,
-      SafeBase
+      SafeBase,
+    SafeHtmlUrl
 
   ],
   imports: [

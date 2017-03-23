@@ -16,13 +16,13 @@ import {HttpServiceOfSocial} from "../social/social.service";
   //providers:[InAppBrowser]
 })
 export class SocialPage {
-    m=[];
+
    social=[];
    socialData:any=[];
   constructor(public navCtrl: NavController, public navParams: NavParams , 
   private httpServiceOfSocial : HttpServiceOfSocial ,public commonService:commonServices,
   /*private iab: InAppBrowser,*/ public plt: Platform) {
-      this.socialData=JSON.parse(this.commonService.appConfig[6]);
+      this.socialData=this.commonService.appConfig[6];
        console.log( this.socialData);
       console.log(this.commonService.appConfig[6]);
       for(var i=0;i<this.socialData.length;i++)
@@ -56,7 +56,6 @@ export class SocialPage {
                   break;
           }
       }
-      console.log(this.m);
   }
 
   ionViewDidLoad() {

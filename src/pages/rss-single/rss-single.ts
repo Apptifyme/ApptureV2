@@ -11,7 +11,7 @@ import {commonServices} from '../../providers/common-services'
 */
 @Component({
   selector: 'page-rss-single',
-  templateUrl: 'rss-single.html'
+  templateUrl: 'rss-single.html',styleUrls:['/rss-single.scss'],
 })
 export class RssSinglePage {
     id: any;
@@ -20,7 +20,8 @@ export class RssSinglePage {
     title: any;
     j:number;
     @ViewChild(Slides) slides: Slides;
-
+    fullTitle="";
+    size:any;
     constructor(public navCtrl: NavController, public navParams: NavParams, public httpserviceofRss: HttpServiceOfRss, public commonServices: commonServices) {
         this.id = this.navParams.get('id');
         console.log(this.id);
@@ -32,7 +33,19 @@ export class RssSinglePage {
         console.log(this.title);
         this.rssData = this.httpserviceofRss.RssContent;
         console.log(this.rssData);
-     //      this.slides.slideTo(this.j);
+        console.log(this.i);
+        this.size=this.rssData[this.i].items.length;
+
+        for(var i=0;i<this.rssData[this.i].items.length;i++)
+        {
+
+            this.fullTitle = this.rssData[this.i].items[i].title;
+            if(this.fullTitle.indexOf('-') != -1){
+                this.rssData[this.i].items[i].title = this.fullTitle.substring(0,this.fullTitle.indexOf('-')-1);
+                this.rssData[this.i].items[i].subTitle = this.fullTitle.substring(this.fullTitle.indexOf('-')+1);
+            }
+
+        }
 
     }
 
@@ -49,6 +62,7 @@ export class RssSinglePage {
         var i=this.slides.getActiveIndex();
         if(i>this.rssData[this.i].length){
             console.log("last slide");
+
         }
         else{
             console.log("slide Right");

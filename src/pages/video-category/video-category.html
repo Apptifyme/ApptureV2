@@ -18,15 +18,15 @@
 
 <ion-content>
   <img src={{videoimage}}{{id.image}}>
-  <ion-list style="margin: 0px; padding:0px; height:80px" *ngFor="let p of videodata.queryresult,let i=index" (click)="openVideo(p)">
-      <ion-item style="margin: 0px;padding: 0px; height:80px">
-      <ion-thumbnail item-left style="padding: 0px; margin-top:0px ; margin-bottom: 0px; height:80px">
-    <img style="height:80px; width:80px" src={{baseImageUrl}}{{arr[i]}}{{baseImageUrl2}}>
+  <ion-list class="margin-padding-0-height-80" *ngFor="let p of videodata.queryresult,let i=index" (click)="openVideo(p)">
+      <ion-item class="margin-padding-0-height-80">
+      <ion-thumbnail item-left class="margin-top-bottom-0-height-80">
+    <img class="height-80-width-80" src={{baseImageUrl}}{{arr[i]}}{{baseImageUrl2}}>
       </ion-thumbnail>
           <h2>{{p.alt}}</h2>
 
           <ion-item>
-          <ion-icon item-left ios="ios-calendar" md="md-calendar"></ion-icon> <p>{{p.publisheddate | getTime}}</p>
+              <ion-icon item-left item-left ios="ios-calendar-outline" md="md-calendar"></ion-icon> <p>{{p.publisheddate | getTime}}</p>
           </ion-item>
       </ion-item>
   </ion-list>

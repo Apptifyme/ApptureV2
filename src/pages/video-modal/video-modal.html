@@ -26,7 +26,7 @@
           <div class="valign-child">
             <ion-item>
               <div class="video-container">
-                <iframe src={{ url | getBase }}
+                <iframe [src]="(url | getTrustUrl )"
                 frameborder="0"></iframe>
               </div>
             </ion-item>

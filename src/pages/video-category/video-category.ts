@@ -17,7 +17,7 @@ import {VideoModalPage} from '../video-modal/video-modal.ts'
 */
 @Component({
   selector: 'page-video-category',
-  templateUrl: 'video-category.html'
+  templateUrl: 'video-category.html',styleUrls:['/video-category.scss'],
 })
 export class VideoCategoryPage {
   videodata:any=[];

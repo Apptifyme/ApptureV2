@@ -17,13 +17,14 @@
     <ion-toolbar class="bar-appture">
         <ion-buttons left>
             <button ion-button icon-only (click)="goLeft()">
-                <ion-icon name="md-left" (click)="goLeft()"></ion-icon>
+                <ion-icon ios="ios-arrow-dropleft-circle" md="md-arrow-dropleft-circle" click="goLeft()"></ion-icon>
+
             </button>
         </ion-buttons>
         <ion-title>{{title}}</ion-title>
         <ion-buttons right>
             <button ion-button icon-only (click)="goRight()">
-                <ion-icon name="md-right" (click)="goRight()"></ion-icon>
+                <ion-icon ios="ios-arrow-dropright-circle" md="md-arrow-dropright-circle" click="goRight"></ion-icon>
             </button>
         </ion-buttons>
     </ion-toolbar>
