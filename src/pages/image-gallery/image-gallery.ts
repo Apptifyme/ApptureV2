@@ -10,6 +10,7 @@ import {VideoCategoryPage} from '../video-category/video-category'
 import {VideoGalleryPage} from "../video-gallery/video-gallery.ts";
 import {ArticlePage} from '../article/article';
 import {ImageCategoryPage} from '../image-category/image-category'
+import * as localforage from "localforage";
 
 /*
   Generated class for the ImageGallery page.
@@ -26,6 +27,8 @@ export class ImageGalleryPage {
   galleryId: any;
   imageInGallery: any = {};
   public loading: any = {};
+  public watcher={id:0,data:[]};
+  public content=[];
 
   constructor(public navCtrl: NavController, public loadingCtrl: LoadingController,
     public navParams: NavParams, public api: API, public commonServices: commonServices,
@@ -44,15 +47,35 @@ export class ImageGalleryPage {
     }
     this.galleryImages = images;
     console.log(this.galleryImages);
-    this.commonServices.AllGallaryImages=this.galleryImages;
+    this.watcher.id=this.galleryId;
+    this.watcher.data=this.galleryImages;
+    this.commonServices.AllGallaryImages.push(this.watcher);
+    localforage.setItem("AllGallaryImages",this.commonServices.AllGallaryImages);
     this.loading.dismiss();
 
   }
 
 
   getGalleryImages() {
-    if (this.commonServices.AllGallaryImages.length == 0)
-    {
+    localforage.getItem("AllGallaryImages").then((result)=>{
+                     this.content=result?<Array<Object>>result:[];
+                     for(var i=0;i<this.content.length;i++){
+                              if(this.content[i].id==this.galleryId){
+                                console.log("data exist in local forage");
+
+                                this.galleryImages=this.content[i].data;
+                                return;
+
+                              }                     }
+    })
+    for(var i=0;i<this.commonServices.AllGallaryImages.length;i++){
+               if(this.commonServices.AllGallaryImages[i].id==this.galleryId){
+                 console.log("data already exist");
+                 this.galleryImages=this.commonServices.AllGallaryImages[i].data;
+                 return;
+               }
+    }
+
       this.loading.present();
       this.api.getGalleryImages(this.galleryId)
           .map(data => data.json())
@@ -70,11 +93,8 @@ export class ImageGalleryPage {
             //   }
             // });
           });
-    }
-    else{
-      console.log("data already exist");
-      this.galleryImages=this.commonServices.AllGallaryImages;
-    }
+
+
   }
 
 

@@ -9,6 +9,7 @@ import {ContactPage} from '../contact/contact';
 import {VideoCategoryPage} from '../video-category/video-category'
 import {VideoGalleryPage} from "../video-gallery/video-gallery.ts";
 import {ImageCategoryPage} from "../image-category/image-category";
+import * as localforage from "localforage";
 
 @Component({
   selector: 'page-article',
@@ -20,6 +21,7 @@ export class ArticlePage {
    phoneNumber:any;
    loading:any;
     watching={id:0,article:{}};
+    public content=[];
    public articlebaseurl="http://business.staging.appturemarket.com/uploads/";
   constructor(public navCtrl: NavController, public navParams: NavParams,public loadingCtrl:LoadingController,public modalCtrl:ModalController, private httpServiceOfArticle:HttpServiceOfActicle, private httpServiceOfHome: HttpService,private commonServices:commonServices) {
      this.id=this.navParams.get('id');
@@ -36,7 +38,26 @@ export class ArticlePage {
     console.log('ionViewDidLoad ArticlePage');
     //this.loading.present();
   }
-  getPageContent(id:number){
+  getPageContent(id:number) {
+      localforage.getItem("ArticlePage").then((result) => {
+          console.log("local foareage has something");
+          console.log("result");
+          this.content = (result ?<Array<Object>> result : []);
+          console.log(this.content);
+          for(var i=0;i<this.content.length;i++){
+              if(id==this.content[i].id){
+                  this.article=this.content[i].article;
+                  console.log("data exist in local forage");
+                  return;
+
+              }
+          }
+      }, (error) => {
+          console.log("ERROR: ", error);
+
+      })
+
+
       for(var i=0;i<this.commonServices.ArticleCompleteData.length;i++){
           if(id==this.commonServices.ArticleCompleteData[i].id){
               this.article=this.commonServices.ArticleCompleteData[i].article;
@@ -55,6 +76,7 @@ export class ArticlePage {
               this.watching.id=id;
               this.watching.article=this.article;
                 this.commonServices.ArticleCompleteData.push(this.watching);
+                localforage.setItem("ArticlePage",this.commonServices.ArticleCompleteData);
 
                 console.log(this.commonServices.ArticleCompleteData);
               console.log("my Article data fathes");

@@ -11,11 +11,16 @@ import { EventsPage } from "../events/events";
 import { VideoGalleryPage } from "../video-gallery/video-gallery.ts";
 import { ImageCategoryPage } from "../image-category/image-category";
 import { RssArticlePage } from "../rss-article/rss-article"
+import * as localforage from "localforage";
+import {RefreshData} from "../../providers/refresh.service";
+
+
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
-  styleUrls: ['/home.scss']
+  styleUrls: ['/home.scss'],
+  providers:[RefreshData]
 })
 export class HomePage {
   headerLogo: string;
@@ -24,9 +29,10 @@ export class HomePage {
   banners: any;
   RSS = [];
   categories = [];
+  content=[];
   baseImageUrl="http://business.staging.appturemarket.com/uploads/";
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public api: API, public commonServices: commonServices) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public api: API, public commonServices: commonServices, public rs: RefreshData) {
 
   }
 
@@ -43,17 +49,38 @@ export class HomePage {
     // this.sortRssLinks(this.commonServices.AllMenuData);
      this.getAppconfig();
   }
+  ngOnInit() {
+    this.rs.refreshData().then(function(){
 
+    });
+  }
+  refreshdata(){
+    let home=this;
+    localforage.removeItem("allObservbledata").then(function(){
+      console.log("refresh call");
+      //home.RefreshDataFun.refreshData();
+      home.rs.refreshData();
+
+    })
+  }
   getAppconfig() {
+     localforage.getItem("appConfig").then((result)=>{
+      this.content = result ? <Array<Object>> result : [];
+      console.log("data exist in local forage app confog");
+      this.commonServices.appConfig=this.content;
+      return;
+    }, (error) => {
+      console.log("ERROR: ", error);
+    })
 
     this.api.getHeaderLogo()
       .subscribe(
       responce => {
         this.commonServices.appConfig = responce;
-        console.log("my Social Data data");
+//        console.log("my Social Data data");
         console.log(this.commonServices.appConfig);
-
-      },
+              localforage.setItem("appConfig",responce);
+               },
       error => console.log(error)
       )
 
@@ -111,6 +138,7 @@ export class HomePage {
         // console.log(this.commonServices.RSSarray);
       }
     });
+    //localforage.setItem("RSSArray",this.commonServices.RSSarray);
     // console.log('from sortlinks');
     if (this.RSS.length == 0) {
       this.fetchRSSData();

@@ -9,12 +9,15 @@ import {VideoGalleryPage} from "../video-gallery/video-gallery.ts";
 import {ImageCategoryPage} from "../image-category/image-category";
 import {commonServices} from '../../providers/common-services'
 import {VideoModalPage} from '../video-modal/video-modal.ts'
+import * as localforage from "localforage";
+
 /*
   Generated class for the VideoCategory page.
 
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
+
 @Component({
   selector: 'page-video-category',
   templateUrl: 'video-category.html',styleUrls:['/video-category.scss'],
@@ -28,6 +31,7 @@ export class VideoCategoryPage {
   par1:any;
   url1:any;
   arr=[];
+  content=[];
     watching={id:0,article:{}};
     public baseImageUrl="http://img.youtube.com/vi/";
     public baseImageUrl2="/default.jpg";
@@ -52,6 +56,15 @@ export class VideoCategoryPage {
   }
 
   getVideoCategorydata(id:number){
+      localforage.getItem("AllVideoCategoryData").then((result)=>{
+          this.content=result?<Array<Object>>result:[];
+          for(var i=0;i<this.content.length;i++){
+                if(this.content[i].id==id){
+                    console.log("data exist in local forage");
+                    this.videodata=this.content[i].article;
+
+                }          }
+      })
       for(var i=0;i<this.commonServices.AllVideoCategory.length;i++){
           if(this.commonServices.AllVideoCategory[i].id==id){
               console.log("data already exist");
@@ -72,6 +85,7 @@ export class VideoCategoryPage {
               this.watching.article=this.videodata;
 
               this.commonServices.AllVideoCategory.push(this.watching);
+              localforage.setItem("AllVideoCategoryData",this.commonServices.AllVideoCategory);
               console.log(this.commonServices.AllVideoCategory);
               this.arr=this.url1.split(",",this.videodata.queryresult.length);
               console.log(this.arr);

@@ -68,7 +68,7 @@ export class MyApp {
            }
            else {
              console.log("MENU DAATA COMIG");
-             this.commonServices.menuData.push(item);
+//             this.commonServices.menuData.push(item);
            }
          });
          console.log(this.commonServices.menuData);

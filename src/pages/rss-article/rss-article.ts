@@ -1,5 +1,5 @@
 import {Component, ViewChild, keyframes} from '@angular/core';
-import { NavController, NavParams,Slides,LoadingController, ModalController } from 'ionic-angular';
+import { NavController, NavParams , Slides ,LoadingController, ModalController } from 'ionic-angular';
 import {commonServices} from '../../providers/common-services'
 import {HttpServiceOfRss} from '../rss-article/rss.service'
 import {RssSinglePage} from '../rss-single/rss-single';
@@ -92,8 +92,8 @@ export class RssArticlePage {
               }
                 this.watching.id=this.index;
                 this.watching.data=this.RssData;
-
-              this.commonServices.AllRssdata.push(this.watching);
+                let tempObj = Object.assign({},this.watching);
+              this.commonServices.AllRssdata.push(tempObj);
               console.log(this.commonServices.AllRssdata);
             },
             error => console.log(error)
@@ -159,14 +159,14 @@ export class RssArticlePage {
       var k=this.index-1;
       console.log(k);
       console.log(this.commonServices.AllRssdata);
-      for(var i=0;i<this.commonServices.AllRssdata.length;i++){
-          if(this.commonServices.AllRssdata[i].id==k){
-              console.log("data Already exist");
-              this.Rsscontent[i]=this.commonServices.AllRssdata[i];
-              this.slides.slidePrev();
-              return;
-          }
-      }
+      // for(var i=0;i<this.commonServices.AllRssdata.length;i++){
+      //     if(this.commonServices.AllRssdata[i].id==k){
+      //         console.log("data Already exist");
+      //         this.Rsscontent[i]=this.commonServices.AllRssdata[i];
+      //         this.slides.slidePrev();
+      //         return;
+      //     }
+      // }
          if(this.index>0) {
              this.showLoader();
              this.index--;
@@ -186,14 +186,14 @@ export class RssArticlePage {
       var j=this.index+1;
       console.log(j);
       console.log(this.commonServices.AllRssdata);
-      for(var i=0;i<this.commonServices.AllRssdata.length;i++){
-          if(this.commonServices.AllRssdata[i].id==j){
-              console.log("data Already exist");
-              this.Rsscontent[i]=this.commonServices.AllRssdata[i];
-              this.slides.slideNext();
-              return;
-          }
-      }
+      // for(var i=0;i<this.commonServices.AllRssdata.length;i++){
+      //     if(this.commonServices.AllRssdata[i].id==j){
+      //         console.log("data Already exist");
+      //         this.Rsscontent[i]=this.commonServices.AllRssdata[i];
+      //         this.slides.slideNext();
+      //         return;
+      //     }
+      // }
       if(this.index<5) {
           this.showLoader();
           this.index++;

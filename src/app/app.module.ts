@@ -37,6 +37,7 @@ import {GetTime} from '../pipes/get.time.pipes'
 import {SafeHtmlUrl} from "../pipes/get.trust.url.pipes";
 import {SafeBase} from '../pipes/get.base.pipe'
 import { DatePipe } from '@angular/common';
+import{RefreshData} from "../providers/refresh.service"
 
 @NgModule({
   declarations: [
@@ -105,7 +106,8 @@ import { DatePipe } from '@angular/common';
       HttpServiceOfVideoCategory,
     HttpServiceOfEventDetails,
     HttpServiceOfRss,
-      DatePipe
+      DatePipe,
+    RefreshData
   ]
 })
 export class AppModule { }

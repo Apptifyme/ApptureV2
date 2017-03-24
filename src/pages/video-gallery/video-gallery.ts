@@ -9,13 +9,15 @@ import {EventsPage} from "../events/events";
 import {ImageCategoryPage} from "../image-category/image-category";
 import {HomePage} from '../home/home';
 
-
+import * as localforage from "localforage";
 /*
   Generated class for the VideoGallery page.
 
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
+
+
 @Component({
   selector: 'page-video-gallery',
   templateUrl: 'video-gallery.html',styleUrls:['/video-gallary.scss'],
@@ -39,6 +41,21 @@ export class VideoGalleryPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad VideoGalleryPage');
 
+  }
+  refreshdata(){
+      console.log("data refresh");
+      let _this=this;
+      localforage.removeItem("AllVideoData").then(function (){
+              _this.commonServices.ALlVideodata = null;
+
+          _this.loading = _this.loadCtrl.create({
+              content: 'Please wait...'
+          });
+          _this.getVideoCategorydata();
+
+
+          }
+      );
   }
     goToFfooterInside(links:any){
         console.log(links);
@@ -76,6 +93,18 @@ export class VideoGalleryPage {
         }
     }
     getVideoCategorydata(){
+      localforage.getItem("AllVideoData").then((result)=>{
+          console.log("data exist in local forage");
+          console.log("result");
+
+              console.log(result);
+              this.video = result ? result : [];
+              console.log(this.video);
+
+              if(this.video!=[])
+              {
+               //    return;
+               }
       if(this.commonServices.ALlVideodata==null) {
           this.loading.present();
 
@@ -86,6 +115,7 @@ export class VideoGalleryPage {
                       console.log("my Videogallary data loaded");
                       console.log(this.video);
                       this.commonServices.ALlVideodata = this.video;
+                      localforage.setItem("AllVideoData",this.video);
                       console.log(this.commonServices.ALlVideodata);
                       this.loading.dismiss();
                       this.image = this.video.queryresult[1].url.split(',');
@@ -100,6 +130,7 @@ export class VideoGalleryPage {
        //   this.loading.dismiss();
 
       }
+      })
     }
     goToImages(id:any,i:number){
         console.log(" Inside video category");

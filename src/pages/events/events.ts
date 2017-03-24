@@ -9,7 +9,7 @@ import {VideoGalleryPage} from "../video-gallery/video-gallery.ts";
 import {ImageCategoryPage} from "../image-category/image-category";
 import {ArticlePage} from '../article/article'
 import {EventDetailsPage} from '../event-details/event-details';
-
+import * as localforage from "localforage";
 
 
 /*
@@ -18,11 +18,14 @@ import {EventDetailsPage} from '../event-details/event-details';
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
+
 @Component({
   selector: 'page-events',
   templateUrl: 'events.html',styleUrls:['/events.scss'],
 })
 export class EventsPage {
+    private content=null;
+    refresh=false;
     imageurl="http://business.staging.appturemarket.com/uploads/";
    public event:any=[];
    loading:any;
@@ -37,8 +40,40 @@ export class EventsPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad EventsPage');
   }
+  reFreshdata(){
+      this.refresh=true;
+      let _this=this;
+      console.log("data Refresh");
+      localforage.removeItem("EventData").then(function(){
 
+          _this.commonServices.AllEventData=null;
+          console.log("error");
+          _this.loading = _this.loadingCtrl.create({
+              content: 'Please wait...'
+          });
+          _this.onGetData();
+
+
+      })
+
+  }
   onGetData(){
+      if(this.refresh==false) {
+
+          localforage.getItem("EventData").then((result) => {
+              this.content = result ? <Array<Object>> result : null;
+              console.log("data exist in local forage");
+              if (this.content != null) {
+                  this.event = this.content;
+              }
+              // return;
+          }, (error) => {
+              console.log("ERROR: ", error);
+          })
+      }
+       if(this.content!=null){
+          return;
+       }
       if(this.commonServices.AllEventData==null){
           this.loading.present();
 
@@ -49,7 +84,9 @@ export class EventsPage {
               console.log("my Event data");
               console.log(this.event);
               this.commonServices.AllEventData=this.event;
+              localforage.setItem("EventData",this.event);
               this.loading.dismiss();
+              this.refresh=false;
             },
             error => console.log(error)
         )
