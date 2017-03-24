@@ -60,7 +60,7 @@ export class MyApp {
                        response=>{
                          this.commonServices.RssArticle.push(response);
                          console.log("RSS DATA FATcHING");
-                         console.log(this.commonServices.RssArticle[i]);
+                        //  console.log(this.commonServices.RssArticle[i]);
 
                        },
                        error=>console.log(error)
@@ -72,10 +72,11 @@ export class MyApp {
            }
          });
          console.log(this.commonServices.menuData);
+        //  this.commonServices.menuData = this.commonServices.menuData.filter(item => ((item.name !== "My Profile") || (item.name!="Settings")));
          for(var i=0;i<this.commonServices.menuData.length;i++){
-                       if(this.commonServices.menuData[i].name=="My Profile"){
-                         this.commonServices.menuData[i].name="BreakingNews";
-                       }
+            if(this.commonServices.menuData[i].name=="My Profile" || this.commonServices.menuData[i].name=="Settings" ){
+              this.commonServices.menuData.splice(i,1);
+            }
          }
        });
       // console.log("RSS ARRAY");
@@ -98,6 +99,10 @@ export class MyApp {
       { title: 'Home', component: HomePage }
     ];
 
+  }
+
+  openRSSPage(){
+      this.nav.push(RssPage);
   }
 
   gotoArticle(id: number, name, articlename, article ,linktypelink) {
