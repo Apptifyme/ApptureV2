@@ -42,6 +42,10 @@ export class LandingPage {
                         console.log(item);
                         this.commonServices.headerLogo = 'http://business.staging.appturemarket.com/uploads/header-logo/' + item.image;
                     }
+                    else if (item.title == 'Contact No') {
+                        console.log(item);
+                        this.commonServices.PhoneNo = item.text;
+                    }
                 });
             });
 
@@ -61,13 +65,13 @@ export class LandingPage {
                 home.checkHomeScreen();
             }
             else {
-                home.commonServices.slides = data[1];
-                home.commonServices.banners = data[2].menu;
+                home.commonServices.slides = data[0];
+                home.commonServices.banners = data[1].menu;
 
-                home.commonServices.AllMenuData = data[3];
+                home.commonServices.AllMenuData = data[2];
                 this.checkWalkThroughFlag();
 
-                data[3].menu.map(item => {
+                data[2].menu.map(item => {
                     if (item.linktypename == "Pages" && this.commonServices.isURL(item.articlename)) {
                         home.commonServices.RSSarray.push(item);
                     }
@@ -104,7 +108,7 @@ export class LandingPage {
             console.log(this.commonServices.banners);
             this.commonServices.AllMenuData = this.allObservableData[2];
             localforage.setItem("Allmenudata", this.commonServices.AllMenuData);
-            this.allObservableData[3].menu.map(item => {
+            this.allObservableData[2].menu.map(item => {
                 if (item.linktypename == "Pages" && this.commonServices.isURL(item.articlename)) {
                     this.commonServices.RSSarray.push(item);
                 }

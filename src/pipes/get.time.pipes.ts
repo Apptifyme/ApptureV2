@@ -16,7 +16,7 @@ export class GetTime implements PipeTransform{
         private commonServices: commonServices,private datePipe: DatePipe
     ){}
 
-    transform(date: string){
+    transform(date: any){
 
         //  console.log(date);
        //   console.log("In Pipe");
