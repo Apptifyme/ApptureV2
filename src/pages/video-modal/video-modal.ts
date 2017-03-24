@@ -14,11 +14,15 @@ import { NavController, NavParams ,ViewController} from 'ionic-angular';
 export class VideoModalPage {
    id:any;
    baseUrl:any;
+   url:any;
+   baseUrl1="https://www.youtube.com/embed/";
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl:ViewController) {
+      //window.screen.lockOrientation("landscape");
     this.id=this.navParams.get('id');
     console.log(this.id);
     console.log(this.id.url);
     this.baseUrl="https://www.youtube.com/embed/WWFLRAh7aUs";
+    this.url=this.baseUrl1+this.id.url;
   }
 
   ionViewDidLoad() {

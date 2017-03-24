@@ -9,16 +9,18 @@ import {EventsPage} from "../events/events";
 import {ImageCategoryPage} from "../image-category/image-category";
 import {HomePage} from '../home/home';
 
-
+import * as localforage from "localforage";
 /*
   Generated class for the VideoGallery page.
 
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
+
+
 @Component({
   selector: 'page-video-gallery',
-  templateUrl: 'video-gallery.html'
+  templateUrl: 'video-gallery.html',styleUrls:['/video-gallary.scss'],
 })
 export class VideoGalleryPage {
   public baseImageUrl="http://img.youtube.com/vi/";
@@ -26,19 +28,34 @@ export class VideoGalleryPage {
     public video:any=[];
     public image=[];
     loading:any;
+    watcher={id:0,data:{}};
   constructor(public navCtrl: NavController, public loadCtrl:LoadingController,public modalCtrl:ModalController,public navParams: NavParams , private httpServiceOfVideocategory:HttpServiceOfVideoGallary,public commonServices:commonServices) {
-     this.getVideoCategorydata();
 
       this.loading = this.loadCtrl.create({
           content: 'Please wait...'
       });
+      this.getVideoCategorydata();
 
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad VideoGalleryPage');
 
-    this.loading.present();
+  }
+  refreshdata(){
+      console.log("data refresh");
+      let _this=this;
+      localforage.removeItem("AllVideoData").then(function (){
+              _this.commonServices.ALlVideodata = null;
+
+          _this.loading = _this.loadCtrl.create({
+              content: 'Please wait...'
+          });
+          _this.getVideoCategorydata();
+
+
+          }
+      );
   }
     goToFfooterInside(links:any){
         console.log(links);
@@ -76,18 +93,44 @@ export class VideoGalleryPage {
         }
     }
     getVideoCategorydata(){
-      this.httpServiceOfVideocategory.getVideocategoryData(1)
-          .subscribe(
-              responce => {
-                this.video = responce;
-                console.log("my Videogallary data loaded");
-                console.log(this.video);
-                this.loading.dismiss();
-                this.image=this.video.queryresult[1].url.split(',');
-                console.log(this.image);
-              },
-              error => console.log(error)
-          )
+      localforage.getItem("AllVideoData").then((result)=>{
+          console.log("data exist in local forage");
+          console.log("result");
+
+              console.log(result);
+              this.video = result ? result : [];
+              console.log(this.video);
+
+              if(this.video!=[])
+              {
+               //    return;
+               }
+      if(this.commonServices.ALlVideodata==null) {
+          this.loading.present();
+
+          this.httpServiceOfVideocategory.getVideocategoryData(1)
+              .subscribe(
+                  responce => {
+                      this.video = responce;
+                      console.log("my Videogallary data loaded");
+                      console.log(this.video);
+                      this.commonServices.ALlVideodata = this.video;
+                      localforage.setItem("AllVideoData",this.video);
+                      console.log(this.commonServices.ALlVideodata);
+                      this.loading.dismiss();
+                      this.image = this.video.queryresult[1].url.split(',');
+                      console.log(this.image);
+                  },
+                  error => console.log(error)
+              )
+      }
+      else{
+          console.log("data Already exist");
+          this.video=this.commonServices.ALlVideodata;
+       //   this.loading.dismiss();
+
+      }
+      })
     }
     goToImages(id:any,i:number){
         console.log(" Inside video category");

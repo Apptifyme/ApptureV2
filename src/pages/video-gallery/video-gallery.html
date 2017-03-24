@@ -19,7 +19,7 @@
 
 
     <ion-buttons end>
-      <button ion-button icon-only>
+      <button ion-button icon-only (click)="refreshdata()">
         <ion-icon name="refresh"></ion-icon>
       </button>
     </ion-buttons>
@@ -27,11 +27,11 @@
 </ion-header>
 
 
-<ion-content style="padding: 0px; margin: 0px">
-  <ion-list *ngFor="let p of video.queryresult,let i=index" style="margin: 0px; padding:0px;" (click)="goToImages(p,i)">
-      <ion-item style="margin: 0px; padding:0px; style:100px">
-          <ion-thumbnail item-left style="height:100px; margin-top: 0px; margin-bottom: 0px">
-    <img style="height: 100px; width:90px" src="{{baseImageUrl}}{{p.url | getImage}}{{baseImageUrl2}}">
+<ion-content class="margin-paddin-0">
+  <ion-list *ngFor="let p of video.queryresult,let i=index" class="margin-padding-0" (click)="goToImages(p,i)">
+      <ion-item class="margin-padding-0-height-100">
+          <ion-thumbnail item-left class="margin-top-bottom-0-height-100">
+    <img class="margin-top-bottom-0-height-100" style="width:100px" src="{{baseImageUrl}}{{p.url | getImage}}{{baseImageUrl2}}">
           </ion-thumbnail>
           <h2> {{p.name}} </h2>
           <p>{{p.subtitle}}</p>

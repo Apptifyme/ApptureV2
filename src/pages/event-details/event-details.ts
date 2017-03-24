@@ -9,6 +9,8 @@ import {VideoCategoryPage} from '../video-category/video-category'
 import {VideoGalleryPage} from "../video-gallery/video-gallery.ts";
 import {ImageCategoryPage} from "../image-category/image-category";
 import {ArticlePage} from '../article/article'
+import * as localforage from "localforage";
+
 
 /*
   Generated class for the EventDetails page.
@@ -18,7 +20,7 @@ import {ArticlePage} from '../article/article'
 */
 @Component({
   selector: 'page-event-details',
-  templateUrl: 'event-details.html'
+  templateUrl: 'event-details.html',styleUrls:['/event-details.scss'],
 })
 export class EventDetailsPage {
    eventDetail:any=[];
@@ -34,7 +36,7 @@ export class EventDetailsPage {
     console.log('ionViewDidLoad EventDetailsPage');
   }
   onGetData(){
-    this.httpServiceOfEventDetails.getEventData(1)
+    this.httpServiceOfEventDetails.getEventData(2)
         .subscribe(
             responce => {
               this.eventDetail = responce;

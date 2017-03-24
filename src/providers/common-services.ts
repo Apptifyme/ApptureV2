@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
@@ -23,16 +23,24 @@ export class commonServices {
   }
 
   headerLogo: string;
+  width:any;
+  ArticleCompleteData=[];
+  DesingPortFolio:null;
   AllMenuData:any = [];
+  ALlVideodata:null;
+  AllVideoCategory=[];
   banners:any = [];
   menuData = [];
   RSSarray = [];
+  AllEventData=null;
+  AllGallaryImages=[];
   imageCategories = [];
+  AllRssdata=[];
   adminUrl = 'http://business.staging.appturemarket.com/index.php/json/';
   adminImages = 'http://business.staging.appturemarket.com/uploads/';
   appConfig=[];
   RssData=[];
-
+  RssArticle=[];
   clickedMenuItem = '';
   slides: any;
   adminImage: string = 'http://business.staging.appturemarket.com/uploads/';

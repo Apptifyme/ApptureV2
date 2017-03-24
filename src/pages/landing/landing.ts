@@ -7,6 +7,8 @@ import { Observable } from 'rxjs/Rx';
 
 import { HomePage } from '../../pages/home/home';
 import { WalkthroughPage } from '../../pages/walkthrough/walkthrough';
+import * as localforage from "localforage";
+
 
 @Component({
     selector: 'page-landing',
@@ -39,7 +41,35 @@ export class LandingPage {
                 // console.log(data);
                 this.commonServices.footerLinks = data.menu;
             });
-        this.checkHomeScreen();
+        let home=this;
+        localforage.getItem("allObservbledata").then((result)=>{
+            console.log(result);
+            let data=[];
+            data=result? <Array<Object>> result:null;
+
+            if(data==null){
+                console.log("data nhi hai");
+                home.checkHomeScreen();
+
+
+            }
+            else{
+                home.commonServices.slides = data[1];
+                home.commonServices.banners = data[2].menu;
+
+                home.commonServices.AllMenuData = data[3];
+                this.checkWalkThroughFlag();
+
+                data[3].menu.map(item => {
+                    if (item.linktypename == "Pages" && this.commonServices.isURL(item.articlename)) {
+                        home.commonServices.RSSarray.push(item);
+                    }
+                    else {
+                        home.commonServices.menuData.push(item);
+                    }
+                });
+            }
+        },)
     }
 
     checkHomeScreen() {
@@ -47,6 +77,8 @@ export class LandingPage {
         Observable.forkJoin(this.allDataPromise).subscribe((resPromise) => {
 
             this.allObservableData = resPromise;
+            localforage.setItem("allObservbledata",resPromise);
+
             // console.log(this.allObservableData[0]);
             this.allObservableData[0]
                 .map(item => {
@@ -58,9 +90,13 @@ export class LandingPage {
             // console.log(this.allObservableData[1]);
             // console.log(this.allObservableData[2]);
             this.commonServices.slides = this.allObservableData[1];
+            localforage.setItem("slides",this.commonServices.slides);
+
             this.commonServices.banners = this.allObservableData[2].menu;
+            localforage.setItem("banners",this.commonServices.banners);
             // console.log(this.allObservableData[3]);
             this.commonServices.AllMenuData = this.allObservableData[3];
+            localforage.setItem("Allmenudata",this.commonServices.AllMenuData);
             this.allObservableData[3].menu.map(item => {
                 if (item.linktypename == "Pages" && this.commonServices.isURL(item.articlename)) {
                     this.commonServices.RSSarray.push(item);
@@ -69,6 +105,8 @@ export class LandingPage {
                     this.commonServices.menuData.push(item);
                 }
             });
+            localforage.setItem("menuData",this.commonServices.menuData);
+            localforage.setItem("RSSarray",this.commonServices.RSSarray);
             // console.log(this.commonServices.menuData);
             this.checkWalkThroughFlag();
             // this.platform.ready().then(() => {

@@ -17,9 +17,10 @@ import {ImageCategoryPage} from '../image-category/image-category'
 */
 @Component({
   selector: 'page-rss',
-  templateUrl: 'rss.html'
+  templateUrl: 'rss.html', styleUrls:['/rss.scss'],
 })
 export class RssPage {
+  baseImageUrl="http://business.staging.appturemarket.com/uploads/";
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public commonService:commonServices) {}
 

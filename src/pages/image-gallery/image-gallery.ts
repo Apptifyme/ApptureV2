@@ -10,6 +10,7 @@ import {VideoCategoryPage} from '../video-category/video-category'
 import {VideoGalleryPage} from "../video-gallery/video-gallery.ts";
 import {ArticlePage} from '../article/article';
 import {ImageCategoryPage} from '../image-category/image-category'
+import * as localforage from "localforage";
 
 /*
   Generated class for the ImageGallery page.
@@ -26,6 +27,8 @@ export class ImageGalleryPage {
   galleryId: any;
   imageInGallery: any = {};
   public loading: any = {};
+  public watcher={id:0,data:[]};
+  public content=[];
 
   constructor(public navCtrl: NavController, public loadingCtrl: LoadingController,
     public navParams: NavParams, public api: API, public commonServices: commonServices,
@@ -44,32 +47,59 @@ export class ImageGalleryPage {
     }
     this.galleryImages = images;
     console.log(this.galleryImages);
+    this.watcher.id=this.galleryId;
+    this.watcher.data=this.galleryImages;
+    this.commonServices.AllGallaryImages.push(this.watcher);
+    localforage.setItem("AllGallaryImages",this.commonServices.AllGallaryImages);
     this.loading.dismiss();
+
   }
 
 
   getGalleryImages() {
-    this.api.getGalleryImages(this.galleryId)
-      .map(data => data.json())
-      .subscribe((data) => {
-        console.log(data);
-        this.processGalleryImages(data.queryresult);
+    localforage.getItem("AllGallaryImages").then((result)=>{
+                     this.content=result?<Array<Object>>result:[];
+                     for(var i=0;i<this.content.length;i++){
+                              if(this.content[i].id==this.galleryId){
+                                console.log("data exist in local forage");
 
-        // this.photoCategories = data;
-        // data.map(item => {
-        //   if (item.title == 'Header Logo') {
-        //     console.log(item);
-        //     this.commonServices.headerLogo = 'http://business.staging.appturemarket.com/uploads/header-logo/' + item.image;
-        //     this.headerLogo = this.commonServices.headerLogo;
-        //     console.log(this.headerLogo);
-        //   }
-        // });
-      });
+                                this.galleryImages=this.content[i].data;
+                                return;
+
+                              }                     }
+    })
+    for(var i=0;i<this.commonServices.AllGallaryImages.length;i++){
+               if(this.commonServices.AllGallaryImages[i].id==this.galleryId){
+                 console.log("data already exist");
+                 this.galleryImages=this.commonServices.AllGallaryImages[i].data;
+                 return;
+               }
+    }
+
+      this.loading.present();
+      this.api.getGalleryImages(this.galleryId)
+          .map(data => data.json())
+          .subscribe((data) => {
+            console.log(data);
+            this.processGalleryImages(data.queryresult);
+
+            // this.photoCategories = data;
+            // data.map(item => {
+            //   if (item.title == 'Header Logo') {
+            //     console.log(item);
+            //     this.commonServices.headerLogo = 'http://business.staging.appturemarket.com/uploads/header-logo/' + item.image;
+            //     this.headerLogo = this.commonServices.headerLogo;
+            //     console.log(this.headerLogo);
+            //   }
+            // });
+          });
+
+
   }
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ImageGalleryPage');
-    this.loading.present();
     this.imageInGallery = { 'width': 0.32 * (this.commonServices.devW - 4) + 'px', 'height': 0.32 * (this.commonServices.devW - 4) + 'px' };
     this.getGalleryImages();
   }
