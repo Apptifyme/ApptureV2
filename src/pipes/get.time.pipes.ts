@@ -22,7 +22,7 @@ export class GetTime implements PipeTransform{
        //   console.log("In Pipe");
         if(date=="0000-00-00 00:00:00"){
          //   console.log("return null");
-            return "null";
+            return null;
         }
         else{
            //  console.log("return date");

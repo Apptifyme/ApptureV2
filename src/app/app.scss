@@ -380,3 +380,27 @@ color: white;
     overflow-y: scroll;
     display: block;
 }
+
+.event-item{
+        border-bottom:1px solid #ccc;
+        min-height: 100px;
+        padding: 12px!important;
+        ion-thumbnail{
+            margin-top: 0!important;
+            img{
+                width: 70px;
+                height: 70px;
+                border-radius: 4px;
+            }
+        }
+        .item-inner{
+            border:none!important;
+            ion-label{
+                white-space: normal;
+                margin: 0;
+                p{
+                    margin-top: 5px;
+                }
+            }
+        }
+    }
