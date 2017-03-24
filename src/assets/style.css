@@ -765,7 +765,7 @@ drawer .item-complex .item-content {
     line-height: 21px;
 }
 .article-header-logo{
-    max-width: 65% !important;
+    max-width: 100% !important;
     margin: auto !important;
 }
 .article-image{

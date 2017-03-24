@@ -1,11 +1,17 @@
 page-video-modal {
+  .video-modal-button-rotate{
+      z-index: 1;
+      transform: rotate(90deg) translate(20px,10px);
+      background-color: rgba(0,0,0,0.8);
+      color: white;
+  }
+  .at-center {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+  }
+}
 
-}
-.at-center {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  transform: translateY(-50%);
-  -webkit-transform: translateY(-50%);
-}

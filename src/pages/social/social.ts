@@ -25,10 +25,13 @@ export class SocialPage {
 
    social=[];
    socialData:any=[];
+   header:any;
+
   constructor(public navCtrl: NavController, public navParams: NavParams ,public commonService:commonServices,
     public plt: Platform) {
 
       console.log(this.commonService.appConfig);
+      this.header=this.commonService.headerLogo;
       this.socialData=JSON.parse(this.commonService.appConfig[6].text);
       console.log(this.commonService.appConfig);
       console.log( this.socialData);

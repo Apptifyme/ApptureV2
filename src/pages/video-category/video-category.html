@@ -19,17 +19,7 @@
 <ion-content>
     <img src={{videoimage}}{{id.image}}>
     <ion-list>
-        <!--<ion-item class="margin-0 padding-0">
-            <ion-thumbnail item-left>
-                <img src={{baseImageUrl}}{{p.url}}{{baseImageUrl2}}>
-            </ion-thumbnail>
-            <h2>{{p.alt}}</h2>
-            <p>{{p.subtitle}}</p>
-            <ion-item>
-                <ion-icon ios="ios-calendar-outline" md="md-calendar" class="item-small padding-0"></ion-icon>
-                {{(p.publisheddate | getTime)||'Date not available'}}
-            </ion-item>
-        </ion-item>-->
+       
         <ion-item *ngFor="let p of videodata.queryresult,let i=index" (click)="openVideo(p)" class="event-item">
             <ion-thumbnail item-left>
                 <img [src]="baseImageUrl+p.url+baseImageUrl2">
