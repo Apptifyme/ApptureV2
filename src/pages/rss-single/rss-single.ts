@@ -22,6 +22,7 @@ export class RssSinglePage {
     @ViewChild(Slides) slides: Slides;
     fullTitle="";
     size:any;
+    watching={id:0,data:{}};
     constructor(public navCtrl: NavController, public navParams: NavParams, public httpserviceofRss: HttpServiceOfRss, public commonServices: commonServices) {
         this.id = this.navParams.get('id');
         console.log(this.id);

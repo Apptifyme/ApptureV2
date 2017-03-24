@@ -1,4 +1,4 @@
-import { Component ,ViewChild} from '@angular/core';
+import {Component, ViewChild, keyframes} from '@angular/core';
 import { NavController, NavParams,Slides,LoadingController, ModalController } from 'ionic-angular';
 import {commonServices} from '../../providers/common-services'
 import {HttpServiceOfRss} from '../rss-article/rss.service'
@@ -28,11 +28,13 @@ export class RssArticlePage {
   index:any;
   RssData:any=[];
   Rsscontent=["","","","","",""];
+
   i:any;
     @ViewChild(Slides) slides: Slides;
   url="";
   currentIndex=0;
   prev=0;
+  watching={'id':0,'data':{}};
   public loading:any;
     constructor(public navCtrl: NavController, public navParams: NavParams ,public loadingController:LoadingController,public modalController:ModalController , public commonServices:commonServices , public httpserviceOfRss:HttpServiceOfRss) {
     console.log(this.commonServices.RssData);
@@ -56,7 +58,7 @@ export class RssArticlePage {
   }
   loadRssdata(url){
     var flag=false;
-    console.log("load RSS data callled");
+      console.log("load RSS data callled");
     this.httpserviceOfRss.loadRssdata( url)
         .subscribe(
             responce => {
@@ -88,6 +90,11 @@ export class RssArticlePage {
                 }
 
               }
+                this.watching.id=this.index;
+                this.watching.data=this.RssData;
+
+              this.commonServices.AllRssdata.push(this.watching);
+              console.log(this.commonServices.AllRssdata);
             },
             error => console.log(error)
         )
@@ -149,6 +156,17 @@ export class RssArticlePage {
       console.log("go left");
 
       console.log(this.index);
+      var k=this.index-1;
+      console.log(k);
+      console.log(this.commonServices.AllRssdata);
+      for(var i=0;i<this.commonServices.AllRssdata.length;i++){
+          if(this.commonServices.AllRssdata[i].id==k){
+              console.log("data Already exist");
+              this.Rsscontent[i]=this.commonServices.AllRssdata[i];
+              this.slides.slidePrev();
+              return;
+          }
+      }
          if(this.index>0) {
              this.showLoader();
              this.index--;
@@ -164,7 +182,19 @@ export class RssArticlePage {
 
       console.log("go right");
       console.log(this.index);
-      if(this.index<this.commonServices.RssData.length) {
+      console.log(this.commonServices.RssData.length);
+      var j=this.index+1;
+      console.log(j);
+      console.log(this.commonServices.AllRssdata);
+      for(var i=0;i<this.commonServices.AllRssdata.length;i++){
+          if(this.commonServices.AllRssdata[i].id==j){
+              console.log("data Already exist");
+              this.Rsscontent[i]=this.commonServices.AllRssdata[i];
+              this.slides.slideNext();
+              return;
+          }
+      }
+      if(this.index<5) {
           this.showLoader();
           this.index++;
           this.i++;

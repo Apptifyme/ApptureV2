@@ -26,6 +26,7 @@ export class VideoGalleryPage {
     public video:any=[];
     public image=[];
     loading:any;
+    watcher={id:0,data:{}};
   constructor(public navCtrl: NavController, public loadCtrl:LoadingController,public modalCtrl:ModalController,public navParams: NavParams , private httpServiceOfVideocategory:HttpServiceOfVideoGallary,public commonServices:commonServices) {
 
       this.loading = this.loadCtrl.create({
