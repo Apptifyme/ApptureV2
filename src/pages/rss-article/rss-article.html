@@ -17,14 +17,14 @@
     <ion-toolbar class="bar-appture">
         <ion-buttons left>
             <button ion-button icon-only (click)="goLeft()">
-                <ion-icon ios="ios-arrow-dropleft-circle" md="md-arrow-dropleft-circle" click="goLeft()"></ion-icon>
+                <ion-icon ios="ios-arrow-back-outline" md="md-arrow-back" click="goLeft()"></ion-icon>
 
             </button>
         </ion-buttons>
         <ion-title>{{title}}</ion-title>
         <ion-buttons right>
             <button ion-button icon-only (click)="goRight()">
-                <ion-icon ios="ios-arrow-dropright-circle" md="md-arrow-dropright-circle" click="goRight"></ion-icon>
+                <ion-icon ios="ios-arrow-forward-outline" md="md-arrow-forward" click="goRight"></ion-icon>
             </button>
         </ion-buttons>
     </ion-toolbar>
@@ -36,10 +36,10 @@
 
     <ion-slides (ionSlideDidChange)="slideChanged()" scrollY="true">
 
-        <ion-slide *ngFor="let p of commonServices.RssArticle" scrollY="true" class="slide-content">
+        <ion-slide *ngFor="let p of commonServices.RssArticle,let parentIndex=index" scrollY="true" class="slide-content">
             <ion-list *ngIf="p.items">
                 <ion-item class="item-border-full-bottom rss-item"
-                *ngFor="let q of p.items.items,let j=index" (click)="goinsideRSS(q,i,j)" >
+                *ngFor="let q of p.items.items,let childIndex=index" (click)="goinsideRSS(q,parentIndex,childIndex)" >
                     <ion-thumbnail item-left>
                         <img src={{q.imageLink}}>
                     </ion-thumbnail>

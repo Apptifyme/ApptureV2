@@ -225,10 +225,10 @@ export class RssArticlePage {
             this.goRight();
         }
     }
-    goinsideRSS(id: any, i: number, j: number) {
+    goinsideRSS(id: any, parentIndex: number, childIndex: number) {
         console.log("Inside RSS");
         console.log(id);
-        console.log(j);
-        this.navCtrl.push(RssSinglePage, { id: id, i: i, title: this.title, j: j });
+        // console.log(j);
+        this.navCtrl.push(RssSinglePage, { id: id, parentIndex: parentIndex, title: this.title, childIndex: childIndex });
     }
 }
