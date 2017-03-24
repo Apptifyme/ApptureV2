@@ -13,8 +13,8 @@
 </ion-header>
 
 
-<ion-content padding>
-    <ion-segment [(ngModel)]="pet">
+<ion-content>
+    <ion-segment [(ngModel)]="tab">
         <ion-segment-button value="Contact Us">
             Contact Us
         </ion-segment-button>
@@ -22,32 +22,26 @@
             Contact From
         </ion-segment-button>
     </ion-segment>
-    <div [ngSwitch]="pet">
+    <div [ngSwitch]="tab">
 
         <ion-list *ngSwitchCase="'Contact Us'">
 
-        <ion-item>
-            <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>
-
-            <ion-label fixed>{{data.content}}</ion-label>
-            <ion-input type="text"   [readonly]="true"></ion-input>
-        </ion-item>
-        <ion-item>
-            <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>
-
-            <ion-label fixed>{{data.text}}</ion-label>
-            <ion-input type="text"  [readonly]="true"></ion-input>
-        </ion-item>
             <ion-item>
-                <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>
-
-                <ion-label fixed>{{data.type}}</ion-label>
-                <ion-input type="readonly"  [readonly]="true"></ion-input>
+                <ion-icon ios="ios-pin-outline" md="md-pin"></ion-icon>
+                {{data.content}}
+            </ion-item>
+            <ion-item>
+                <ion-icon ios="ios-call-outline" md="md-call"></ion-icon>
+                {{data.text}}
+            </ion-item>
+            <ion-item>
+                <ion-icon ios="ios-globe-outline" md="md-globe"></ion-icon>
+                {{data.type}}
             </ion-item>
             <ion-item>
                 <div class="map" [innerHTML]="data.description.description | getBase"></div>
             </ion-item>
-    </ion-list>
+        </ion-list>
 
 
         <ion-list *ngSwitchCase="'Contact From'">
@@ -56,24 +50,24 @@
 
                 <ion-item>
                     <ion-label floating>FullName</ion-label>
-                    <ion-input type="text"></ion-input>
+                    <ion-input type="text" [ngModel]="enquiry.name"></ion-input>
                 </ion-item>
 
                 <ion-item>
                     <ion-label floating>E-mail</ion-label>
-                    <ion-input type="text"></ion-input>
+                    <ion-input type="email" [ngModel]="enquiry.email"></ion-input>
                 </ion-item>
                 <ion-item>
                     <ion-label floating>Subject</ion-label>
-                    <ion-input type="text"></ion-input>
+                    <ion-input type="text" [ngModel]="enquiry.title"></ion-input>
                 </ion-item>
                 <ion-item>
                     <ion-label floating>Comment</ion-label>
-                    <ion-input type="text"></ion-input>
+                    <ion-input type="text" [ngModel]="enquiry.comment"></ion-input>
                 </ion-item>
 
             </ion-list>
-            <button ion-button full >Submit</button>
+            <button ion-button block (click)="enquiryform()">Submit</button>
         </ion-list>
     </div>
 
