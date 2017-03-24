@@ -79,8 +79,8 @@ export class EventsPage {
 
           this.httpServiceOfEvent.getEventData(1)
         .subscribe(
-            responce => {
-              this.event = responce;
+            response => {
+              this.event = response;
               console.log("my Event data");
               console.log(this.event);
               this.commonServices.AllEventData=this.event;
@@ -100,7 +100,7 @@ export class EventsPage {
       console.log("Event Deatails Page");
       this.navCtrl.push(EventDetailsPage,{id:id});
 
-    }    goToFfooterInside(links:any){
+    }    goToFooterInside(links:any){
         console.log(links);
         var str:any;
         switch(links.linktypelink){

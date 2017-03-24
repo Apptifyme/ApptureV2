@@ -57,7 +57,7 @@ export class VideoGalleryPage {
           }
       );
   }
-    goToFfooterInside(links:any){
+    goToFooterInside(links:any){
         console.log(links);
         var str:any;
         switch(links.linktypelink){
@@ -110,8 +110,8 @@ export class VideoGalleryPage {
 
           this.httpServiceOfVideocategory.getVideocategoryData(1)
               .subscribe(
-                  responce => {
-                      this.video = responce;
+                  response => {
+                      this.video = response;
                       console.log("my Videogallary data loaded");
                       console.log(this.video);
                       this.commonServices.ALlVideodata = this.video;

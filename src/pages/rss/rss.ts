@@ -30,7 +30,7 @@ export class RssPage {
   gotoRss(id:number){
     this.navCtrl.push(RssArticlePage,{id:id});
   }
-  goToFfooterInside(links:any){
+  goToFooterInside(links:any){
     console.log(links);
     var str:any;
     switch(links.linktypelink){

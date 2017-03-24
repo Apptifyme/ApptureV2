@@ -70,7 +70,7 @@ export class SocialPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad SocialPage');
   }
-    goToFfooterInside(links:any){
+    goToFooterInside(links:any){
         console.log(links);
         var str:any;
         switch(links.linktypelink){

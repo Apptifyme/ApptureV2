@@ -10,7 +10,7 @@ import {Observable} from "rxjs/Observable";
 import 'rxjs/Rx';
 @Injectable()
 export class HttpService{
-    responce : {};
+    response : {};
     menudata=[];
     RssArrayData=[];
     RssArray=[];

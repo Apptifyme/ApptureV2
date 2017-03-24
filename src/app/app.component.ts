@@ -57,8 +57,8 @@ export class MyApp {
              console.log("RSS DATA COMING");
              this.commonServices.RSSarray.push(item);
                    this.api.getSingleArticle(item.article).subscribe(
-                       responce=>{
-                         this.commonServices.RssArticle.push(responce);
+                       response=>{
+                         this.commonServices.RssArticle.push(response);
                          console.log("RSS DATA FATcHING");
                          console.log(this.commonServices.RssArticle[i]);
 
@@ -81,8 +81,8 @@ export class MyApp {
       // console.log("RSS ARRAY");
        // console.log(this.commonServices.RSSarray);
        // for(var i=0;i<this.commonServices.RSSarray.length;i++){
-       //   this.api.getSingleArticle(this.commonServices.RSSarray[i].article).subscribe( responce=>{
-       //         this.commonServices.RssArticle.push(responce);
+       //   this.api.getSingleArticle(this.commonServices.RSSarray[i].article).subscribe( response=>{
+       //         this.commonServices.RssArticle.push(response);
        //         console.log(this.commonServices.RssArticle[i]);
        //
        //       },

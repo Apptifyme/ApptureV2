@@ -108,7 +108,7 @@ export class ImageGalleryPage {
     let profileModal = this.modalCtrl.create(ImageModalPage, { imagesrc: image });
     profileModal.present();
   }
-  goToFfooterInside(links:any){
+  goToFooterInside(links:any){
     console.log(links);
     var str:any;
     switch(links.linktypelink){

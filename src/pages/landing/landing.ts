@@ -50,8 +50,6 @@ export class LandingPage {
             if(data==null){
                 console.log("data nhi hai");
                 home.checkHomeScreen();
-
-
             }
             else{
                 home.commonServices.slides = data[1];
@@ -91,10 +89,10 @@ export class LandingPage {
             // console.log(this.allObservableData[2]);
             this.commonServices.slides = this.allObservableData[1];
             localforage.setItem("slides",this.commonServices.slides);
-
+            console.log(this.commonServices.slides);
             this.commonServices.banners = this.allObservableData[2].menu;
             localforage.setItem("banners",this.commonServices.banners);
-            // console.log(this.allObservableData[3]);
+            console.log(this.commonServices.banners);
             this.commonServices.AllMenuData = this.allObservableData[3];
             localforage.setItem("Allmenudata",this.commonServices.AllMenuData);
             this.allObservableData[3].menu.map(item => {

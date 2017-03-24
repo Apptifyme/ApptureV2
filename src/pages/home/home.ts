@@ -50,9 +50,9 @@ export class HomePage {
      this.getAppconfig();
   }
   ngOnInit() {
-    this.rs.refreshData().then(function(){
+    // this.rs.refreshData().then(function(){
 
-    });
+    // });
   }
   refreshdata(){
     let home=this;
@@ -75,11 +75,11 @@ export class HomePage {
 
     this.api.getHeaderLogo()
       .subscribe(
-      responce => {
-        this.commonServices.appConfig = responce;
+      response => {
+        this.commonServices.appConfig = response;
 //        console.log("my Social Data data");
         console.log(this.commonServices.appConfig);
-              localforage.setItem("appConfig",responce);
+              localforage.setItem("appConfig",response);
                },
       error => console.log(error)
       )
@@ -212,7 +212,12 @@ export class HomePage {
     // console.log(id);
     this.navCtrl.push(ArticlePage, { id: id });
   }
-  goToFfooterInside(links: any) {
+  goToPromotion(id: number) {
+    // console.log("page Change Article");
+    // console.log(id);
+    this.navCtrl.push(ArticlePage, { id: id });
+  }
+  goToFooterInside(links: any) {
     console.log(links);
     var str: any;
     switch (links.linktypelink) {

@@ -77,8 +77,8 @@ export class VideoCategoryPage {
 
       this.httpServiceOfVideoCategory.getVideocategoryData(id)
         .subscribe(
-            responce => {
-              this.videodata = responce;
+            response => {
+              this.videodata = response;
               console.log("my Videogallary data loaded");
               console.log(this.videodata);
               this.watching.id=id;
@@ -96,7 +96,7 @@ export class VideoCategoryPage {
             error => console.log(error)
         )
   }
-    goToFfooterInside(links:any){
+    goToFooterInside(links:any){
         console.log(links);
         var str:any;
         switch(links.linktypelink){

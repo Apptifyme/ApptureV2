@@ -1,6 +1,4 @@
 page-rss-single {
-
-}
 .move-up{
   position : relative;
   top:-40px!important;
@@ -65,4 +63,15 @@ page-rss-single {
 }
 .bold {
   font-weight: bold;
+}
+.item-RSS{
+  padding: 0;
+  .item-inner{
+    padding: 0!important;
+    ion-label{
+    margin: 0!important;
+  }
+  }
+  
+}
 }

@@ -70,9 +70,9 @@ export class ArticlePage {
       this.loading.present();
     this.httpServiceOfArticle.getArticleData(id)
         .subscribe(
-            responce => {
+            response => {
 
-              this.article = responce;
+              this.article = response;
               this.watching.id=id;
               this.watching.article=this.article;
                 this.commonServices.ArticleCompleteData.push(this.watching);
@@ -88,7 +88,7 @@ export class ArticlePage {
         )
 
   }
-    goToFfooterInside(links:any){
+    goToFooterInside(links:any){
         console.log(links);
         var str:any;
         switch(links.linktypelink){
