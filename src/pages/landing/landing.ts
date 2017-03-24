@@ -51,7 +51,7 @@ export class LandingPage {
 
         this.api.getAllFootermenu()
             .subscribe((data) => {
-                // console.log(data);
+                console.log(data);
                 this.commonServices.footerLinks = data.menu;
             });
         let home = this;

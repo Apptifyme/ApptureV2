@@ -70,8 +70,8 @@ export class EventDetailsPage {
                 links.typeid = 0;
 
         }
-        if(links.linktypelink=="Phone Call"){
-//      window.open('tel:' + ('+1' + $rootScope.phoneNumber), '_system');
+        if(links.name=="Phone Call"){
+     window.open('tel:' + ('+1' + this.commonServices.PhoneNo), '_system');
         }
         else if (links.linktypelink == "home") {
             this.navCtrl.push(HomePage,{});
