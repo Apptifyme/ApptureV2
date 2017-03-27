@@ -52,41 +52,37 @@ export class ArticlePage {
 
               }
           }
+          for(var i=0;i<this.commonServices.ArticleCompleteData.length;i++){
+              if(id==this.commonServices.ArticleCompleteData[i].id){
+                  this.article=this.commonServices.ArticleCompleteData[i].article;
+                  console.log("data Already exist");
+                  //           this.loading.dismiss();
+                  return ;
+
+              }
+          }
+          this.loading.present();
+          this.httpServiceOfArticle.getArticleData(id)
+              .subscribe(
+                  responce => {
+
+                      this.article = responce;
+                      this.watching.id=id;
+                      this.watching.article=this.article;
+                      this.commonServices.ArticleCompleteData.push(this.watching);
+                      localforage.setItem("ArticlePage",this.commonServices.ArticleCompleteData);
+
+                      console.log(this.commonServices.ArticleCompleteData);
+                      console.log("my Article data fathes");
+                      console.log(this.article);
+                      this.loading.dismiss();
+                  },
+                  error => console.log(error)
+              )
       }, (error) => {
           console.log("ERROR: ", error);
 
       })
-
-
-      for(var i=0;i<this.commonServices.ArticleCompleteData.length;i++){
-          if(id==this.commonServices.ArticleCompleteData[i].id){
-              this.article=this.commonServices.ArticleCompleteData[i].article;
-              console.log("data Already exist");
-   //           this.loading.dismiss();
-              return ;
-
-          }
-      }
-      this.loading.present();
-    this.httpServiceOfArticle.getArticleData(id)
-        .subscribe(
-            responce => {
-
-              this.article = responce;
-              this.watching.id=id;
-              this.watching.article=this.article;
-                this.commonServices.ArticleCompleteData.push(this.watching);
-                localforage.setItem("ArticlePage",this.commonServices.ArticleCompleteData);
-
-                console.log(this.commonServices.ArticleCompleteData);
-              console.log("my Article data fathes");
-              console.log(this.article);
-                this.loading.dismiss();
-
-            },
-            error => console.log(error)
-        )
-
   }
     goToFfooterInside(links:any){
         console.log(links);
@@ -111,8 +107,8 @@ export class ArticlePage {
                 links.typeid = 0;
 
         }
-        if(links.linktypelink=="Phone Call"){
-       window.open('tel:' + ('+1' + this.phoneNumber), '_system');
+        if (links.linktypelink == "setting") {
+            window.open('tel:' + "9088788");
         }
         else if (links.linktypelink == "home") {
             this.navCtrl.push(HomePage,{});

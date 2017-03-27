@@ -14,7 +14,7 @@
 
 
 <ion-content padding>
-    <ion-segment [(ngModel)]="pet">
+    <ion-segment [(ngModel)]="pet" color="dark">
         <ion-segment-button value="Contact Us">
             Contact Us
         </ion-segment-button>
@@ -29,19 +29,19 @@
         <ion-item>
             <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>
 
-            <ion-label fixed>{{data.content}}</ion-label>
+            <ion-label fixed style="width:300px!important; min-width:300px!important; max-width:300px!important;"> <ion-icon ios="ios-home" md="md-home"></ion-icon> {{data.content}}</ion-label>
             <ion-input type="text"   [readonly]="true"></ion-input>
         </ion-item>
         <ion-item>
             <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>
 
-            <ion-label fixed>{{data.text}}</ion-label>
+            <ion-label fixed style="width:300px!important; min-width:300px!important; max-width:300px!important;"> <ion-icon ios="ios-contact" md="md-contact"></ion-icon> {{data.text}}</ion-label>
             <ion-input type="text"  [readonly]="true"></ion-input>
         </ion-item>
             <ion-item>
                 <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>
 
-                <ion-label fixed>{{data.type}}</ion-label>
+                <ion-label fixed style="width:300px!important; min-width:300px!important; max-width:300px!important;"> <ion-icon ios="ios-mail-open" md="md-mail-open"></ion-icon> {{data.type}}</ion-label>
                 <ion-input type="readonly"  [readonly]="true"></ion-input>
             </ion-item>
             <ion-item>
@@ -79,3 +79,20 @@
 
 
 </ion-content>
+<ion-footer class="footer-appture">
+    <ion-scroll zoom="false" scrollX="true" style="height: 60px" class="categories-filter">
+    <span class="footer-col" ng-click="footerLink(links)" *ngFor="let links of commonService.footerLinks">
+                <ion-row class="padding-top-5">
+                    <ion-col class="col padding-0 text-x-large" (click)="goToFfooterInside(links)">
+                        <i class="icon" [ngClass]="links.icon"></i>
+                        <!--<ion-icon name="search"></ion-icon>-->
+                    </ion-col>
+                </ion-row>
+                <ion-row class="">
+                    <ion-col class="col padding-0 text-small" (click)="goToFfooterInside(links)">
+                        {{links.name}}
+                    </ion-col>
+                </ion-row>
+            </span>
+    </ion-scroll>
+</ion-footer>

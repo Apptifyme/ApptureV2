@@ -93,8 +93,8 @@ export class SocialPage {
                 links.typeid = 0;
 
         }
-        if(links.linktypelink=="Phone Call"){
-//      window.open('tel:' + ('+1' + $rootScope.phoneNumber), '_system');
+        if (links.linktypelink == "setting") {
+            window.open('tel:' + "9088788");
         }
         else if (links.linktypelink == "home") {
             this.navCtrl.push(HomePage,{});
