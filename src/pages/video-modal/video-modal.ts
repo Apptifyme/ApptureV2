@@ -15,10 +15,12 @@ export class VideoModalPage {
    id:any;
    baseUrl:any;
    url:any;
+   orientation:any;
    baseUrl1="https://www.youtube.com/embed/";
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl:ViewController) {
       //window.screen.lockOrientation("landscape");
     this.id=this.navParams.get('id');
+      this.orientation = window.orientation;
     console.log(this.id);
     console.log(this.id.url);
     this.baseUrl="https://www.youtube.com/embed/WWFLRAh7aUs";
@@ -26,6 +28,7 @@ export class VideoModalPage {
   }
 
   ionViewDidLoad() {
+      this.orientation=180;
     console.log('ionViewDidLoad VideoModalPage');
   }
   closeModal() {
