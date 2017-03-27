@@ -41,7 +41,7 @@ export class EventsPage {
     console.log('ionViewDidLoad EventsPage');
   }
   reFreshdata(){
-      this.refresh=true;
+    //  this.refresh=true;
       let _this=this;
       console.log("data Refresh");
       localforage.removeItem("EventData").then(function(){
@@ -58,44 +58,45 @@ export class EventsPage {
 
   }
   onGetData(){
-      if(this.refresh==false) {
+
 
           localforage.getItem("EventData").then((result) => {
               this.content = result ? <Array<Object>> result : null;
+
               console.log("data exist in local forage");
               if (this.content != null) {
                   this.event = this.content;
+                  this.commonServices.AllEventData=this.event;
+                  return;
               }
-              // return;
+              if(this.commonServices.AllEventData==null){
+                  this.loading.present();
+
+                  this.httpServiceOfEvent.getEventData(1)
+                      .subscribe(
+                          responce => {
+                              this.event = responce;
+                              console.log("my Event data");
+                              console.log(this.event);
+                              this.commonServices.AllEventData=this.event;
+                              localforage.setItem("EventData",this.event);
+                              this.loading.dismiss();
+                              this.refresh=false;
+                          },
+                          error => console.log(error)
+                      )
+              }
+              else {
+                  console.log("data already exist");
+                  this.event = this.commonServices.AllEventData
+              }
+
           }, (error) => {
               console.log("ERROR: ", error);
           })
       }
-       if(this.content!=null){
-          return;
-       }
-      if(this.commonServices.AllEventData==null){
-          this.loading.present();
 
-          this.httpServiceOfEvent.getEventData(1)
-        .subscribe(
-            responce => {
-              this.event = responce;
-              console.log("my Event data");
-              console.log(this.event);
-              this.commonServices.AllEventData=this.event;
-              localforage.setItem("EventData",this.event);
-              this.loading.dismiss();
-              this.refresh=false;
-            },
-            error => console.log(error)
-        )
-  }
-  else{
-          console.log("data already exist");
-          this.event=this.commonServices.AllEventData;
-      }
-  }
+
     gointoEventDetails(id:any){
       console.log("Event Deatails Page");
       this.navCtrl.push(EventDetailsPage,{id:id});
@@ -123,9 +124,9 @@ export class EventsPage {
                 links.typeid = 0;
 
         }
-        if(links.linktypelink=="Phone Call"){
-//      window.open('tel:' + ('+1' + $rootScope.phoneNumber), '_system');
-        }
+    if (links.linktypelink == "setting") {
+        window.open('tel:' + "9088788");
+    }
         else if (links.linktypelink == "home") {
             this.navCtrl.push(HomePage,{});
 
