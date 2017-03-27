@@ -64,17 +64,19 @@ export class ImageGalleryPage {
                                 console.log("data exist in local forage");
 
                                 this.galleryImages=this.content[i].data;
+                                console.log(this.galleryImages);
                                 return;
 
-                              }                     }
-    })
-    for(var i=0;i<this.commonServices.AllGallaryImages.length;i++){
-               if(this.commonServices.AllGallaryImages[i].id==this.galleryId){
-                 console.log("data already exist");
-                 this.galleryImages=this.commonServices.AllGallaryImages[i].data;
-                 return;
-               }
-    }
+                              }
+
+                     }
+      for(var i=0;i<this.commonServices.AllGallaryImages.length;i++){
+        if(this.commonServices.AllGallaryImages[i].id==this.galleryId){
+          console.log("data already exist");
+          this.galleryImages=this.commonServices.AllGallaryImages[i].data;
+          return;
+        }
+      }
 
       this.loading.present();
       this.api.getGalleryImages(this.galleryId)
@@ -82,19 +84,8 @@ export class ImageGalleryPage {
           .subscribe((data) => {
             console.log(data);
             this.processGalleryImages(data.queryresult);
-
-            // this.photoCategories = data;
-            // data.map(item => {
-            //   if (item.title == 'Header Logo') {
-            //     console.log(item);
-            //     this.commonServices.headerLogo = 'http://business.staging.appturemarket.com/uploads/header-logo/' + item.image;
-            //     this.headerLogo = this.commonServices.headerLogo;
-            //     console.log(this.headerLogo);
-            //   }
-            // });
           });
-
-
+    })
   }
 
 
