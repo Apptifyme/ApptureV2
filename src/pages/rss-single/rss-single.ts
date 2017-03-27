@@ -58,6 +58,8 @@ export class RssSinglePage {
             console.log("data load");
             this.slides.slideNext();
         }
+        this.slides.getActiveIndex();
+        this.slides.length()
     }
     goRight(){
         var i=this.slides.getActiveIndex();

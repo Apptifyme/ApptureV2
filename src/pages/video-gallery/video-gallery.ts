@@ -80,8 +80,8 @@ export class VideoGalleryPage {
                 links.typeid = 0;
 
         }
-        if(links.linktypelink=="Phone Call"){
-//      window.open('tel:' + ('+1' + $rootScope.phoneNumber), '_system');
+        if (links.linktypelink == "setting") {
+            window.open('tel:' + "9088788");
         }
         else if (links.linktypelink == "home") {
             this.navCtrl.push(HomePage,{});
@@ -101,9 +101,11 @@ export class VideoGalleryPage {
               this.video = result ? result : [];
               console.log(this.video);
 
-              if(this.video!=[])
-              {
-               //    return;
+              if(this.video.length!=0)
+               {
+                   this.commonServices.ALlVideodata=this.video;
+                   return;
+
                }
       if(this.commonServices.ALlVideodata==null) {
           this.loading.present();
