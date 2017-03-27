@@ -85,6 +85,7 @@ export class LandingPage {
 
     checkHomeScreen() {
         // console.log(this.allDataPromise);
+        console.log("Inside Check Home Screen");
         Observable.forkJoin(this.allDataPromise).subscribe((resPromise) => {
 
             this.allObservableData = resPromise;
@@ -159,5 +160,4 @@ export class LandingPage {
             this.navCtrl.setRoot(HomePage);
         }
     }
-
 }

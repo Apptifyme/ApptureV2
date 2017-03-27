@@ -28,7 +28,6 @@ export class RssArticlePage {
     index: any;
     RssData: any = [];
     Rsscontent = ["", "", "", "", "", ""];
-
     i: any;
     @ViewChild(Slides) slides: Slides;
     url = "";
@@ -192,7 +191,6 @@ export class RssArticlePage {
         console.log(this.commonServices.RssData.length);
         var j = this.index + 1;
         console.log(j);
-        // console.log(this.commonServices.AllRssdata);
         // for(var i=0;i<this.commonServices.AllRssdata.length;i++){
         //     if(this.commonServices.AllRssdata[i].id==j){
         //         console.log("data Already exist");
