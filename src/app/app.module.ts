@@ -28,15 +28,16 @@ import {HttpServiceOfActicle} from '../pages/article/article.service';
 import {HttpService} from '../pages/home/home.service'
 import {ContactPage} from '../pages/contact/contact';
 import {HttpServiceOfEvent} from '../pages/events/event.service'
-import {HttpServiceOfSocial} from '../pages/social/social.service';
 import {HttpServiceOfVideoGallary} from '../pages/video-gallery/video-gallery.service';
 import {HttpServiceOfVideoCategory} from '../pages/video-category/video-category.service';
 import {HttpServiceOfEventDetails} from '../pages/event-details/event-deatails.service'
 import {HttpServiceOfRss} from '../pages/rss-article/rss.service';
 import {GetTime} from '../pipes/get.time.pipes'
 //import {SafePipe} from '../pipes/get.trust.pipes'
+import {SafeHtmlUrl} from "../pipes/get.trust.url.pipes";
 import {SafeBase} from '../pipes/get.base.pipe'
 import { DatePipe } from '@angular/common';
+import{RefreshData} from "../providers/refresh.service"
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { DatePipe } from '@angular/common';
     EventDetailsPage,
     GetTime,
    // SafePipe,
-      SafeBase
+      SafeBase,
+    SafeHtmlUrl
 
   ],
   imports: [
@@ -100,12 +102,12 @@ import { DatePipe } from '@angular/common';
     HttpServiceOfActicle,
       HttpService,
       HttpServiceOfEvent,
-      HttpServiceOfSocial,
       HttpServiceOfVideoGallary,
       HttpServiceOfVideoCategory,
     HttpServiceOfEventDetails,
     HttpServiceOfRss,
-      DatePipe
+      DatePipe,
+    RefreshData
   ]
 })
 export class AppModule { }

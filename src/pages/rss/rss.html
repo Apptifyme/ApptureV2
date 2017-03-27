@@ -17,11 +17,11 @@
 </ion-header>
 
 
-<ion-content style="overflow:scroll; background-color:black">
-    <ion-grid style="margin:0px; padding:0px">
-        <ion-row style="margin:0px; padding:0px">
-            <ion-col style="margin:0px; padding:0px" col-6 *ngFor="let image of commonService.RSSarray,let i=index">
-                <img style="margin:0px; padding:0px" src="{{image.image | serverImage}}" (click)="gotoRss(i)">
+<ion-content class="overflow-bgcolor-black">
+    <ion-grid class="margin-padding-0">
+        <ion-row class="margin-padding-0">
+            <ion-col class="margin-padding-0"*ngFor="let image of commonService.RssArticle,let i=index"  col-6 >
+                <img [ngStyle]="{'width':commonService.width/2}" class="margin-padding-0" src={{baseImageUrl}}{{image.image}} (click)="gotoRss(i)">
             </ion-col>
         </ion-row>
     </ion-grid>
@@ -33,13 +33,13 @@
   <ion-scroll zoom="false" scrollX="true" style="height: 60px" class="categories-filter">
     <span class="footer-col" ng-click="footerLink(links)" *ngFor="let links of commonService.footerLinks">
                 <ion-row class="padding-top-5">
-                    <ion-col class="col padding-0 text-x-large" (click)="goToFfooterInside(links)">
+                    <ion-col class="col padding-0 text-x-large" (click)="goToFooterInside(links)">
                         <i class="icon" [ngClass]="links.icon"></i>
                       <!--<ion-icon name="search"></ion-icon>-->
                     </ion-col>
                 </ion-row>
                 <ion-row class="">
-                    <ion-col class="col padding-0 text-small" (click)="goToFfooterInside(links)">
+                    <ion-col class="col padding-0 text-small" (click)="goToFooterInside(links)">
                         {{links.name}}
                     </ion-col>
                 </ion-row>

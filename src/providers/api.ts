@@ -19,15 +19,15 @@ export class API {
     console.log('Hello API Provider');
   }
 
-  getHeaderLogo() : Observable<any> {
+  getHeaderLogo(): Observable<any> {
     return this.http.get(this.commonServices.adminUrl + 'getAppConfig')
-        .map(res => res.json());
+      .map(res => res.json());
   }
   getImageCategories() {
     return this.http.get(this.commonServices.adminUrl + 'getAllGallery');
   }
   getGalleryImages(id) {
-    return this.http.get(this.commonServices.adminUrl + 'getAllGalleryImage?id=' + id );
+    return this.http.get(this.commonServices.adminUrl + 'getAllGalleryImage?id=' + id);
   }
   getAllFrontMenu(): Observable<any> {
     return this.http.get(this.commonServices.adminUrl + 'getAllFrontmenu')
@@ -48,14 +48,21 @@ export class API {
 
   }
 
-  getSingleArticle(id: number): Observable<any>{
-    return this.http.get(this.commonServices.adminUrl+'getSingleArticles?id='+id)
-    .map(res => res.json())
-    .catch(this.handleError);
+  getSingleArticle(id: number): Observable<any> {
+    return this.http.get(this.commonServices.adminUrl + 'getSingleArticles?id=' + id)
+      .map(res => res.json())
+      .catch(this.handleError);
   }
 
-  getAllFootermenu(): Observable<any>{
+  getAllFootermenu(): Observable<any> {
     return this.http.get(this.commonServices.adminUrl + 'getAllFootermenu')
+      .map(res => res.json())
+      .catch(this.handleError);
+  }
+
+  sendEnquiry(data): Observable<any> {
+    
+    return this.http.post(this.commonServices.adminUrl + 'createEnquiry',data)
       .map(res => res.json())
       .catch(this.handleError);
   }

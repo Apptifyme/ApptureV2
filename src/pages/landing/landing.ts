@@ -7,6 +7,8 @@ import { Observable } from 'rxjs/Rx';
 
 import { HomePage } from '../../pages/home/home';
 import { WalkthroughPage } from '../../pages/walkthrough/walkthrough';
+import * as localforage from "localforage";
+
 
 @Component({
     selector: 'page-landing',
@@ -25,8 +27,6 @@ export class LandingPage {
     /*fetch all data and hit all API*/
 
     ionViewDidLoad() {
-        let headerPromise = this.api.getHeaderLogo();
-        this.allDataPromise.push(headerPromise);
         let sliderPromise = this.api.getallsliders()
         this.allDataPromise.push(sliderPromise);
         let promotionsPromise = this.api.getAllPromotions()
@@ -34,12 +34,53 @@ export class LandingPage {
         //this.fetchRSSData();
         let frontMenuPromise = this.api.getAllFrontMenu()
         this.allDataPromise.push(frontMenuPromise);
+        this.api.getHeaderLogo()
+            .subscribe((data) => {
+                console.log(data);
+                data.map(item => {
+                    if (item.title == 'Header Logo') {
+                        console.log(item);
+                        this.commonServices.headerLogo = 'http://business.staging.appturemarket.com/uploads/header-logo/' + item.image;
+                    }
+                    else if (item.title == 'Contact No') {
+                        console.log(item);
+                        this.commonServices.PhoneNo = item.text;
+                    }
+                });
+            });
+
         this.api.getAllFootermenu()
             .subscribe((data) => {
-                // console.log(data);
+                console.log(data);
                 this.commonServices.footerLinks = data.menu;
             });
-        this.checkHomeScreen();
+        let home = this;
+        localforage.getItem("allObservbledata").then((result) => {
+            console.log(result);
+            let data = [];
+            data = result ? <Array<Object>>result : null;
+
+            if (data == null) {
+                console.log("data nhi hai");
+                home.checkHomeScreen();
+            }
+            else {
+                home.commonServices.slides = data[0];
+                home.commonServices.banners = data[1].menu;
+
+                home.commonServices.AllMenuData = data[2];
+                this.checkWalkThroughFlag();
+
+                data[2].menu.map(item => {
+                    if (item.linktypename == "Pages" && this.commonServices.isURL(item.articlename)) {
+                        home.commonServices.RSSarray.push(item);
+                    }
+                    else {
+                        home.commonServices.menuData.push(item);
+                    }
+                });
+            }
+        }, )
     }
 
     checkHomeScreen() {
@@ -47,21 +88,27 @@ export class LandingPage {
         Observable.forkJoin(this.allDataPromise).subscribe((resPromise) => {
 
             this.allObservableData = resPromise;
+            localforage.setItem("allObservbledata", resPromise);
+
             // console.log(this.allObservableData[0]);
-            this.allObservableData[0]
-                .map(item => {
-                    if (item.title == 'Header Logo') {
-                        console.log(item);
-                        this.commonServices.headerLogo = 'http://business.staging.appturemarket.com/uploads/header-logo/' + item.image;
-                    }
-                });
+            // this.allObservableData[0]
+            //     .map(item => {
+            //         if (item.title == 'Header Logo') {
+            //             console.log(item);
+            //             this.commonServices.headerLogo = 'http://business.staging.appturemarket.com/uploads/header-logo/' + item.image;
+            //         }
+            //     });
             // console.log(this.allObservableData[1]);
             // console.log(this.allObservableData[2]);
-            this.commonServices.slides = this.allObservableData[1];
-            this.commonServices.banners = this.allObservableData[2].menu;
-            // console.log(this.allObservableData[3]);
-            this.commonServices.AllMenuData = this.allObservableData[3];
-            this.allObservableData[3].menu.map(item => {
+            this.commonServices.slides = this.allObservableData[0];
+            localforage.setItem("slides", this.commonServices.slides);
+            console.log(this.commonServices.slides);
+            this.commonServices.banners = this.allObservableData[1].menu;
+            localforage.setItem("banners", this.commonServices.banners);
+            console.log(this.commonServices.banners);
+            this.commonServices.AllMenuData = this.allObservableData[2];
+            localforage.setItem("Allmenudata", this.commonServices.AllMenuData);
+            this.allObservableData[2].menu.map(item => {
                 if (item.linktypename == "Pages" && this.commonServices.isURL(item.articlename)) {
                     this.commonServices.RSSarray.push(item);
                 }
@@ -69,6 +116,8 @@ export class LandingPage {
                     this.commonServices.menuData.push(item);
                 }
             });
+            localforage.setItem("menuData", this.commonServices.menuData);
+            localforage.setItem("RSSarray", this.commonServices.RSSarray);
             // console.log(this.commonServices.menuData);
             this.checkWalkThroughFlag();
             // this.platform.ready().then(() => {
@@ -106,7 +155,7 @@ export class LandingPage {
             }, 1000);
 
         }
-         else {
+        else {
             this.navCtrl.setRoot(HomePage);
         }
     }

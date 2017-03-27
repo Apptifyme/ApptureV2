@@ -12,23 +12,43 @@
       </button>
     </ion-buttons>
 
-
-    <ion-title class="bar-appture">Social Feeds</ion-title>
+    <ion-title class="text-center">
+      <h1 [ngStyle]="{'background': 'url(' + header + ') no-repeat center', 'background-size': 'cover'}" class="title company-logo article-header-logo">&nbsp;</h1>
+      <!--<img src="{{commonServices.headerLogo}}">-->
+    </ion-title>
 
   </ion-toolbar>
 </ion-header>
 
 
-<ion-content>
+<ion-content class="bg-grey">
   <ion-grid class="padding-0">
-    <ion-row  class="padding-0">
-      <ion-col *ngFor="let p of socialData.text;let i=index;" col-6 class="lightgray-bg" class="padding-0">
+    <ion-row class="padding-0">
+      <ion-col *ngFor="let p of socialData;let i=index;" col-6 class="lightgray-bg" class="padding-0">
         <img [src]=p.image *ngIf="(index%2)" class="block" (click)="goSocial(p.value)">
       </ion-col>
-      <ion-col *ngFor="let p of socialData.text" col-6 class="lightgray-bg" class="padding-0">
+      <ion-col *ngFor="let p of socialData" col-6 class="lightgray-bg" class="padding-0">
         <img [src]=p.image *ngIf="!(index%2)" class="block" (click)="goSocial(p.value)">
       </ion-col>
     </ion-row>
   </ion-grid>
 
 </ion-content>
+
+<ion-footer class="footer-appture">
+  <ion-scroll zoom="false" scrollX="true" style="height: 60px" class="categories-filter">
+    <span class="footer-col" (click)="footerLink(links)" *ngFor="let links of commonService.footerLinks">
+                <ion-row class="padding-top-5" (click)="goToFooterInside(links)">
+                    <ion-col class="col padding-0 text-x-large" >
+                        <i class="icon" [ngClass]="links.icon"></i>
+                      <!--<ion-icon name="search"></ion-icon>-->
+                    </ion-col>
+                </ion-row>
+                <ion-row class="">
+                    <ion-col class="col padding-0 text-small" (click)="goToFooterInside(links)">
+                        {{links.name}}
+                    </ion-col>
+                </ion-row>
+            </span>
+  </ion-scroll>
+</ion-footer>

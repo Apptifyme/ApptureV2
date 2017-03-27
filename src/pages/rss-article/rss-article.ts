@@ -1,15 +1,15 @@
-import { Component ,ViewChild} from '@angular/core';
-import { NavController, NavParams,Slides,LoadingController, ModalController } from 'ionic-angular';
-import {commonServices} from '../../providers/common-services'
-import {HttpServiceOfRss} from '../rss-article/rss.service'
-import {RssSinglePage} from '../rss-single/rss-single';
-import {HomePage} from '../home/home';
-import {EventsPage} from '../events/events';
-import {ContactPage} from '../contact/contact';
-import {VideoCategoryPage} from '../video-category/video-category'
-import {VideoGalleryPage} from "../video-gallery/video-gallery.ts";
-import {ImageCategoryPage} from "../image-category/image-category";
-import {ArticlePage} from '../article/article.ts';
+import { Component, ViewChild, keyframes } from '@angular/core';
+import { NavController, NavParams, Slides, LoadingController, ModalController } from 'ionic-angular';
+import { commonServices } from '../../providers/common-services'
+import { HttpServiceOfRss } from '../rss-article/rss.service'
+import { RssSinglePage } from '../rss-single/rss-single';
+import { HomePage } from '../home/home';
+import { EventsPage } from '../events/events';
+import { ContactPage } from '../contact/contact';
+import { VideoCategoryPage } from '../video-category/video-category'
+import { VideoGalleryPage } from "../video-gallery/video-gallery.ts";
+import { ImageCategoryPage } from "../image-category/image-category";
+import { ArticlePage } from '../article/article.ts';
 
 
 
@@ -20,82 +20,96 @@ import {ArticlePage} from '../article/article.ts';
   Ionic pages and navigation.
 */
 @Component({
-  selector: 'page-rss-article',
-  templateUrl: 'rss-article.html'
+    selector: 'page-rss-article',
+    templateUrl: 'rss-article.html'
 })
 export class RssArticlePage {
-  title="";
-  index:any;
-  RssData:any=[];
-  Rsscontent=["","","","","",""];
-  i:any;
+    title = "";
+    index: any;
+    RssData: any = [];
+    Rsscontent = ["", "", "", "", "", ""];
+
+    i: any;
     @ViewChild(Slides) slides: Slides;
-  url="";
-  currentIndex=0;
-  prev=0;
-  public loading:any;
-    constructor(public navCtrl: NavController, public navParams: NavParams ,public loadingController:LoadingController,public modalController:ModalController , public commonServices:commonServices , public httpserviceOfRss:HttpServiceOfRss) {
-    console.log(this.commonServices.RssData);
-    this.index=this.navParams.get('id');
-    this.i=this.index;
-    this.currentIndex=this.index;
-    console.log(this.index);
-    //this.title=this.commonServices.RssData[this.index].name;
-    console.log(this.title);
-    this.url=this.commonServices.RssData[this.index].title;
-    console.log(this.url);
-     this.loadRssdata(this.url);
-    this.showLoader();
+    url = "";
+    currentIndex = 0;
+    prev = 0;
+    watching = { 'id': 0, 'data': {} };
+    public loading: any;
+    constructor(public navCtrl: NavController, public navParams: NavParams, public loadingController: LoadingController, public modalController: ModalController, public commonServices: commonServices, public httpserviceOfRss: HttpServiceOfRss) {
+        console.log(this.commonServices.RssData);
+        this.index = this.navParams.get('id');
+        this.i = this.index;
+        this.currentIndex = this.index;
+        console.log(this.index);
+        //this.title=this.commonServices.RssData[this.index].name;
+        console.log(this.title);
+        this.url = this.commonServices.RssArticle[this.index].title;
+        console.log(this.commonServices.RssArticle);
+        this.loadRssdata(this.url);
+        this.showLoader();
 
-  }
-  showLoader() {
-      this.loading = this.loadingController.create({
-          content: 'Please wait...'
-      });
-      this.loading.present();
-  }
-  loadRssdata(url){
-    var flag=false;
-    console.log("load RSS data callled");
-    this.httpserviceOfRss.loadRssdata( url)
-        .subscribe(
-            responce => {
-             // this.temp=true;
-              this.RssData = responce;
-              console.log("my Rss data Loaded");
-              console.log(this.RssData);
-                this.loading.dismiss();
+    }
+    showLoader() {
+        this.loading = this.loadingController.create({
+            content: 'Please wait...'
+        });
+        this.loading.present();
+    }
+    loadRssdata(url) {
+        var flag = false;
+        console.log("load RSS data callled");
+        if (this.commonServices.RssArticle[this.index] && this.commonServices.RssArticle[this.index].length) {
+            //do nothing
+            this.loading.dismiss();
+        }
+        else {
+            this.httpserviceOfRss.loadRssdata(url)
+                .subscribe(
+                response => {
+                    // this.temp=true;
+                    this.RssData = response;
+                    console.log("my Rss data Loaded");
+                    console.log(this.RssData);
+                    this.loading.dismiss();
 
-                if(this.RssData[this.index]==null) {
-                this.Rsscontent[this.index]=this.RssData;
-                console.log(this.index);
-                console.log(this.Rsscontent);
-                this.title=this.RssData.feed.title;
-                this.httpserviceOfRss.RssContent=this.Rsscontent;
-                for(var i=0;i<this.RssData.items.length;i++){
-                    if (this.RssData.items[i].thumbnail == '' && typeof this.RssData.items[i].image == 'undefined') {
-                        this.RssData.items[i].imageLink = this.getBlogImage(this.RssData.items[i].content);
-                        this.RssData.items[i].imageSource = 'pickedFromHtml';
+                    // if (this.RssData[this.index] == null) {
+                    this.commonServices.RssArticle[this.index].items = [];
+                    this.commonServices.RssArticle[this.index].items = this.RssData;
+                    console.log(this.index);
+                    console.log(this.commonServices.RssArticle);
+                    this.title = this.RssData.feed.title;
+                    // this.httpserviceOfRss.RssContent = this.Rsscontent;
+                    for (var i = 0; i < this.RssData.items.length; i++) {
+                        if (this.RssData.items[i].thumbnail == '' && typeof this.RssData.items[i].image == 'undefined') {
+                            this.RssData.items[i].imageLink = this.getBlogImage(this.RssData.items[i].content);
+                            this.RssData.items[i].imageSource = 'pickedFromHtml';
+                        }
+                        else if (this.RssData.items[i].image.url != 'undefined') {
+                            this.RssData.items[i].imageLink = this.RssData.items[i].image.url;
+                            this.RssData.items[i].imageSource = 'imageUrl';
+                        }
+                        else {
+                            this.RssData.items[i].imageLink = this.RssData.items[i].thumbnail;
+                            this.RssData.items[i].imageSource = 'thumbnail';
+                        }
                     }
-                    else if (this.RssData.items[i].image.url != 'undefined') {
-                        this.RssData.items[i].imageLink = this.RssData.items[i].image.url;
-                        this.RssData.items[i].imageSource = 'imageUrl';
-                    }
-                    else{
-                        this.RssData.items[i].imageLink = this.RssData.items[i].thumbnail;
-                        this.RssData.items[i].imageSource = 'thumbnail';
-                    }
-                }
 
-              }
-            },
-            error => console.log(error)
-        )
-  }
-    goToFfooterInside(links:any){
+                    // }
+                    this.watching.id = this.index;
+                    this.watching.data = this.RssData;
+                    let tempObj = Object.assign({}, this.watching);
+                    this.commonServices.AllRssdata.push(tempObj);
+                    console.log(this.commonServices.AllRssdata);
+                },
+                error => console.log(error)
+                )
+        }
+    }
+    goToFooterInside(links: any) {
         console.log(links);
-        var str:any;
-        switch(links.linktypelink){
+        var str: any;
+        switch (links.linktypelink) {
             case 'home':
                 str = HomePage;
                 break;
@@ -115,81 +129,106 @@ export class RssArticlePage {
                 links.typeid = 0;
 
         }
-        if(links.linktypelink=="Phone Call"){
-//      window.open('tel:' + ('+1' + $rootScope.phoneNumber), '_system');
+        if (links.name == "Phone Call") {
+                 window.open('tel:' + ('+1' + this.commonServices.PhoneNo), '_system');
         }
         else if (links.linktypelink == "home") {
-            this.navCtrl.push(HomePage,{});
+            this.navCtrl.push(HomePage, {});
 
         }
         else {
             console.log("page Change");
-            this.navCtrl.push(str,{});
+            this.navCtrl.push(str, {});
         }
     }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad RssArticlePage');
-      this.loading.present();
+    ionViewDidLoad() {
+        console.log('ionViewDidLoad RssArticlePage');
+        this.loading.present();
 
-  }
+    }
     getBlogImage(htmlString) {
-    var string1 = htmlString.substring(htmlString.indexOf('src="'), htmlString.indexOf('"', htmlString.indexOf('src="') + 5));
-    var imageString = '';
-    if (string1 == '') {
-        imageString = 'img/menu.png';
+        var string1 = htmlString.substring(htmlString.indexOf('src="'), htmlString.indexOf('"', htmlString.indexOf('src="') + 5));
+        var imageString = '';
+        if (string1 == '') {
+            imageString = 'img/menu.png';
+        }
+        else {
+            imageString = string1.substring(5, string1.length);
+        }
+        return imageString;
     }
-    else {
-        imageString = string1.substring(5, string1.length);
-    }
-    return imageString;
-    }
-  goLeft(){
+    goLeft() {
 
-      console.log("go left");
-      this.showLoader();
-      console.log(this.index);
-         if(this.index>0) {
-             this.index--;
-             this.i--;
-             this.url=this.commonServices.RssData[this.index].title;
+        console.log("go left");
+
+        console.log(this.index);
+        var k = this.index - 1;
+        console.log(k);
+        console.log(this.commonServices.AllRssdata);
+        // for(var i=0;i<this.commonServices.AllRssdata.length;i++){
+        //     if(this.commonServices.AllRssdata[i].id==k){
+        //         console.log("data Already exist");
+        //         this.Rsscontent[i]=this.commonServices.AllRssdata[i];
+        //         this.slides.slidePrev();
+        //         return;
+        //     }
+        // }
+        if (this.index > 0) {
+            this.showLoader();
+            this.index--;
+            this.i--;
+            this.url = this.commonServices.RssArticle[this.index].title;
             this.loadRssdata(this.url);
-         }
+        }
 
 
 
-  }
-  goRight(){
-      this.showLoader();
-      console.log("go right");
-      console.log(this.index);
-      if(this.index<this.commonServices.RssData.length) {
-          this.index++;
-          this.i++;
-          this.url=this.commonServices.RssData[this.index].title;
-          this.loadRssdata(this.url);
-      }
+    }
+    goRight() {
+
+        console.log("go right");
+        console.log(this.index);
+        console.log(this.commonServices.RssData.length);
+        var j = this.index + 1;
+        console.log(j);
+        // console.log(this.commonServices.AllRssdata);
+        // for(var i=0;i<this.commonServices.AllRssdata.length;i++){
+        //     if(this.commonServices.AllRssdata[i].id==j){
+        //         console.log("data Already exist");
+        //         this.Rsscontent[i]=this.commonServices.AllRssdata[i];
+        //         this.slides.slideNext();
+        //         return;
+        //     }
+        // }
+        if (this.index < this.commonServices.RssArticle.length) {
+            this.showLoader();
+            this.index++;
+            this.i++;
+            this.url = this.commonServices.RssArticle[this.index].title;
+            this.loadRssdata(this.url);
+        }
 
 
 
-  }
-  slideChanged(){
-      this.title="";
-      this.prev=this.currentIndex;
-      this.currentIndex=this.slides.getActiveIndex();
-         console.log("slide Change");
-         if(this.currentIndex<this.prev){
-             this.goLeft();
+    }
+    slideChanged() {
+        this.title = "";
+        this.prev = this.currentIndex;
+        this.currentIndex = this.slides.getActiveIndex();
+        console.log("slide Change");
+        if (this.currentIndex < this.prev) {
+            this.goLeft()
 
-         }
-         else{
-             this.goRight();
-         }
-  }
-  goinsideRSS(id:any,i:number,j:number){
-      console.log("Inside RSS");
-      console.log(id);
-      console.log(j);
-      this.navCtrl.push(RssSinglePage,{id:id,i:i,title:this.title,j:j});
-  }
+        }
+        else {
+            this.goRight();
+        }
+    }
+    goinsideRSS(id: any, parentIndex: number, childIndex: number) {
+        console.log("Inside RSS");
+        console.log(id);
+        // console.log(j);
+        this.navCtrl.push(RssSinglePage, { id: id, parentIndex: parentIndex, title: this.title, childIndex: childIndex });
+    }
 }

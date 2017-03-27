@@ -14,47 +14,72 @@
             </ion-title>
         </ion-title>
     </ion-navbar>
-<ion-toolbar class="bar-appture">
-
+    <ion-toolbar class="bar-appture">
         <ion-buttons left>
-            <button ion-button icon-only (click)="goLeft()">Left
-                <ion-icon name="md-left" (click)="goLeft()"></ion-icon>
-            </button>
+            <button ion-button icon-only (click)="goLeft()">
+            <ion-icon name="md-arrow-back" click="goLeft()"></ion-icon>
+
+        </button>
         </ion-buttons>
-        <ion-title>{{title}}</ion-title>
+        <ion-title>{{title}}{{length}}/{{i}}</ion-title>
 
         <ion-buttons right>
-            <button ion-button icon-only (click)="goRight()">Right
-                    <ion-icon name="md-right" (click)="goRight()"></ion-icon>
-                </button>
+            <button ion-button icon-only (click)="goRight()">
+            <ion-icon name="md-arrow-forward" click="goRight"></ion-icon>
+        </button>
         </ion-buttons>
     </ion-toolbar>
 
-
 </ion-header>
+<ion-content class="padding-0">
+    <ion-slides class="padding-0">
+        <ion-slide style="margin:0px!important; padding: 0px!important;" *ngFor="let p of rssData" class="slide-content">
 
+            <ion-item class="item-RSS">
+                <div class="item-image min-h-250 " [ngStyle]="{'background-image': 'url(' + p.imageLink + ')'}">
 
-<ion-content class="has-subheader">
+                    <!--<img cache-src="{{article.image}}">-->
+                    <div class="titles">
+                        <h1 class="new-line">{{p.title}}</h1>
+                        <h3 style="color:white; white-space:normal!important; margin:5px;" class="bold">{{p.subTitle}}</h3>
+                    </div>
 
-    <ion-slides>
-        <ion-slide *ngFor="let p of rssData[i].items" class="slide-content">
-            <ion-item>
-                <img [ngStyle]="{'width':commonServices.width,'height':commonServices.height/2}" [src]="p.imageLink">
+                </div>
+                <div class="item-content">
+                    <div class="row">
+                        <div class="col bold italic">
+                            <ion-icon item-left ios="ios-bulb-outline" md="md-bulb"></ion-icon>{{p.author}}
+                        </div>
+                        <div class="col bold italic">
+                            <ion-icon item-left ios="ios-calendar-outline" md="md-calendar">
 
-                <p style="margin-top:-20px">{{p.title}}
+                            </ion-icon>
+                            <!--{{p.pubDate |   date:'longDate'}}-->
+                        </div>
+                    </div>
+                    <div class="row padding-top-15">
+                        <div class="col">
+                            <p class="article-content" [innerHTML]="p.content"></p>
+                        </div>
+                    </div>
+                    <!--<srf-social-share data-config="itemCtrl.share"></srf-social-share>-->
+                </div>
             </ion-item>
-            <ion-item>
-                <ion-item item-left class="item-small">
-                    <ion-icon item-left ios="ios-bulb-outline" md="md-bulb"></ion-icon>
-                    <p>{{p.author}}</p>
-                </ion-item>
-                <ion-item item-right class="item-small">
-                    <ion-icon item-left item-left ios="ios-calendar-outline" md="md-calendar"></ion-icon>
-                    <p>{{p.pubdate}}</p>
-                </ion-item>
-            </ion-item>
-            <div style="margin: 10px; padding:10px " [innerHTML]="p.content"></div>
-            <div style="margin:10px; padding:10px" [innerHTML]="p.description"></div>
         </ion-slide>
     </ion-slides>
 </ion-content>
+
+
+<!--<ion-content class="has-subheader">-->
+
+<!--<ion-slides>-->
+<!--<ion-slide *ngFor="let p of rssData[i].items" class="slide-content">-->
+
+<!--<ion-item style="position:absolute; top:20%; background:transparent">-->
+<!--{{p.title}}-->
+<!--</ion-item>-->
+<!--<div class="margin-padding-0" [innerHTML]="p.content"></div>-->
+<!--<div class="margin-paddin-10" [innerHTML]="p.description"></div>-->
+<!--</ion-slide>-->
+<!--</ion-slides>-->
+<!--</ion-content>-->

@@ -25,6 +25,7 @@ export class MyApp {
   constructor(public platform: Platform, public commonServices: commonServices, public api: API) {
     this.initializeApp();
     console.log(this.commonServices);
+
     //  if(this.commonServices.RSSarray.length==0) {
     //    this.api.getAllFrontMenu().subscribe((data) => {
     //      console.log(data);
@@ -47,12 +48,61 @@ export class MyApp {
     //    });
     //    console.log(this.commonServices.RSSarray);
     //  }
+     if(this.commonServices.RSSarray.length==0) {
+       this.api.getAllFrontMenu().subscribe((data) => {
+         console.log(data);
+         data.menu.map(item => {
+           // console.log(item);
+           if (item.linktypename == "Pages" && this.commonServices.isURL(item.articlename)) {
+             console.log("RSS DATA COMING");
+             this.commonServices.RSSarray.push(item);
+                   this.api.getSingleArticle(item.article).subscribe(
+                       response=>{
+                         this.commonServices.RssArticle.push(response);
+                         console.log("RSS DATA FATcHING");
+                        //  console.log(this.commonServices.RssArticle[i]);
+
+                       },
+                       error=>console.log(error)
+                   )
+           }
+           else {
+             console.log("MENU DAATA COMIG");
+//             this.commonServices.menuData.push(item);
+           }
+         });
+         console.log(this.commonServices.menuData);
+        //  this.commonServices.menuData = this.commonServices.menuData.filter(item => ((item.name !== "My Profile") || (item.name!="Settings")));
+         for(var i=0;i<this.commonServices.menuData.length;i++){
+            if(this.commonServices.menuData[i].name=="My Profile" || this.commonServices.menuData[i].name=="Settings" ){
+              this.commonServices.menuData.splice(i,1);
+            }
+         }
+       });
+      // console.log("RSS ARRAY");
+       // console.log(this.commonServices.RSSarray);
+       // for(var i=0;i<this.commonServices.RSSarray.length;i++){
+       //   this.api.getSingleArticle(this.commonServices.RSSarray[i].article).subscribe( response=>{
+       //         this.commonServices.RssArticle.push(response);
+       //         console.log(this.commonServices.RssArticle[i]);
+       //
+       //       },
+       //       error=>console.log(error)
+       //   )
+       // }
+       console.log(this.commonServices.RssArticle);
+     }
+
 
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Home', component: HomePage }
     ];
 
+  }
+
+  openRSSPage(){
+      this.nav.push(RssPage);
   }
 
   gotoArticle(id: number, name, articlename, article ,linktypelink) {
@@ -98,6 +148,8 @@ export class MyApp {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
+      this.commonServices.width=this.platform.width();
+      console.log(this.commonServices.width);
       StatusBar.styleDefault();
       Splashscreen.hide();
     });

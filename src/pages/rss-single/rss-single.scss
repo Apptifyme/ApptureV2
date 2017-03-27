@@ -1,3 +1,77 @@
 page-rss-single {
+.move-up{
+  position : relative;
+  top:-40px!important;
+}
+.margin-padding-0{
+  margin:10px!important;
+  padding:10px!important;
+}
+.padding-0{
+  padding: 0px!important;
+  margin:0px!important;
+}
+.new-line{
+  color:white;
+  white-space:normal!important;
+  margin:10px;
+}
 
+
+.min-h-250{
+  min-height:250px;
+  margin:0px!important;
+  padding:0px!important;
+}
+
+
+.item-image .titles {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 15px 15px 15px 15px;
+  text-align: left;
+  z-index: 2;
+}
+
+.playfair{
+  font-family: "Playfair Display",sans-serif ;
+}
+
+.padding-right-5 {
+  padding-right: 5px !important;
+}
+
+.padding-top-15 {
+  padding-top: 15px !important;
+}
+.item-image {
+  padding: 0;
+  text-align: center;
+}
+
+.item-image .titles {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 15px 15px 15px 15px;
+  text-align: left;
+  z-index: 2;
+}
+.playfair{
+  font-family: "Playfair Display",sans-serif ;
+}
+.bold {
+  font-weight: bold;
+}
+.item-RSS{
+  padding: 0;
+  .item-inner{
+    padding: 0!important;
+    ion-label{
+    margin: 0!important;
+  }
+  }
+  
+}
 }

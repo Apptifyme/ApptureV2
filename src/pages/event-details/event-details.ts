@@ -9,6 +9,8 @@ import {VideoCategoryPage} from '../video-category/video-category'
 import {VideoGalleryPage} from "../video-gallery/video-gallery.ts";
 import {ImageCategoryPage} from "../image-category/image-category";
 import {ArticlePage} from '../article/article'
+import * as localforage from "localforage";
+
 
 /*
   Generated class for the EventDetails page.
@@ -18,7 +20,7 @@ import {ArticlePage} from '../article/article'
 */
 @Component({
   selector: 'page-event-details',
-  templateUrl: 'event-details.html'
+  templateUrl: 'event-details.html',styleUrls:['/event-details.scss'],
 })
 export class EventDetailsPage {
    eventDetail:any=[];
@@ -34,10 +36,10 @@ export class EventDetailsPage {
     console.log('ionViewDidLoad EventDetailsPage');
   }
   onGetData(){
-    this.httpServiceOfEventDetails.getEventData(1)
+    this.httpServiceOfEventDetails.getEventData(2)
         .subscribe(
-            responce => {
-              this.eventDetail = responce;
+            response => {
+              this.eventDetail = response;
               console.log("my Event data");
               console.log(this.eventDetail);
 
@@ -45,7 +47,7 @@ export class EventDetailsPage {
             error => console.log(error)
         )
   }
-    goToFfooterInside(links:any){
+    goToFooterInside(links:any){
         console.log(links);
         var str:any;
         switch(links.linktypelink){
@@ -68,8 +70,8 @@ export class EventDetailsPage {
                 links.typeid = 0;
 
         }
-        if(links.linktypelink=="Phone Call"){
-//      window.open('tel:' + ('+1' + $rootScope.phoneNumber), '_system');
+        if(links.name=="Phone Call"){
+     window.open('tel:' + ('+1' + this.commonServices.PhoneNo), '_system');
         }
         else if (links.linktypelink == "home") {
             this.navCtrl.push(HomePage,{});

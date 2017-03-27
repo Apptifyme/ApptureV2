@@ -17,9 +17,10 @@ import {ImageCategoryPage} from '../image-category/image-category'
 */
 @Component({
   selector: 'page-rss',
-  templateUrl: 'rss.html'
+  templateUrl: 'rss.html', styleUrls:['/rss.scss'],
 })
 export class RssPage {
+  baseImageUrl="http://business.staging.appturemarket.com/uploads/";
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public commonService:commonServices) {}
 
@@ -29,7 +30,7 @@ export class RssPage {
   gotoRss(id:number){
     this.navCtrl.push(RssArticlePage,{id:id});
   }
-  goToFfooterInside(links:any){
+  goToFooterInside(links:any){
     console.log(links);
     var str:any;
     switch(links.linktypelink){
@@ -52,8 +53,8 @@ export class RssPage {
         links.typeid = 0;
 
     }
-    if(links.linktypelink=="Phone Call"){
-//      window.open('tel:' + ('+1' + $rootScope.phoneNumber), '_system');
+    if(links.name == "Phone Call"){
+     window.open('tel:' + ('+1' + this.commonService.PhoneNo), '_system');
     }
     else if (links.linktypelink == "home") {
       this.navCtrl.push(HomePage,{});
