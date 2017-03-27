@@ -33,6 +33,7 @@ export class VideoModalPage {
   }
 
   ionViewDidLoad() {
+      // this.orientation=180;
     console.log('ionViewDidLoad VideoModalPage');
     if (this.rotation == '2') {
       console.log('landscape');
