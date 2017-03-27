@@ -64,17 +64,19 @@ export class ImageGalleryPage {
                                 console.log("data exist in local forage");
 
                                 this.galleryImages=this.content[i].data;
+                                console.log(this.galleryImages);
                                 return;
 
-                              }                     }
-    })
-    for(var i=0;i<this.commonServices.AllGallaryImages.length;i++){
-               if(this.commonServices.AllGallaryImages[i].id==this.galleryId){
-                 console.log("data already exist");
-                 this.galleryImages=this.commonServices.AllGallaryImages[i].data;
-                 return;
-               }
-    }
+                              }
+
+                     }
+      for(var i=0;i<this.commonServices.AllGallaryImages.length;i++){
+        if(this.commonServices.AllGallaryImages[i].id==this.galleryId){
+          console.log("data already exist");
+          this.galleryImages=this.commonServices.AllGallaryImages[i].data;
+          return;
+        }
+      }
 
       this.loading.present();
       this.api.getGalleryImages(this.galleryId)
@@ -82,19 +84,8 @@ export class ImageGalleryPage {
           .subscribe((data) => {
             console.log(data);
             this.processGalleryImages(data.queryresult);
-
-            // this.photoCategories = data;
-            // data.map(item => {
-            //   if (item.title == 'Header Logo') {
-            //     console.log(item);
-            //     this.commonServices.headerLogo = 'http://business.staging.appturemarket.com/uploads/header-logo/' + item.image;
-            //     this.headerLogo = this.commonServices.headerLogo;
-            //     console.log(this.headerLogo);
-            //   }
-            // });
           });
-
-
+    })
   }
 
 
@@ -131,8 +122,8 @@ export class ImageGalleryPage {
         links.typeid = 0;
 
     }
-    if(links.linktypelink=="Phone Call"){
-//      window.open('tel:' + ('+1' + $rootScope.phoneNumber), '_system');
+    if (links.linktypelink == "setting") {
+      window.open('tel:' + "9088788");
     }
     else if (links.linktypelink == "home") {
       this.navCtrl.push(HomePage,{});
