@@ -12,6 +12,18 @@ page-rss-single {
 .padding-0{
   padding: 0px!important;
   margin:0px!important;
+  .item-inner{
+    padding-right: 0px!important;
+    .input-inner{
+      .input-wrapper{
+
+
+      }
+    }
+  }
+}
+.label-ios{
+  margin: 0px!important;
 }
 .new-line{
   color:white;

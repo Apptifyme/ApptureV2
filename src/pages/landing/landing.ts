@@ -58,7 +58,13 @@ export class LandingPage {
                 home.commonServices.banners = data[2].menu;
 
                 home.commonServices.AllMenuData = data[3];
-                this.checkWalkThroughFlag();
+                home.checkWalkThroughFlag();
+                data[0].map(item => {
+                        if (item.title == 'Header Logo') {
+                            console.log(item);
+                            this.commonServices.headerLogo = 'http://business.staging.appturemarket.com/uploads/header-logo/' + item.image;
+                        }
+                    });
 
                 data[3].menu.map(item => {
                     if (item.linktypename == "Pages" && this.commonServices.isURL(item.articlename)) {
@@ -68,12 +74,23 @@ export class LandingPage {
                         home.commonServices.menuData.push(item);
                     }
                 });
-            }
+                for(var i=0;i<this.commonServices.menuData.length;i++){
+                    if(this.commonServices.menuData[i].name=="Settings"){
+                        this.commonServices.menuData[i].name="Scheduler";
+                    }
+                    else if(this.commonServices.menuData[i].name=="My Profile"){
+                        this.commonServices.menuData[i].name="Breaking News";
+                    }
+
+                }
+
+                     }
         },)
     }
 
     checkHomeScreen() {
         // console.log(this.allDataPromise);
+        console.log("Inside Check Home Screen");
         Observable.forkJoin(this.allDataPromise).subscribe((resPromise) => {
 
             this.allObservableData = resPromise;
@@ -148,5 +165,4 @@ export class LandingPage {
             this.navCtrl.setRoot(HomePage);
         }
     }
-
 }

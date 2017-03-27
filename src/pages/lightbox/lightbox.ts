@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import {commonServices} from "../../providers/common-services"
 
 /*
   Generated class for the Lightbox page.
@@ -13,7 +14,7 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class LightboxPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams , public commonServices: commonServices) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LightboxPage');
