@@ -10,7 +10,7 @@
       <!--<img src="{{commonServices.headerLogo}}">-->
     </ion-title>
     <ion-buttons end>
-      <button ion-button icon-only>
+      <button ion-button icon-only (click)="refreshdata()">
         <ion-icon name="md-refresh"></ion-icon>
       </button>
     </ion-buttons>
@@ -28,7 +28,7 @@
 
 <ion-footer class="footer-appture">
   <ion-scroll zoom="false" scrollX="true" style="height: 60px" class="categories-filter">
-    <span class="footer-col" (click)="footerLink(links)" *ngFor="let links of commonServices.footerLinks">
+    <span class="footer-col" *ngFor="let links of commonServices.footerLinks">
                 <ion-row class="padding-top-5" (click)="goToFooterInside(links)">
                     <ion-col class="col padding-0 text-x-large" >
                         <i class="icon" [ngClass]="links.icon"></i>

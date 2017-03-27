@@ -8,7 +8,7 @@ import { VideoCategoryPage } from '../video-category/video-category'
 import { VideoGalleryPage } from "../video-gallery/video-gallery.ts";
 import { ImageCategoryPage } from "../image-category/image-category";
 import { ArticlePage } from '../article/article.ts';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
+//import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 /*
   Generated class for the Social page.
@@ -19,7 +19,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 @Component({
     selector: 'page-social',
     templateUrl: 'social.html',
-    providers:[InAppBrowser]
+  //  providers:[InAppBrowser]
 })
 export class SocialPage {
 
@@ -28,8 +28,8 @@ export class SocialPage {
     header: any;
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public commonService: commonServices,
-        public plt: Platform, public iab:InAppBrowser) {
-
+                public plt: Platform) {
+        //   public iab:InAppBrowser
         console.log(this.commonService.appConfig);
         this.header = this.commonService.headerLogo;
         this.socialData = JSON.parse(this.commonService.appConfig[6].text);
@@ -72,6 +72,7 @@ export class SocialPage {
     ionViewDidLoad() {
         console.log('ionViewDidLoad SocialPage');
     }
+
     goToFooterInside(links: any) {
         console.log(links);
         var str: any;
@@ -96,7 +97,7 @@ export class SocialPage {
 
         }
         if (links.name == "Phone Call") {
-                 window.open('tel:' + ('+1' + this.commonService.PhoneNo), '_system');
+            window.open('tel:' + ('+1' + this.commonService.PhoneNo), '_system');
         }
         else if (links.linktypelink == "home") {
             this.navCtrl.push(HomePage, {});
@@ -108,15 +109,15 @@ export class SocialPage {
         }
     }
 
-
-
-    goSocial(link) {
-        if (this.plt.is('cordova')) {
-            const browser = this.iab.create(link, '_blank', 'location=yes');
-            browser.show();
-        }
-        else {
-            window.open(link, "_blank");
-        }
-    }
 }
+
+//     goSocial(link) {
+//         if (this.plt.is('cordova')) {
+//     //        const browser = this.iab.create(link, '_blank', 'location=yes');
+//       //      browser.show();
+//         }
+//         else {
+//             window.open(link, "_blank");
+//         }
+//     }
+// }

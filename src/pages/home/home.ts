@@ -26,7 +26,7 @@ import {LightboxPage} from '../lightbox/lightbox'
 export class HomePage {
   headerLogo: string;
   @ViewChild(Slides) sliders: Slides;
-  slides: any;
+  slides= [];
   slider1Loading: boolean = true;
   banners: any;
   RSS = [];
@@ -51,6 +51,10 @@ export class HomePage {
     //this.fetchRSSData();
     let frontMenuPromise = this.api.getAllFrontMenu()
     this.allDataPromise.push(frontMenuPromise);
+    localforage.getItem("slides").then((result)=>{
+      this.commonServices.slides=result?<Array<Object>>result:[];
+      console.log(this.commonServices.slides);
+    })
   }
 
 
@@ -79,14 +83,14 @@ export class HomePage {
     this.loading = this.loadingCtrl.create({
       content: 'Please wait...'
     });
-    this.sliders.stopAutoplay();
+   // this.sliders.stopAutoplay();
     localforage.removeItem("allObservbledata").then(function(){
       console.log("refresh call");
       //home.RefreshDataFun.refreshData();
     //  home.rs.refreshData();
       home.loading.present();
       console.log("inside service");
-          home.commonServices.slides=[];
+       //   home.commonServices.slides=[];
          // home.commonServices.banners=[];
            home.commonServices.AllMenuData=[];
            home.commonServices.menuData=[];
@@ -106,10 +110,11 @@ export class HomePage {
             });
         // console.log(this.allObservableData[1]);
         // console.log(this.allObservableData[2]);
+      //  home.commonServices.slides=[];
         home.commonServices.slides = home.allObservableData[1];
         localforage.setItem("slides",home.commonServices.slides);
 
-     //   home.commonServices.banners = home.allObservableData[2].menu;
+        home.commonServices.banners = home.allObservableData[2].menu;
         localforage.setItem("banners",home.commonServices.banners);
         // console.log(this.allObservableData[3]);
         home.commonServices.AllMenuData = home.allObservableData[3];
@@ -143,10 +148,16 @@ export class HomePage {
     })
   }
   getAppconfig() {
+    localforage.getItem("slides").then((result)=>{
+         this.slides=result?<Array<Object>>result:[];
+         console.log(this.commonServices.slides);
+    })
+
      localforage.getItem("appConfig").then((result)=>{
       this.content = result ? <Array<Object>> result : [];
       console.log("data exist in local forage app confog");
       this.commonServices.appConfig=this.content;
+      this.sliders.stopAutoplay();
       return;
     }, (error) => {
       console.log("ERROR: ", error);
@@ -158,6 +169,7 @@ export class HomePage {
         this.commonServices.appConfig = response;
 //        console.log("my Social Data data");
         console.log(this.commonServices.appConfig);
+            this.sliders.startAutoplay();
               localforage.setItem("appConfig",response);
                },
       error => console.log(error)
@@ -334,6 +346,7 @@ export class HomePage {
       this.navCtrl.push(str, {});
     }
   }
+
   gotoRss(i: number) {
     // console.log( i);
     this.navCtrl.push(RssArticlePage, { id: i })

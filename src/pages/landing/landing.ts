@@ -57,21 +57,25 @@ export class LandingPage {
         let home = this;
         localforage.getItem("allObservbledata").then((result) => {
             console.log(result);
-            let data = [];
-            data = result ? <Array<Object>>result : null;
+            let Homedata = [];
+            Homedata = result ? <Array<Object>>result : null;
 
-            if (data == null) {
+            if (Homedata == null) {
                 console.log("data nhi hai");
                 home.checkHomeScreen();
             }
             else {
-                home.commonServices.slides = data[0];
-                home.commonServices.banners = data[1].menu;
+            //    home.checkHomeScreen();
+                home.commonServices.slides = Homedata[0];
+                console.log(this.commonServices.slides);
+                home.commonServices.banners = Homedata[1].menu;
+                console.log(this.commonServices.banners);
 
-                home.commonServices.AllMenuData = data[2];
+                home.commonServices.AllMenuData = Homedata[2];
                 this.checkWalkThroughFlag();
+                console.log(this.commonServices.AllMenuData);
 
-                data[2].menu.map(item => {
+                Homedata[2].menu.map(item => {
                     if (item.linktypename == "Pages" && this.commonServices.isURL(item.articlename)) {
                         home.commonServices.RSSarray.push(item);
                     }

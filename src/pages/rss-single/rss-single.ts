@@ -38,6 +38,10 @@ export class RssSinglePage {
         this.rssData = this.commonServices.RssArticle[this.parentIndex].items.items;
         console.log(this.rssData);
         console.log(this.parentIndex);
+
+        setTimeout(() => {
+            this.slides.slideTo(this.childIndex, 0);
+        }, 500);
         // this.size=this.rssData.items.length;
 
         for(var i=0;i<this.rssData.length;i++)
