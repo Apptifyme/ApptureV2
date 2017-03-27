@@ -12,6 +12,7 @@ import {SocialPage} from '../pages/social/social.ts';
 import {EventsPage} from '../pages/events/events.ts';
 import {VideoCategoryPage} from '../pages/video-category/video-category'
 import {VideoGalleryPage} from '../pages/video-gallery/video-gallery.ts'
+import {LightboxPage} from '../pages/lightbox/lightbox'
 
 @Component({
   templateUrl: 'app.html',
@@ -26,28 +27,7 @@ export class MyApp {
     this.initializeApp();
     console.log(this.commonServices);
 
-    //  if(this.commonServices.RSSarray.length==0) {
-    //    this.api.getAllFrontMenu().subscribe((data) => {
-    //      console.log(data);
-    //      data.menu.map(item => {
-    //        // console.log(item);
-    //        if (item.linktypename == "Pages" && this.commonServices.isURL(item.articlename)) {
 
-    //          this.commonServices.RSSarray.push(item);
-    //        }
-    //        else {
-    //          this.commonServices.menuData.push(item);
-    //        }
-    //      });
-    //      console.log(this.commonServices.menuData);
-    //      for(var i=0;i<this.commonServices.menuData.length;i++){
-    //                    if(this.commonServices.menuData[i].name=="My Profile"){
-    //                      this.commonServices.menuData[i].name="BreakingNews";
-    //                    }
-    //      }
-    //    });
-    //    console.log(this.commonServices.RSSarray);
-    //  }
      if(this.commonServices.RSSarray.length==0) {
        this.api.getAllFrontMenu().subscribe((data) => {
          console.log(data);
@@ -68,7 +48,7 @@ export class MyApp {
            }
            else {
              console.log("MENU DAATA COMIG");
-//             this.commonServices.menuData.push(item);
+
            }
          });
          console.log(this.commonServices.menuData);
@@ -94,7 +74,6 @@ export class MyApp {
      }
 
 
-    // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Home', component: HomePage }
     ];
@@ -134,6 +113,8 @@ export class MyApp {
             case 'social':
               str=SocialPage;
               break;
+            case 'setting':
+              str=LightboxPage;
             default:
               break;
 
