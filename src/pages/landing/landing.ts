@@ -65,7 +65,8 @@ export class LandingPage {
                 home.checkHomeScreen();
             }
             else {
-            //    home.checkHomeScreen();
+                console.log("data hai");
+                home.checkHomeScreen();
                 home.commonServices.slides = Homedata[0];
                 console.log(this.commonServices.slides);
                 home.commonServices.banners = Homedata[1].menu;
@@ -94,6 +95,7 @@ export class LandingPage {
 
             this.allObservableData = resPromise;
             localforage.setItem("allObservbledata", resPromise);
+            console.log(resPromise);
 
             // console.log(this.allObservableData[0]);
             // this.allObservableData[0]
@@ -106,6 +108,7 @@ export class LandingPage {
             // console.log(this.allObservableData[1]);
             // console.log(this.allObservableData[2]);
             this.commonServices.slides = this.allObservableData[0];
+            console.log(this.commonServices.slides);
             localforage.setItem("slides", this.commonServices.slides);
             console.log(this.commonServices.slides);
             this.commonServices.banners = this.allObservableData[1].menu;

@@ -52,8 +52,11 @@ export class HomePage {
     let frontMenuPromise = this.api.getAllFrontMenu()
     this.allDataPromise.push(frontMenuPromise);
     localforage.getItem("slides").then((result)=>{
-      this.commonServices.slides=result?<Array<Object>>result:[];
-      console.log(this.commonServices.slides);
+      var slide=result?<Array<Object>>result:null;
+      if(slide!=null) {
+        this.commonServices.slides=slide;
+        console.log(this.commonServices.slides);
+      }
     })
   }
 
@@ -63,6 +66,7 @@ export class HomePage {
     this.headerLogo = this.commonServices.headerLogo;
     // console.log('ionViewDidLoad HomePage');
     this.slides = this.commonServices.slides;
+    console.log(this.slides);
     this.slider1Loading = false;
     this.RSS = this.commonServices.RSSarray;
     this.banners = this.commonServices.banners;
@@ -77,6 +81,7 @@ export class HomePage {
     // });
   }
   refreshdata(){
+    this.slider1Loading = true;
 
     let home=this;
 
@@ -90,8 +95,8 @@ export class HomePage {
     //  home.rs.refreshData();
       home.loading.present();
       console.log("inside service");
-       //   home.commonServices.slides=[];
-         // home.commonServices.banners=[];
+          home.commonServices.slides=[];
+       //   home.commonServices.banners=[];
            home.commonServices.AllMenuData=[];
            home.commonServices.menuData=[];
       console.log("data change");
@@ -113,9 +118,10 @@ export class HomePage {
       //  home.commonServices.slides=[];
         home.commonServices.slides = home.allObservableData[1];
         localforage.setItem("slides",home.commonServices.slides);
-
+         console.log(home.commonServices.slides);
         home.commonServices.banners = home.allObservableData[2].menu;
         localforage.setItem("banners",home.commonServices.banners);
+        console.log(home.commonServices.banners);
         // console.log(this.allObservableData[3]);
         home.commonServices.AllMenuData = home.allObservableData[3];
         localforage.setItem("Allmenudata",home.commonServices.AllMenuData);
@@ -138,8 +144,10 @@ export class HomePage {
         }
         localforage.setItem("menuData",home.commonServices.menuData);
         localforage.setItem("RSSarray",home.commonServices.RSSarray);
+        home.slider1Loading = false;
+
         home.loading.dismiss();
-        home.sliders.startAutoplay();
+     //   home.sliders.startAutoplay();
    //     return new Promise((resolve, reject) => resolve());
       });
       console.log("end");
@@ -149,8 +157,11 @@ export class HomePage {
   }
   getAppconfig() {
     localforage.getItem("slides").then((result)=>{
-         this.slides=result?<Array<Object>>result:[];
-         console.log(this.commonServices.slides);
+         var slide=result?<Array<Object>>result:null;
+         if(slide!=null) {
+           this.commonServices.slides=slide;
+           console.log(this.commonServices.slides);
+         }
     })
 
      localforage.getItem("appConfig").then((result)=>{

@@ -29,7 +29,7 @@
 <ion-content class="has-header dark-bg">
 
     <!--1st Slide-->
-    <ion-slides autoplay="1500" loop="true" *ngIf="!slider1Loading" [ngStyle]="commonServices.sliderheight" class="valign-parent">
+    <ion-slides  autoplay="2000" loop="true" *ngIf="!slider1Loading" [ngStyle]="commonServices.sliderheight" class="valign-parent">
         <ion-slide *ngFor="let slide of commonServices.slides.menu" class="text-center slider-bg lightgray-bg" (click)="goToInside(slide.article)" [ngStyle]="{'background': 'url(' + (slide.image | serverImage) + ') no-repeat center', 'background-size': 'cover'}">
             <!--<img src="{{slide.image | serverImage}}">-->
         </ion-slide>
@@ -37,7 +37,7 @@
     <!--End of 1st Slide-->
 
     <!--2nd Slide-->
-    <ion-slides autoplay="1500" loop="true" *ngIf="!slider1Loading" [ngStyle]="commonServices.promo_banner" class="padding-separation valign-parent">
+    <ion-slides  autoplay="2000" loop="true" *ngIf="!slider1Loading" [ngStyle]="commonServices.promo_banner" class="padding-separation valign-parent">
         <ion-slide *ngFor="let banner of commonServices.banners" class="text-center slider2-bg" 
         [ngStyle]="{'background': 'url(' + (banner.image | serverImage) + ') no-repeat center','background-size': 'cover'}"
         (click)="goToPromotion(banner.article)">
