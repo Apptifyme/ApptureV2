@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams ,LoadingController ,ModalController} from 'ionic-angular';
-import {HttpServiceOfVideoCategory} from '../video-category/video-category.service';
-import {HomePage} from '../home/home';
-import {EventsPage} from '../events/events';
-import {ContactPage} from '../contact/contact';
-import {ArticlePage} from '../article/article';
-import {VideoGalleryPage} from "../video-gallery/video-gallery.ts";
-import {ImageCategoryPage} from "../image-category/image-category";
-import {commonServices} from '../../providers/common-services'
-import {VideoModalPage} from '../video-modal/video-modal.ts'
+import { NavController, NavParams, LoadingController, ModalController } from 'ionic-angular';
+import { HttpServiceOfVideoCategory } from '../video-category/video-category.service';
+import { HomePage } from '../home/home';
+import { EventsPage } from '../events/events';
+import { ContactPage } from '../contact/contact';
+import { ArticlePage } from '../article/article';
+import { VideoGalleryPage } from "../video-gallery/video-gallery.ts";
+import { ImageCategoryPage } from "../image-category/image-category";
+import { commonServices } from '../../providers/common-services'
+import { VideoModalPage } from '../video-modal/video-modal.ts'
 import * as localforage from "localforage";
 
 /*
@@ -19,87 +19,95 @@ import * as localforage from "localforage";
 */
 
 @Component({
-  selector: 'page-video-category',
-  templateUrl: 'video-category.html',styleUrls:['/video-category.scss'],
+    selector: 'page-video-category',
+    templateUrl: 'video-category.html', styleUrls: ['/video-category.scss'],
 })
 export class VideoCategoryPage {
-  videodata:any=[];
-  id:any;
-  uinurl=[];
-  i:number;
-  par:number;
-  par1:any;
-  url1:any;
-  arr=[];
-  content=[];
-    watching={id:0,article:{}};
-    public baseImageUrl="http://img.youtube.com/vi/";
-    public baseImageUrl2="/default.jpg";
-  videoimage='http://business.staging.appturemarket.com/uploads/video-image/';
-  loading:any;
-  constructor(public navCtrl: NavController, public navParams: NavParams,public loadingCtrl:LoadingController,public modalCtrl:ModalController,private httpServiceOfVideoCategory:HttpServiceOfVideoCategory,public commonServices:commonServices) {
-      this.id=this.navParams.get('id');
-      console.log(this.id);
-      this.par1=this.id.id;
-      this.url1=this.id.url;
-      console.log(this.url1);
-      this.i=this.navParams.get('i');
-      console.log(this.i);
-      this.loading = this.loadingCtrl.create({
-          content: 'Please wait...'
-      });
-      this.getVideoCategorydata(this.par1);
-  }
+    videodata: any = [];
+    id: any;
+    uinurl = [];
+    i: number;
+    par: number;
+    par1: any;
+    url1: any;
+    arr = [];
+    content = [];
+    watching = { id: 0, article: {} };
+    public baseImageUrl = "http://img.youtube.com/vi/";
+    public baseImageUrl2 = "/default.jpg";
+    videoimage = 'http://business.staging.appturemarket.com/uploads/video-image/';
+    loading: any;
+    constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public modalCtrl: ModalController, private httpServiceOfVideoCategory: HttpServiceOfVideoCategory, public commonServices: commonServices) {
+        this.id = this.navParams.get('id');
+        console.log(this.id);
+        this.par1 = this.id.id;
+        this.url1 = this.id.url;
+        console.log(this.url1);
+        this.i = this.navParams.get('i');
+        console.log(this.i);
+        this.loading = this.loadingCtrl.create({
+            content: 'Please wait...'
+        });
+        this.getVideoCategorydata(this.par1);
+    }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad VideoCategoryPage');
-  }
+    ionViewDidLoad() {
+        console.log('ionViewDidLoad VideoCategoryPage');
+    }
 
-  getVideoCategorydata(id:number){
-      localforage.getItem("AllVideoCategoryData").then((result)=>{
-          this.content=result?<Array<Object>>result:[];
-          for(var i=0;i<this.content.length;i++){
-                if(this.content[i].id==id){
+    getVideoCategorydata(id: number) {
+        localforage.getItem("AllVideoCategoryData").then((result) => {
+            this.content = result ? <Array<Object>>result : [];
+            for (var i = 0; i < this.content.length; i++) {
+                if (this.content[i].id == id) {
                     console.log("data exist in local forage");
-                    this.videodata=this.content[i].article;
+                    this.videodata = this.content[i].article;
 
-                }          }
-      })
-      for(var i=0;i<this.commonServices.AllVideoCategory.length;i++){
-          if(this.commonServices.AllVideoCategory[i].id==id){
-              console.log("data already exist");
-              this.videodata=this.commonServices.AllVideoCategory[i].article;
-              return;
-          }
+                }
+            }
+        })
+        for (var i = 0; i < this.commonServices.AllVideoCategory.length; i++) {
+            if (this.commonServices.AllVideoCategory[i].id == id) {
+                console.log("data already exist");
+                this.videodata = this.commonServices.AllVideoCategory[i].article;
+                return;
+            }
 
-      }
-      this.loading.present();
+        }
+        this.loading.present();
 
-      this.httpServiceOfVideoCategory.getVideocategoryData(id)
-        .subscribe(
+        this.httpServiceOfVideoCategory.getVideocategoryData(id)
+            .subscribe(
             response => {
-              this.videodata = response;
-              console.log("my Videogallary data loaded");
-              console.log(this.videodata);
-              this.watching.id=id;
-              this.watching.article=this.videodata;
+                this.videodata = response;
+                this.watching.id = id;
+                this.watching.article = this.videodata;
 
-              this.commonServices.AllVideoCategory.push(this.watching);
-              localforage.setItem("AllVideoCategoryData",this.commonServices.AllVideoCategory);
-              console.log(this.commonServices.AllVideoCategory);
-              this.arr=this.url1.split(",",this.videodata.queryresult.length);
-              console.log(this.arr);
-                console.log(this.arr);
+                this.commonServices.AllVideoCategory.push(this.watching);
+                localforage.setItem("AllVideoCategoryData", this.commonServices.AllVideoCategory);
+                this.arr = this.url1.split(",", this.videodata.queryresult.length);
+                for (let i = 0; i < this.videodata.queryresult.length; i++) {
+                    let fullDate = new Date(this.videodata.queryresult[i].publisheddate.replace(/\s/, 'T')).toString();
+                    console.log(fullDate);
+                    if (fullDate != 'Invalid Date') {
+                        let tempArray = fullDate.split(' ');
+                        this.videodata.queryresult[i].publisheddate = tempArray[0] + ", " + tempArray[1] + " " + tempArray[2] + " " + tempArray[3];
+                    }
+                    else{
+                        this.videodata.queryresult[i].publisheddate = null;
+                    }
+                }
+
                 this.loading.dismiss();
 
             },
             error => console.log(error)
-        )
-  }
-    goToFooterInside(links:any){
+            )
+    }
+    goToFooterInside(links: any) {
         console.log(links);
-        var str:any;
-        switch(links.linktypelink){
+        var str: any;
+        switch (links.linktypelink) {
             case 'home':
                 str = HomePage;
                 break;
@@ -119,20 +127,20 @@ export class VideoCategoryPage {
                 links.typeid = 0;
 
         }
-        if(links.name == "Phone Call"){
-     window.open('tel:' + ('+1' + this.commonServices.PhoneNo), '_system');
+        if (links.name == "Phone Call") {
+            window.open('tel:' + ('+1' + this.commonServices.PhoneNo), '_system');
         }
         else if (links.linktypelink == "home") {
-            this.navCtrl.push(HomePage,{});
+            this.navCtrl.push(HomePage, {});
 
         }
         else {
             console.log("page Change");
-            this.navCtrl.push(str,{});
+            this.navCtrl.push(str, {});
         }
     }
-    openVideo(p:any){
-      this.navCtrl.push(VideoModalPage,{id:p});
+    openVideo(p: any) {
+        this.navCtrl.push(VideoModalPage, { id: p });
     }
 
 }

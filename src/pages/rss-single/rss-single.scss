@@ -61,7 +61,12 @@ page-rss-single {
   padding: 0;
   text-align: center;
 }
-
+.rss-title{
+    padding: 0 50px 1px!important;
+    .toolbar-title{
+        font-size: 14px;
+    }
+}
 .item-image .titles {
   position: absolute;
   bottom: 0;

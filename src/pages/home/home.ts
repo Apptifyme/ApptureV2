@@ -98,7 +98,6 @@ export class HomePage {
           else if (this.commonServices.menuData[i].name == "My Profile") {
             this.commonServices.menuData[i].name = "Breaking News";
           }
-
         }
         this.loading.dismiss();
         this.sliders.startAutoplay();

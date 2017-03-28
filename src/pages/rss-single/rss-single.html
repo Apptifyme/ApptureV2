@@ -21,7 +21,7 @@
 
         </button>
         </ion-buttons>
-        <ion-title>{{title}}{{length}}/{{i}}</ion-title>
+        <ion-title class="rss-title">{{title}}{{length}}/{{i}}</ion-title>
 
         <ion-buttons right>
             <button ion-button icon-only (click)="goRight()">
@@ -54,7 +54,7 @@
                             <ion-icon item-left ios="ios-calendar-outline" md="md-calendar">
 
                             </ion-icon>
-                            <!--{{p.pubDate |   date:'longDate'}}-->
+                            {{p.pubDate}}
                         </div>
                     </div>
                     <div class="row padding-top-15">

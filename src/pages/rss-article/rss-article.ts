@@ -1,15 +1,15 @@
-import {Component, ViewChild, keyframes} from '@angular/core';
-import {NavController, NavParams, Slides, LoadingController, ModalController} from 'ionic-angular';
-import {commonServices} from '../../providers/common-services'
-import {HttpServiceOfRss} from '../rss-article/rss.service'
-import {RssSinglePage} from '../rss-single/rss-single';
-import {HomePage} from '../home/home';
-import {EventsPage} from '../events/events';
-import {ContactPage} from '../contact/contact';
-import {VideoCategoryPage} from '../video-category/video-category'
-import {VideoGalleryPage} from "../video-gallery/video-gallery.ts";
-import {ImageCategoryPage} from "../image-category/image-category";
-import {ArticlePage} from '../article/article.ts';
+import { Component, ViewChild, keyframes } from '@angular/core';
+import { NavController, NavParams, Slides, LoadingController, ModalController } from 'ionic-angular';
+import { commonServices } from '../../providers/common-services'
+import { HttpServiceOfRss } from '../rss-article/rss.service'
+import { RssSinglePage } from '../rss-single/rss-single';
+import { HomePage } from '../home/home';
+import { EventsPage } from '../events/events';
+import { ContactPage } from '../contact/contact';
+import { VideoCategoryPage } from '../video-category/video-category'
+import { VideoGalleryPage } from "../video-gallery/video-gallery.ts";
+import { ImageCategoryPage } from "../image-category/image-category";
+import { ArticlePage } from '../article/article.ts';
 import * as localforage from "localforage";
 
 
@@ -34,11 +34,11 @@ export class RssArticlePage {
     @ViewChild(Slides) slides: Slides;
     url = "";
     RSSdata = [];
-    prevState:any='';
+    prevState: any = '';
     private slider: JSON;
     currentIndex = 0;
     prev = 0;
-    watching = {'id': 0, 'data': {}};
+    watching = { 'id': 0, 'data': {} };
     public loading: any;
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public loadingController: LoadingController, public modalController: ModalController, public commonServices: commonServices, public httpserviceOfRss: HttpServiceOfRss) {
@@ -54,10 +54,10 @@ export class RssArticlePage {
         console.log(this.commonServices.RssArticle);
         this.loadRssdata(this.url);
         setTimeout(() => {
-            this.change=true;
+            this.change = true;
 
             this.slides.slideTo(this.index, 0);
-           // this.change=true;
+            // this.change=true;
         }, 500);
 
         this.showLoader();
@@ -65,13 +65,13 @@ export class RssArticlePage {
 
     }
 
-    goBack(){
+    goBack() {
         this.navCtrl.pop();
     }
 
     goToSlide(i) {
         console.log("Slide Change");
-//        this.slides.slideTo(this.index, 0);
+        //        this.slides.slideTo(this.index, 0);
     }
 
     showLoader() {
@@ -81,20 +81,29 @@ export class RssArticlePage {
         this.loading.present();
     }
 
+    splitBy(title, char) {
+        let array = title.indexOf(' - ');
+        console.log(array);
+        console.log('-');
+
+        return title;
+    }
+
     loadRssdata(url) {
         var flag = false;
         var home = this;
         console.log("load RSS data callled");
         localforage.getItem("RSS").then((result) => {
-            home.RSStemp = result ? <Array<Object>> result : [];
+            home.RSStemp = result ? <Array<Object>>result : [];
             for (var i = 0; i < home.RSStemp.length; i++) {
                 console.log("local foarage has something");
 
                 if (home.RSStemp[i].id == url) {
                     console.log("local forage has data");
-                  //  this.commonServices.RssArticle[this.index].items = [];
+                    //  this.commonServices.RssArticle[this.index].items = [];
                     this.commonServices.RssArticle[this.index].items = home.RSStemp[i].data;
                     this.title = home.RSStemp[i].data.feed.title;
+                    
                     console.log(this.title);
                     // this.slides.slideTo(this.index,0);
                     this.loading.dismiss();
@@ -104,44 +113,50 @@ export class RssArticlePage {
             }
             this.httpserviceOfRss.loadRssdata(url)
                 .subscribe(
-                    response => {
-                        // this.temp=true;
-                        this.RssData = response;
-                        console.log("my Rss data Loaded");
-                        console.log(this.RssData);
-                        this.loading.dismiss();
+                response => {
+                    // this.temp=true;
+                    this.RssData = response;
+                    console.log("my Rss data Loaded");
+                    console.log(this.RssData);
+                    this.loading.dismiss();
 
-                        // if (this.RssData[this.index] == null) {
-                        this.commonServices.RssArticle[this.index].items = [];
-                        this.commonServices.RssArticle[this.index].items = this.RssData;
-                        console.log(this.index);
-                        console.log(this.commonServices.RssArticle);
-                        this.title = this.RssData.feed.title;
-                        // this.httpserviceOfRss.RssContent = this.Rsscontent;
-                        for (var i = 0; i < this.RssData.items.length; i++) {
-                            if (this.RssData.items[i].thumbnail == '' && typeof this.RssData.items[i].image == 'undefined') {
-                                this.RssData.items[i].imageLink = this.getBlogImage(this.RssData.items[i].content);
-                                this.RssData.items[i].imageSource = 'pickedFromHtml';
-                            }
-                            else if (this.RssData.items[i].image.url != 'undefined') {
-                                this.RssData.items[i].imageLink = this.RssData.items[i].image.url;
-                                this.RssData.items[i].imageSource = 'imageUrl';
-                            }
-                            else {
-                                this.RssData.items[i].imageLink = this.RssData.items[i].thumbnail;
-                                this.RssData.items[i].imageSource = 'thumbnail';
-                            }
+                    // if (this.RssData[this.index] == null) {
+                    this.commonServices.RssArticle[this.index].items = [];
+                    this.commonServices.RssArticle[this.index].items = this.RssData;
+                    console.log(this.index);
+                    console.log(this.commonServices.RssArticle);
+                    this.title = this.splitBy(this.RssData.feed.title,'-');
+                    // this.title = this.splitBy(this.title, '-');
+                    // this.httpserviceOfRss.RssContent = this.Rsscontent;
+                    for (var i = 0; i < this.RssData.items.length; i++) {
+                        
+                        let fullDate = new Date(this.RssData.items[i].pubDate.replace(/\s/, 'T')).toString();
+                        let tempArray = fullDate.split(' ');
+                        this.RssData.items[i].pubDate = tempArray[0]+", "+tempArray[1]+" "+tempArray[2]+" "+tempArray[3];
+
+                        if (this.RssData.items[i].thumbnail == '' && typeof this.RssData.items[i].image == 'undefined') {
+                            this.RssData.items[i].imageLink = this.getBlogImage(this.RssData.items[i].content);
+                            this.RssData.items[i].imageSource = 'pickedFromHtml';
                         }
+                        else if (this.RssData.items[i].image.url != 'undefined') {
+                            this.RssData.items[i].imageLink = this.RssData.items[i].image.url;
+                            this.RssData.items[i].imageSource = 'imageUrl';
+                        }
+                        else {
+                            this.RssData.items[i].imageLink = this.RssData.items[i].thumbnail;
+                            this.RssData.items[i].imageSource = 'thumbnail';
+                        }
+                    }
 
-                        // }
-                        this.watching.id = url;
-                        this.watching.data = this.RssData;
-                        let tempObj = Object.assign({}, this.watching);
-                        this.commonServices.AllRssdata.push(tempObj);
-                        localforage.setItem("RSS", this.commonServices.AllRssdata);
-                        console.log(this.commonServices.AllRssdata);
-                    },
-                    error => console.log(error)
+                    // }
+                    this.watching.id = url;
+                    this.watching.data = this.RssData;
+                    let tempObj = Object.assign({}, this.watching);
+                    this.commonServices.AllRssdata.push(tempObj);
+                    localforage.setItem("RSS", this.commonServices.AllRssdata);
+                    console.log(this.commonServices.AllRssdata);
+                },
+                error => console.log(error)
                 )
 
 
@@ -153,7 +168,7 @@ export class RssArticlePage {
         console.log("refresh fnctin called");
         localforage.getItem("RSS").then((result) => {
             console.log("local forage ayye");
-            this.commonServices.AllRssdata.splice(this.index,1);
+            this.commonServices.AllRssdata.splice(this.index, 1);
             this.RSSdata = result ? <Array<Object>>result : [];
             console.log(this.RSSdata);
             localforage.removeItem("RSS");
@@ -326,6 +341,6 @@ export class RssArticlePage {
         console.log("Inside RSS");
         console.log(id);
         // console.log(j);
-        this.navCtrl.push(RssSinglePage, {id: id, parentIndex: parentIndex, title: this.title, childIndex: childIndex});
+        this.navCtrl.push(RssSinglePage, { id: id, parentIndex: parentIndex, title: this.title, childIndex: childIndex });
     }
 }

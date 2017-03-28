@@ -107,6 +107,14 @@ export class LandingPage {
                     this.commonServices.menuData.push(item);
                 }
             });
+            for (var i = 0; i < this.commonServices.menuData.length; i++) {
+                if (this.commonServices.menuData[i].name == "Settings") {
+                    this.commonServices.menuData[i].name = "Scheduler";
+                }
+                else if (this.commonServices.menuData[i].name == "My Profile") {
+                    this.commonServices.menuData[i].name = "Breaking News";
+                }
+            }
             // localforage.setItem("menuData", this.commonServices.menuData);
             // localforage.setItem("RSSarray", this.commonServices.RSSarray);
             // console.log(this.commonServices.menuData);
@@ -131,7 +139,7 @@ export class LandingPage {
                     },
                     error => {
                         console.error(error);
-                        localforage.setItem('walkThroughFlag',true)
+                        localforage.setItem('walkThroughFlag', true)
                         this.navCtrl.setRoot(WalkthroughPage);
                     }
                     );
