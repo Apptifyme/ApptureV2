@@ -34,6 +34,7 @@ export class RssArticlePage {
     @ViewChild(Slides) slides: Slides;
     url = "";
     RSSdata = [];
+    prevState:any='';
     private slider: JSON;
     currentIndex = 0;
     prev = 0;
@@ -43,6 +44,7 @@ export class RssArticlePage {
     constructor(public navCtrl: NavController, public navParams: NavParams, public loadingController: LoadingController, public modalController: ModalController, public commonServices: commonServices, public httpserviceOfRss: HttpServiceOfRss) {
         console.log(this.commonServices.RssData);
         this.index = this.navParams.get('id');
+        this.prevState = this.navParams.get('prev');
         this.i = this.index;
         this.currentIndex = this.index;
         console.log(this.index);
@@ -63,6 +65,9 @@ export class RssArticlePage {
 
     }
 
+    goBack(){
+        this.navCtrl.pop();
+    }
 
     goToSlide(i) {
         console.log("Slide Change");

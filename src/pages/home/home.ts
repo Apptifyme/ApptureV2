@@ -100,11 +100,6 @@ export class HomePage {
           }
 
         }
-        // localforage.setItem("slides", this.commonServices.slides);
-        // localforage.setItem("banners", this.commonServices.banners);
-        // localforage.setItem("Allmenudata", this.commonServices.AllMenuData);
-        // localforage.setItem("menuData", this.commonServices.menuData);
-        // localforage.setItem("RSSarray", this.commonServices.RSSarray);
         this.loading.dismiss();
         this.sliders.startAutoplay();
         //     return new Promise((resolve, reject) => resolve());
@@ -140,9 +135,6 @@ export class HomePage {
       case '2':
         str = ArticlePage;
         break;
-      //    case 'setting':
-      //    str=LightboxPage;
-      //     break;
       default:
         links.typeid = 0;
 
@@ -162,7 +154,7 @@ export class HomePage {
 
   gotoRss(i: number) {
     // console.log( i);
-    this.navCtrl.push(RssArticlePage, { id: i })
+    this.navCtrl.push(RssArticlePage, { id: i, prev:'home' })
   }
   pressMe() {
     this.navCtrl.push(LightboxPage, {});

@@ -413,3 +413,9 @@ color: white;
 .pull-right {
     float: right;
 }
+.company-logo {
+    background-size: contain!important;
+    background-repeat: no-repeat!important;
+    background-position: center!important;
+    height: 40px;
+}
