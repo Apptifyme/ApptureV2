@@ -26,7 +26,7 @@ page-rss-single {
 .new-line{
   color:white;
   white-space:normal!important;
-  margin:10px;
+  margin:5px;
 }
 
 
@@ -41,7 +41,7 @@ page-rss-single {
   position: absolute;
   bottom: 0;
   left: 0;
-  padding: 15px 15px 15px 15px;
+  padding: 10px;
   text-align: left;
   z-index: 2;
 }
@@ -60,6 +60,7 @@ page-rss-single {
 .item-image {
   padding: 0;
   text-align: center;
+  background-size: cover;
 }
 .rss-title{
     padding: 0 50px 1px!important;

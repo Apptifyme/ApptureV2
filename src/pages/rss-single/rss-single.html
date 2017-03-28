@@ -36,32 +36,32 @@
         <ion-slide style="margin:0px!important; padding: 0px!important;" *ngFor="let p of rssData" class="slide-content">
 
             <ion-item class="item-RSS">
-                <div class="item-image min-h-250 " [ngStyle]="{'background-image': 'url(' + p.imageLink + ')'}">
+                <div class="item-image min-h-250 relative" [ngStyle]="{'background-image': 'url(' + p.imageLink + ')'}">
 
                     <!--<img cache-src="{{article.image}}">-->
                     <div class="titles">
-                        <h1 class="new-line">{{p.title}}</h1>
+                        <h1 class="playfair bold new-line">{{p.title}}</h1>
                         <h3 style="color:white; white-space:normal!important; margin:5px;" class="bold">{{p.subTitle}}</h3>
                     </div>
 
                 </div>
                 <div class="item-content">
-                    <div class="row">
-                        <div class="col bold italic">
-                            <ion-icon item-left ios="ios-bulb-outline" md="md-bulb"></ion-icon>{{p.author}}
-                        </div>
-                        <div class="col bold italic">
-                            <ion-icon item-left ios="ios-calendar-outline" md="md-calendar">
+                    <ion-row class="text-small">
+                        <ion-col col-6 class=" bold italic">
+                            <ion-icon item-left ios="ios-bulb-outline" md="md-bulb" class="assertive"></ion-icon>{{p.author}}
+                        </ion-col>
+                        <ion-col col-6 class=" bold italic">
+                            <ion-icon item-left ios="ios-calendar-outline" md="md-calendar" class="assertive">
 
                             </ion-icon>
                             {{p.pubDate}}
-                        </div>
-                    </div>
-                    <div class="row padding-top-15">
-                        <div class="col">
+                        </ion-col>
+                    </ion-row>
+                    <ion-row class=" padding-top-15">
+                        <ion-col col-12>
                             <p class="article-content" [innerHTML]="p.content"></p>
-                        </div>
-                    </div>
+                        </ion-col>
+                    </ion-row>
                     <!--<srf-social-share data-config="itemCtrl.share"></srf-social-share>-->
                 </div>
             </ion-item>

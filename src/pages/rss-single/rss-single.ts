@@ -30,15 +30,13 @@ export class RssSinglePage {
         this.childIndex = this.navParams.get('childIndex');
         console.log(this.childIndex);
         this.parentIndex = this.navParams.get('parentIndex');
-                console.log(this.parentIndex);
-
-        this.title = this.navParams.get('title');
-        console.log(this.title);
-        console.log(this.commonServices.RssArticle);
-        this.rssData = this.commonServices.RssArticle[this.parentIndex].items.items;
-        console.log(this.rssData);
         console.log(this.parentIndex);
 
+        this.title = this.navParams.get('title');
+        this.rssData = this.commonServices.RssArticle[this.parentIndex].items.items;
+        for(let j=0;j<this.rssData.length;j++){
+            this.rssData[j].content = this.processArticle(this.rssData[j].content,this.rssData[j].imageLink)
+        }
         setTimeout(() => {
             this.slides.slideTo(this.childIndex, 0);
         }, 500);
@@ -56,6 +54,30 @@ export class RssSinglePage {
 
     }
 
+    processArticle(content,image){
+
+    let loopRemoveDuplicateImage = true;
+
+            // console.log($scope.article);
+            function removeDuplicateImage() {
+                let htmlString = content;
+                let string1 = htmlString.substring(htmlString.indexOf('src="'), htmlString.indexOf('"', htmlString.indexOf('src="') + 5));
+                let imageString = string1.substring(5, string1.length);
+                if (imageString == image) {
+                    var nextImage = htmlString.substring(htmlString.indexOf('<img'), htmlString.indexOf('>', htmlString.indexOf('<img') + 5) + 1);
+                    content = content.replace(nextImage, '');
+                }
+                else {
+                    loopRemoveDuplicateImage = false;
+                }
+            }
+
+            while (loopRemoveDuplicateImage) {
+                removeDuplicateImage();
+            }
+
+            return content;
+    }
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad RssSinglePage');
@@ -65,7 +87,7 @@ export class RssSinglePage {
             this.slides.slideNext();
         }
         this.slides.getActiveIndex();
-        this.slides.length()
+        // this.slides.length()
     }
     goRight(){
         var i=this.slides.getActiveIndex();

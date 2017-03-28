@@ -103,8 +103,8 @@ export class RssArticlePage {
                     //  this.commonServices.RssArticle[this.index].items = [];
                     this.commonServices.RssArticle[this.index].items = home.RSStemp[i].data;
                     this.title = home.RSStemp[i].data.feed.title;
-                    
-                    console.log(this.title);
+                    this.title= this.title.replace(/\u2013|\u2014/g, "-");
+                    this.title = this.title.substring(0,this.title.indexOf('-')-1);
                     // this.slides.slideTo(this.index,0);
                     this.loading.dismiss();
                     return;
@@ -123,9 +123,11 @@ export class RssArticlePage {
                     // if (this.RssData[this.index] == null) {
                     this.commonServices.RssArticle[this.index].items = [];
                     this.commonServices.RssArticle[this.index].items = this.RssData;
-                    console.log(this.index);
-                    console.log(this.commonServices.RssArticle);
-                    this.title = this.splitBy(this.RssData.feed.title,'-');
+                    
+                    this.title = this.RssData.feed.title;
+                    this.title= this.title.replace(/\u2013|\u2014/g, "-");
+                    this.title = this.title.substring(0,this.title.indexOf('-')-1);
+                    this.RssData.feed.title = this.title;
                     // this.title = this.splitBy(this.title, '-');
                     // this.httpserviceOfRss.RssContent = this.Rsscontent;
                     for (var i = 0; i < this.RssData.items.length; i++) {
@@ -133,7 +135,7 @@ export class RssArticlePage {
                         let fullDate = new Date(this.RssData.items[i].pubDate.replace(/\s/, 'T')).toString();
                         let tempArray = fullDate.split(' ');
                         this.RssData.items[i].pubDate = tempArray[0]+", "+tempArray[1]+" "+tempArray[2]+" "+tempArray[3];
-
+                                    // n.subTitle = fullTitle.substring(fullTitle.indexOf('-')+1);
                         if (this.RssData.items[i].thumbnail == '' && typeof this.RssData.items[i].image == 'undefined') {
                             this.RssData.items[i].imageLink = this.getBlogImage(this.RssData.items[i].content);
                             this.RssData.items[i].imageSource = 'pickedFromHtml';
