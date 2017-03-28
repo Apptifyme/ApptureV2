@@ -66,7 +66,7 @@ export class LandingPage {
             }
             else {
                 console.log("data hai");
-                home.checkHomeScreen();
+            //    home.checkHomeScreen();
                 home.commonServices.slides = Homedata[0];
                 console.log(this.commonServices.slides);
                 home.commonServices.banners = Homedata[1].menu;

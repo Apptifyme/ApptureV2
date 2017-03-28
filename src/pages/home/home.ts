@@ -54,10 +54,12 @@ export class HomePage {
     localforage.getItem("slides").then((result)=>{
       var slide=result?<Array<Object>>result:null;
       if(slide!=null) {
+
         this.commonServices.slides=slide;
         console.log(this.commonServices.slides);
       }
     })
+
   }
 
 
@@ -103,7 +105,6 @@ export class HomePage {
       Observable.forkJoin(home.allDataPromise).subscribe((resPromise) => {
         console.log("inside forkable");
         home.allObservableData = resPromise;
-        localforage.setItem("allObservbledata",resPromise);
         console.log(home.allObservableData);
         // console.log(this.allObservableData[0]);
         home.allObservableData[0]
@@ -123,6 +124,13 @@ export class HomePage {
         localforage.setItem("banners",home.commonServices.banners);
         console.log(home.commonServices.banners);
         // console.log(this.allObservableData[3]);
+        var storage=[];
+        storage.push(home.allObservableData[1]);
+        storage.push(home.allObservableData[2]);
+        storage.push(home.allObservableData[3]);
+        localforage.setItem("allObservbledata",storage);
+
+
         home.commonServices.AllMenuData = home.allObservableData[3];
         localforage.setItem("Allmenudata",home.commonServices.AllMenuData);
         home.allObservableData[3].menu.map(item => {
