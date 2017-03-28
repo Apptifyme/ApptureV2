@@ -75,7 +75,7 @@ export class HomePage {
         this.allObservableData[0]
           .map(item => {
             if (item.title == 'Header Logo') {
-              console.log(item);
+              // console.log(item);
               this.commonServices.headerLogo = 'http://business.staging.appturemarket.com/uploads/header-logo/' + item.image;
             }
           });
@@ -103,7 +103,6 @@ export class HomePage {
         this.sliders.startAutoplay();
         //     return new Promise((resolve, reject) => resolve());
       });
-      console.log("end");
 
 
     })
@@ -116,7 +115,6 @@ export class HomePage {
     this.navCtrl.push(ArticlePage, { id: id });
   }
   goToFooterInside(links: any) {
-    console.log(links);
     var str: any;
     switch (links.linktypelink) {
       case 'home':
@@ -146,7 +144,6 @@ export class HomePage {
 
     }
     else {
-      console.log("page Change");
       this.navCtrl.push(str, {});
     }
   }

@@ -21,7 +21,7 @@
 
         </button>
         </ion-buttons>
-        <ion-title class="rss-title">{{title}}{{length}}/{{i}}</ion-title>
+        <ion-title class="rss-title">{{title}} {{childIndex+1}}/{{rssData.length}}</ion-title>
 
         <ion-buttons right>
             <button ion-button icon-only (click)="goRight()">
@@ -32,7 +32,7 @@
 
 </ion-header>
 <ion-content class="padding-0">
-    <ion-slides class="padding-0">
+    <ion-slides class="padding-0" (ionSlideDidChange)="slideChanged()">
         <ion-slide style="margin:0px!important; padding: 0px!important;" *ngFor="let p of rssData" class="slide-content">
 
             <ion-item class="item-RSS">
@@ -40,8 +40,9 @@
 
                     <!--<img cache-src="{{article.image}}">-->
                     <div class="titles">
-                        <h1 class="playfair bold new-line">{{p.title}}</h1>
-                        <h3 style="color:white; white-space:normal!important; margin:5px;" class="bold">{{p.subTitle}}</h3>
+                        <h1 class="playfair bold new-line" ng-bind-html="p.title"></h1>
+                        <h3 style="color:white; white-space:normal!important; margin:5px;" class="bold"
+                        ng-bind-html="p.subTitle"></h3>
                     </div>
 
                 </div>

@@ -116,8 +116,6 @@ export class RssArticlePage {
                 response => {
                     // this.temp=true;
                     this.RssData = response;
-                    console.log("my Rss data Loaded");
-                    console.log(this.RssData);
                     this.loading.dismiss();
 
                     // if (this.RssData[this.index] == null) {
@@ -156,7 +154,7 @@ export class RssArticlePage {
                     let tempObj = Object.assign({}, this.watching);
                     this.commonServices.AllRssdata.push(tempObj);
                     localforage.setItem("RSS", this.commonServices.AllRssdata);
-                    console.log(this.commonServices.AllRssdata);
+                    // console.log(this.commonServices.AllRssdata);
                 },
                 error => console.log(error)
                 )
@@ -167,15 +165,11 @@ export class RssArticlePage {
 
     refreshData() {
         // this.slides.slideTo(1,0);
-        console.log("refresh fnctin called");
         localforage.getItem("RSS").then((result) => {
-            console.log("local forage ayye");
             this.commonServices.AllRssdata.splice(this.index, 1);
             this.RSSdata = result ? <Array<Object>>result : [];
-            console.log(this.RSSdata);
             localforage.removeItem("RSS");
             this.RSSdata.splice(this.index, 1);
-            console.log(this.RSSdata);
             this.url = this.commonServices.RssArticle[this.index].title;
             localforage.setItem("RSS", this.RSSdata);
             this.Rsscontent.splice(this.index, 1);
@@ -186,7 +180,7 @@ export class RssArticlePage {
     }
 
     goToFooterInside(links: any) {
-        console.log(links);
+        // console.log(links);
         var str: any;
         switch (links.linktypelink) {
             case 'home':
@@ -216,13 +210,13 @@ export class RssArticlePage {
 
         }
         else {
-            console.log("page Change");
+            // console.log("page Change");
             this.navCtrl.push(str, {});
         }
     }
 
     ionViewDidLoad() {
-        console.log('ionViewDidLoad RssArticlePage');
+        // console.log('ionViewDidLoad RssArticlePage');
         this.goToSlide(this.index);
         this.loading.present();
 
@@ -246,12 +240,7 @@ export class RssArticlePage {
         //     this.slides.slidePrev();
         //     this.change=false;
         // }
-        console.log("go left");
-
-        console.log(this.index);
         var k = this.index - 1;
-        console.log(k);
-        console.log(this.commonServices.AllRssdata);
         // for(var i=0;i<this.commonServices.AllRssdata.length;i++){
         //     if(this.commonServices.AllRssdata[i].id==k){
         //         console.log("data Already exist");
@@ -263,7 +252,6 @@ export class RssArticlePage {
         if (this.index > 0) {
 
             this.change = true;
-            console.log("go right");
             this.slides.slidePrev();
             this.showLoader();
             this.index--;
@@ -280,10 +268,10 @@ export class RssArticlePage {
         //     this.slides.slideNext();
         //     this.change=false;
         // }
-        console.log(this.index);
-        console.log(this.commonServices.RssData.length);
+        // console.log(this.index);
+        // console.log(this.commonServices.RssData.length);
         var j = this.index + 1;
-        console.log(j);
+        // console.log(j);
         // for(var i=0;i<this.commonServices.AllRssdata.length;i++){
         //     if(this.commonServices.AllRssdata[i].id==j){
         //         console.log("data Already exist");
@@ -295,7 +283,7 @@ export class RssArticlePage {
         if (this.index < this.commonServices.RssArticle.length - 1) {
 
             this.change = true;
-            console.log("go right");
+            // console.log("go right");
             this.slides.slideNext();
             this.showLoader();
             this.index++;
@@ -313,7 +301,7 @@ export class RssArticlePage {
             //  this.title = "";
             this.prev = this.currentIndex;
             this.currentIndex = this.slides.getActiveIndex();
-            console.log("slide Change");
+            // console.log("slide Change");
 
 
             if (this.currentIndex < this.prev) {
@@ -340,8 +328,8 @@ export class RssArticlePage {
     }
 
     goinsideRSS(id: any, parentIndex: number, childIndex: number) {
-        console.log("Inside RSS");
-        console.log(id);
+        // console.log("Inside RSS");
+        // console.log(id);
         // console.log(j);
         this.navCtrl.push(RssSinglePage, { id: id, parentIndex: parentIndex, title: this.title, childIndex: childIndex });
     }

@@ -28,20 +28,15 @@ export class VideoModalPage {
 
     //window.screen.lockOrientation("landscape");
     this.id = this.navParams.get('id');
-    console.log(this.id);
-    console.log(this.id.url);
     // this.baseUrl="https://www.youtube.com/embed/WWFLRAh7aUs";
     this.url = this.baseUrl1 + this.id.url;
     this.rotation = this.id.orientation;
-    console.log(this.url);
     this.loading = false;
   }
 
   ionViewDidLoad() {
     // this.orientation=180;
-    console.log('ionViewDidLoad VideoModalPage');
     if (this.rotation == '2') {
-      console.log('landscape');
       this.devHeight = this.platform.height();
       this.devWidth = this.platform.width();
       this.rotateVideo = {
@@ -51,7 +46,6 @@ export class VideoModalPage {
       this.landscape = true;
     }
     else {
-      console.log('portrait');
       this.rotateVideo = {};
       this.buttonRotate = {};
       this.landscape = false;

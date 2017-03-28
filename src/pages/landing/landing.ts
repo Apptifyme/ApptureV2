@@ -32,14 +32,14 @@ export class LandingPage {
 
         this.api.getHeaderLogo()
             .subscribe((data) => {
-                console.log(data);
+                // console.log(data);
                 data.map(item => {
                     if (item.title == 'Header Logo') {
-                        console.log(item);
+                        // console.log(item);
                         this.commonServices.headerLogo = 'http://business.staging.appturemarket.com/uploads/header-logo/' + item.image;
                     }
                     else if (item.title == 'Contact No') {
-                        console.log(item);
+                        // console.log(item);
                         this.commonServices.PhoneNo = item.text;
                     }
                 });
@@ -47,17 +47,17 @@ export class LandingPage {
 
         this.api.getAllFootermenu()
             .subscribe((data) => {
-                console.log(data);
+                // console.log(data);
                 this.commonServices.footerLinks = data.menu;
             });
         // let home = this;
         localforage.getItem("allObservbledata").then((result) => {
-            console.log(result);
+            // console.log(result);
             let Homedata = [];
             Homedata = result ? <Array<Object>>result : null;
 
             if (Homedata == null) {
-                console.log("data nhi hai");
+                // console.log("data nhi hai");
                 let sliderPromise = this.api.getallsliders()
                 this.allDataPromise.push(sliderPromise);
                 let promotionsPromise = this.api.getAllPromotions()
@@ -87,7 +87,7 @@ export class LandingPage {
     }
 
     checkHomeScreen() {
-        console.log("Inside Check Home Screen");
+        // console.log("Inside Check Home Screen");
         Observable.forkJoin(this.allDataPromise).subscribe((resPromise) => {
             this.allObservableData = resPromise;
             this.commonServices.slides = this.allObservableData[0];
@@ -130,7 +130,7 @@ export class LandingPage {
                 localforage.getItem('walkThroughFlag')
                     .then(
                     data => {
-                        console.log(data);
+                        // console.log(data);
                         if (data) {
                             this.navCtrl.setRoot(HomePage);
                         } else {
@@ -138,8 +138,7 @@ export class LandingPage {
                         }
                     },
                     error => {
-                        console.error(error);
-                        localforage.setItem('walkThroughFlag', true)
+                        // console.error(error);
                         this.navCtrl.setRoot(WalkthroughPage);
                     }
                     );
@@ -150,4 +149,6 @@ export class LandingPage {
             this.navCtrl.setRoot(HomePage);
         }
     }
+
+    
 }

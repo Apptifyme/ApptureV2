@@ -39,12 +39,12 @@ export class VideoCategoryPage {
     loading: any;
     constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public modalCtrl: ModalController, private httpServiceOfVideoCategory: HttpServiceOfVideoCategory, public commonServices: commonServices) {
         this.id = this.navParams.get('id');
-        console.log(this.id);
+        // console.log(this.id);
         this.par1 = this.id.id;
         this.url1 = this.id.url;
-        console.log(this.url1);
+        // console.log(this.url1);
         this.i = this.navParams.get('i');
-        console.log(this.i);
+        // console.log(this.i);
         this.loading = this.loadingCtrl.create({
             content: 'Please wait...'
         });
@@ -52,7 +52,7 @@ export class VideoCategoryPage {
     }
 
     ionViewDidLoad() {
-        console.log('ionViewDidLoad VideoCategoryPage');
+        // console.log('ionViewDidLoad VideoCategoryPage');
     }
 
     getVideoCategorydata(id: number) {
@@ -60,7 +60,7 @@ export class VideoCategoryPage {
             this.content = result ? <Array<Object>>result : [];
             for (var i = 0; i < this.content.length; i++) {
                 if (this.content[i].id == id) {
-                    console.log("data exist in local forage");
+                    // console.log("data exist in local forage");
                     this.videodata = this.content[i].article;
 
                 }
@@ -68,7 +68,7 @@ export class VideoCategoryPage {
         })
         for (var i = 0; i < this.commonServices.AllVideoCategory.length; i++) {
             if (this.commonServices.AllVideoCategory[i].id == id) {
-                console.log("data already exist");
+                // console.log("data already exist");
                 this.videodata = this.commonServices.AllVideoCategory[i].article;
                 return;
             }
@@ -88,7 +88,7 @@ export class VideoCategoryPage {
                 this.arr = this.url1.split(",", this.videodata.queryresult.length);
                 for (let i = 0; i < this.videodata.queryresult.length; i++) {
                     let fullDate = new Date(this.videodata.queryresult[i].publisheddate.replace(/\s/, 'T')).toString();
-                    console.log(fullDate);
+                    // console.log(fullDate);
                     if (fullDate != 'Invalid Date') {
                         let tempArray = fullDate.split(' ');
                         this.videodata.queryresult[i].publisheddate = tempArray[0] + ", " + tempArray[1] + " " + tempArray[2] + " " + tempArray[3];
@@ -105,7 +105,7 @@ export class VideoCategoryPage {
             )
     }
     goToFooterInside(links: any) {
-        console.log(links);
+        // console.log(links);
         var str: any;
         switch (links.linktypelink) {
             case 'home':
@@ -135,7 +135,7 @@ export class VideoCategoryPage {
 
         }
         else {
-            console.log("page Change");
+            // console.log("page Change");
             this.navCtrl.push(str, {});
         }
     }
