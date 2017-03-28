@@ -16,8 +16,8 @@ export class SafeHtmlUrl {
 
     }
 
-    public transform(value: string): SafeHtml | SafeStyle | SafeScript | SafeUrl | SafeResourceUrl {
-
+    public transform(value: string) {
+        console.log(value);
         return this._sanitizer.bypassSecurityTrustResourceUrl(value);
 
     }
