@@ -1,12 +1,11 @@
 page-home {
-
-}
-
-.slider-bg {
+    .slider-bg {
     padding: 0px;
+    width: 100%;
     background-size: cover !important;
     background-position: center center !important;
     border-bottom: 1px solid gray;
+    background-repeat: none;
 }
 
 .lightgray-bg{
@@ -61,3 +60,6 @@ page-home {
     opacity: 0.7;
     z-index: 1;
 }
+
+}
+

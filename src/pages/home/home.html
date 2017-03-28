@@ -29,19 +29,18 @@
 <ion-content class="has-header dark-bg">
 
     <!--1st Slide-->
-    <ion-slides autoplay="1500" loop="true" *ngIf="!slider1Loading" [ngStyle]="commonServices.sliderheight" class="valign-parent">
-        <ion-slide *ngFor="let slide of commonServices.slides.menu" class="text-center slider-bg lightgray-bg" (click)="goToInside(slide.article)" [ngStyle]="{'background': 'url(' + (slide.image | serverImage) + ') no-repeat center', 'background-size': 'cover'}">
-            <!--<img src="{{slide.image | serverImage}}">-->
+    <ion-slides autoplay="3000" *ngIf="!slider1Loading" [ngStyle]="commonServices.sliderheight" class="valign-parent">
+        <ion-slide *ngFor="let slide of commonServices.slides.menu" class="text-center slider-bg lightgray-bg" (click)="goToInside(slide.article)" 
+        [ngStyle]="{'background-image': 'url(' + (slide.image | serverImage) + ')','height':0.44*commonServices.devH+'px','max-width':commonServices.devW+'px'}">
         </ion-slide>
     </ion-slides>
     <!--End of 1st Slide-->
 
     <!--2nd Slide-->
-    <ion-slides autoplay="1500" loop="true" *ngIf="!slider1Loading" [ngStyle]="commonServices.promo_banner" class="padding-separation valign-parent">
-        <ion-slide *ngFor="let banner of commonServices.banners" class="text-center slider2-bg" 
-        [ngStyle]="{'background': 'url(' + (banner.image | serverImage) + ') no-repeat center','background-size': 'cover'}"
+    <ion-slides autoplay="3000" *ngIf="!slider1Loading" [ngStyle]="commonServices.promo_banner" class="padding-separation valign-parent">
+        <ion-slide *ngFor="let banner of commonServices.banners" class="text-center slider-bg" 
+        [ngStyle]="{'background-image': 'url(' + (banner.image | serverImage) + ')','max-height':0.15*commonServices.devH+'px','max-width':commonServices.devW+'px'}"
         (click)="goToPromotion(banner.article)">
-            <!--<img src="{{banner.image | serverImage}}">-->
         </ion-slide>
     </ion-slides>
     <!--End of 2nd Slide-->
@@ -55,7 +54,6 @@
         </ion-row>
     </ion-grid>
     <!--End of RSS Feeds-->
-    <!--<button (click)="pressMe()">hey</button>-->
 </ion-content>
 
 <ion-footer class="footer-appture">
