@@ -28,13 +28,13 @@ export class ContactPage {
     enquiry: any = {};
 
     constructor(public navCtrl: NavController, public api: API, public navParams: NavParams, private commonService: commonServices) {
-        console.log(this.commonService.appConfig);
-        this.data = this.commonService.appConfig[5];
-        console.log(this.data);
+        // console.log(this.commonService.appConfig);
+        // this.data = this.commonService.appConfig[5];
+        // console.log(this.data);
         this.getmap();
-        console.log(commonService.menuData);
+        // console.log(commonService.menuData);
         console.log(commonService.AllMenuData);
-        this.data.description = this.commonService.AllMenuData.config[5];
+        this.data = this.commonService.AllMenuData.config[5];
         console.log(this.data.description);
         this.tab = 'Contact Us'
     }
@@ -89,7 +89,7 @@ export class ContactPage {
 
     }
 
-    goToFfooterInside(links:any){
+    goToFooterInside(links:any){
         console.log(links);
         var str:any;
         switch(links.linktypelink){
