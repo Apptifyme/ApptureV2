@@ -32,14 +32,14 @@ export class HomePage {
   RSS = [];
   categories = [];
   content = [];
-  loading: any={};
+  loading: any = {};
   phoneNumber = 0;
   baseImageUrl = "http://business.staging.appturemarket.com/uploads/";
   public allDataPromise: any = [];
   public allObservableData: any = [];
 
   constructor(public loadingCtrl: LoadingController, public navCtrl: NavController, public navParams: NavParams, public api: API, public commonServices: commonServices, public rs: RefreshData) {
-    
+
   }
 
   ionViewDidLoad() {
@@ -65,10 +65,10 @@ export class HomePage {
     this.allDataPromise.push(frontMenuPromise);
 
     localforage.removeItem("allObservbledata").then(() => {
-      
+
       this.commonServices.AllMenuData = [];
       this.commonServices.menuData = [];
-      
+
       Observable.forkJoin(this.allDataPromise).subscribe((resPromise) => {
         this.allObservableData = resPromise;
         localforage.setItem("allObservbledata", resPromise);
@@ -82,23 +82,25 @@ export class HomePage {
         this.commonServices.slides = this.allObservableData[1];
         this.commonServices.banners = this.allObservableData[2].menu;
         this.commonServices.AllMenuData = this.allObservableData[3];
-        
+
         this.allObservableData[3].menu.map(item => {
           if (item.linktypename == "Pages" && this.commonServices.isURL(item.articlename)) {
             this.commonServices.RSSarray.push(item);
           }
           else {
-            this.commonServices.menuData.push(item);
+            if (item.name != 'Settings') {
+              this.commonServices.menuData.push(item);
+            }
           }
         });
-        for (var i = 0; i < this.commonServices.menuData.length; i++) {
-          if (this.commonServices.menuData[i].name == "Settings") {
-            this.commonServices.menuData[i].name = "Scheduler";
-          }
-          else if (this.commonServices.menuData[i].name == "My Profile") {
-            this.commonServices.menuData[i].name = "Breaking News";
-          }
-        }
+        // for (var i = 0; i < this.commonServices.menuData.length; i++) {
+        //   if (this.commonServices.menuData[i].name == "Settings") {
+        //     this.commonServices.menuData[i].name = "Scheduler";
+        //   }
+        //   else if (this.commonServices.menuData[i].name == "My Profile") {
+        //     this.commonServices.menuData[i].name = "Breaking News";
+        //   }
+        // }
         this.loading.dismiss();
         this.sliders.startAutoplay();
         //     return new Promise((resolve, reject) => resolve());
@@ -150,7 +152,7 @@ export class HomePage {
 
   gotoRss(i: number) {
     // console.log( i);
-    this.navCtrl.push(RssArticlePage, { id: i, prev:'home' })
+    this.navCtrl.push(RssArticlePage, { id: i, prev: 'home' })
   }
   pressMe() {
     this.navCtrl.push(LightboxPage, {});

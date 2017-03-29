@@ -41,6 +41,7 @@ export class RssSinglePage {
 
         for (var i = 0; i < this.rssData.length; i++) {
             this.fullTitle = this.rssData[i].title;
+            this.fullTitle = this.fullTitle.replace(/\u2013|\u2014/g, "-");
             if (this.fullTitle.indexOf('-') != -1) {
                 this.rssData[i].title = this.fullTitle.substring(0, this.fullTitle.indexOf('-') - 1);
                 this.rssData[i].subTitle = this.fullTitle.substring(this.fullTitle.indexOf('-') + 1);

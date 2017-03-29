@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, Platform } from 'ionic-angular';
-import { NativeStorage } from 'ionic-native';
 import { HomePage } from '../../pages/home/home';
 import * as localforage from "localforage";
+// import { StatusBar } from '@ionic-native/status-bar';
 
 /*
  Generated class for the Walkthrough page.
@@ -20,11 +20,13 @@ export class WalkthroughPage {
     }
 
     ionViewDidLoad() {
+        // this.statusBar.hide();
         // console.log('ionViewDidLoad WalkthroughPage');
     }
 
     goToHome() {
-        localforage.setItem('walkThroughFlag', true)
+        localforage.setItem('walkThroughFlag', true);
+        // this.statusBar.show();
         this.navCtrl.setRoot(HomePage);
     }
 

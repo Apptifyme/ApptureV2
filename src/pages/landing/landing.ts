@@ -29,61 +29,62 @@ export class LandingPage {
     ionViewDidLoad() {
 
         //this.fetchRSSData();
-
-        this.api.getHeaderLogo()
-            .subscribe((data) => {
-                // console.log(data);
-                data.map(item => {
-                    if (item.title == 'Header Logo') {
-                        // console.log(item);
-                        this.commonServices.headerLogo = 'http://business.staging.appturemarket.com/uploads/header-logo/' + item.image;
-                    }
-                    else if (item.title == 'Contact No') {
-                        // console.log(item);
-                        this.commonServices.PhoneNo = item.text;
-                    }
-                });
-            });
-
-        this.api.getAllFootermenu()
-            .subscribe((data) => {
-                // console.log(data);
-                this.commonServices.footerLinks = data.menu;
-            });
-        // let home = this;
-        localforage.getItem("allObservbledata").then((result) => {
-            // console.log(result);
-            let Homedata = [];
-            Homedata = result ? <Array<Object>>result : null;
-
-            if (Homedata == null) {
-                // console.log("data nhi hai");
-                let sliderPromise = this.api.getallsliders()
-                this.allDataPromise.push(sliderPromise);
-                let promotionsPromise = this.api.getAllPromotions()
-                this.allDataPromise.push(promotionsPromise);
-                let frontMenuPromise = this.api.getAllFrontMenu()
-                this.allDataPromise.push(frontMenuPromise);
-                this.checkHomeScreen();
-            }
-            else {
-                //    this.checkHomeScreen();
-                this.commonServices.slides = Homedata[0];
-                this.commonServices.banners = Homedata[1].menu;
-                this.commonServices.AllMenuData = Homedata[2];
-
-                Homedata[2].menu.map(item => {
-                    if (item.linktypename == "Pages" && this.commonServices.isURL(item.articlename)) {
-                        this.commonServices.RSSarray.push(item);
-                    }
-                    else {
-                        this.commonServices.menuData.push(item);
-                    }
+        this.platform.ready().then(() => {
+            this.api.getHeaderLogo()
+                .subscribe((data) => {
+                    // console.log(data);
+                    data.map(item => {
+                        if (item.title == 'Header Logo') {
+                            // console.log(item);
+                            this.commonServices.headerLogo = 'http://business.staging.appturemarket.com/uploads/header-logo/' + item.image;
+                        }
+                        else if (item.title == 'Contact No') {
+                            // console.log(item);
+                            this.commonServices.PhoneNo = item.text;
+                        }
+                    });
                 });
 
-                this.checkWalkThroughFlag();
-            }
-        }, )
+            this.api.getAllFootermenu()
+                .subscribe((data) => {
+                    // console.log(data);
+                    this.commonServices.footerLinks = data.menu;
+                });
+            // let home = this;
+            localforage.getItem("allObservbledata").then((result) => {
+                // console.log(result);
+                let Homedata = [];
+                Homedata = result ? <Array<Object>>result : null;
+
+                if (Homedata == null) {
+                    // console.log("data nhi hai");
+                    let sliderPromise = this.api.getallsliders()
+                    this.allDataPromise.push(sliderPromise);
+                    let promotionsPromise = this.api.getAllPromotions()
+                    this.allDataPromise.push(promotionsPromise);
+                    let frontMenuPromise = this.api.getAllFrontMenu()
+                    this.allDataPromise.push(frontMenuPromise);
+                    this.checkHomeScreen();
+                }
+                else {
+                    //    this.checkHomeScreen();
+                    this.commonServices.slides = Homedata[0];
+                    this.commonServices.banners = Homedata[1].menu;
+                    this.commonServices.AllMenuData = Homedata[2];
+
+                    Homedata[2].menu.map(item => {
+                        if (item.linktypename == "Pages" && this.commonServices.isURL(item.articlename)) {
+                            this.commonServices.RSSarray.push(item);
+                        }
+                        else {
+                            this.commonServices.menuData.push(item);
+                        }
+                    });
+
+                    this.checkWalkThroughFlag();
+                }
+            }, )
+        })
     }
 
     checkHomeScreen() {
@@ -93,6 +94,7 @@ export class LandingPage {
             this.commonServices.slides = this.allObservableData[0];
             this.commonServices.banners = this.allObservableData[1].menu;
             this.commonServices.AllMenuData = this.allObservableData[2];
+            console.log(this.commonServices.AllMenuData)
 
             localforage.setItem("allObservbledata", resPromise);
             // localforage.setItem("slides", this.commonServices.slides);
@@ -104,17 +106,19 @@ export class LandingPage {
                     this.commonServices.RSSarray.push(item);
                 }
                 else {
-                    this.commonServices.menuData.push(item);
+                    if (item.name != 'Settings') {
+                        this.commonServices.menuData.push(item);
+                    }
                 }
             });
-            for (var i = 0; i < this.commonServices.menuData.length; i++) {
-                if (this.commonServices.menuData[i].name == "Settings") {
-                    this.commonServices.menuData[i].name = "Scheduler";
-                }
-                else if (this.commonServices.menuData[i].name == "My Profile") {
-                    this.commonServices.menuData[i].name = "Breaking News";
-                }
-            }
+            // for (var i = 0; i < this.commonServices.menuData.length; i++) {
+            //     if (this.commonServices.menuData[i].name == "Settings") {
+            //         this.commonServices.menuData[i].name = "Scheduler";
+            //     }
+            //     else if (this.commonServices.menuData[i].name == "My Profile") {
+            //         this.commonServices.menuData[i].name = "Breaking News";
+            //     }
+            // }
             // localforage.setItem("menuData", this.commonServices.menuData);
             // localforage.setItem("RSSarray", this.commonServices.RSSarray);
             // console.log(this.commonServices.menuData);
@@ -150,5 +154,5 @@ export class LandingPage {
         }
     }
 
-    
+
 }
