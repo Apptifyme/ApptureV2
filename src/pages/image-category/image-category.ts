@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams,LoadingController } from 'ionic-angular';
 import { commonServices } from '../../providers/common-services';
 import { API } from '../../providers/api';
 import { ImageGalleryPage } from '../../pages/image-gallery/image-gallery';
@@ -26,9 +26,21 @@ import * as localforage from "localforage";
 export class ImageCategoryPage {
   photoCategories: any = [];
   public content={};
-  constructor(public navCtrl: NavController, public navParams: NavParams, public api: API, public commonServices: commonServices) {
-
+  loading:any;
+  constructor(public loadingCtrl: LoadingController ,public navCtrl: NavController, public navParams: NavParams, public api: API, public commonServices: commonServices) {
+ //   this.loading = this.loadingCtrl.create({
+ //     content: 'Please wait...'
+ //   });
   }
+
+
+  showLoader() {
+    this.loading = this.loadingCtrl.create({
+      content: 'Please wait...'
+    });
+    this.loading.present();
+  }
+
 
   processImageCategoryResults(categories) {
 
@@ -41,6 +53,7 @@ export class ImageCategoryPage {
       }
     }
     this.photoCategories = categories;
+    this.loading.dismiss();
     this.commonServices.DesingPortFolio=this.photoCategories;
     localforage.setItem("image-category",categories);
     console.log(this.photoCategories )
@@ -58,6 +71,7 @@ export class ImageCategoryPage {
     )
     if (this.commonServices.DesingPortFolio == null) {
       console.log("data not exist")
+      this.showLoader();
       this.api.getImageCategories()
           .map(data => data.json())
           .subscribe((data) => {
@@ -114,7 +128,7 @@ export class ImageCategoryPage {
 
     }
     if(links.name == "Phone Call"){
-     window.open('tel:' + ('+1' + this.commonServices.PhoneNo), '_system');
+      window.open('tel:' + ('+1' + this.commonServices.PhoneNo), '_system');
     }
     else if (links.linktypelink == "home") {
       this.navCtrl.push(HomePage,{});
@@ -124,5 +138,13 @@ export class ImageCategoryPage {
       console.log("page Change");
       this.navCtrl.push(str,{});
     }
+  }
+  refreshdata(){
+    var home=this;
+     localforage.removeItem("image-category").then(function(){
+       home.commonServices.DesingPortFolio=null;
+       home.getAllImageCategories();
+         }
+     )
   }
 }

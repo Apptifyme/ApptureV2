@@ -14,64 +14,7 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
-@font-face {
-    font-family: 'Cutive';
-    src: url('../../assets/fonts/Cutive-Regular.eot');
-    src: url('../../assets/fonts/Cutive-Regular.eot?#iefix') format('embedded-opentype'),
-    url('../../assets/fonts/Cutive-Regular.woff2') format('woff2'),
-    url('../../assets/fonts/Cutive-Regular.woff') format('woff'),
-    url('../../assets/fonts/Cutive-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-@font-face {
-    font-family: 'Raleway';
-    src: url('../../assets/fonts/Raleway-Light.eot');
-    src: url('../../assets/fonts/Raleway-Light.eot?#iefix') format('embedded-opentype'),
-    url('../../assets/fonts/Raleway-Light.woff2') format('woff2'),
-    url('../../assets/fonts/Raleway-Light.woff') format('woff'),
-    url('../../assets/fonts/Raleway-Light.ttf') format('truetype');
-    font-weight: 300;
-    font-style: normal;
-}
-@font-face {
-    font-family: 'Myriad Pro';
-    src: url('../../assets/fonts/MyriadPro-Bold.eot');
-    src: url('../../assets/fonts/MyriadPro-Bold.eot?#iefix') format('embedded-opentype'),
-    url('../../assets/fonts/MyriadPro-Bold.woff2') format('woff2'),
-    url('../../assets/fonts/MyriadPro-Bold.woff') format('woff'),
-    url('../../assets/fonts/MyriadPro-Bold.ttf') format('truetype');
-    font-weight: bold;
-    font-style: normal;
-}
-@font-face {
-    font-family: 'Playfair Display';
-    src: url('../../assets/fonts/PlayfairDisplay-Regular.eot');
-    src: url('../../assets/fonts/PlayfairDisplay-Regular.eot?#iefix') format('embedded-opentype'),
-    url('../../assets/fonts/PlayfairDisplay-Regular.woff2') format('woff2'),
-    url('../../assets/fonts/PlayfairDisplay-Regular.woff') format('woff'),
-    url('fonts/PlayfairDisplay-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-.playfair{
-    font-family: "Playfair Display",sans-serif ;
-}
-.cutive{
-    font-family: "Cutive",sans-serif ;
-    font-weight: normal;
-    font-style: normal;
-}
-.raleway{
-    font-family: "Raleway",sans-serif ;
-    font-weight: 300;
-    font-style: normal;
-}
-.myriad{
-    font-family: "Myriad Pro",sans-serif ;
-    font-weight: bold;
-    font-style: normal;
-}
+
 
 .article-content {
   p, strong {
@@ -161,6 +104,7 @@
   white-space: normal !important;
   font-size: 20px !important;
   margin-bottom: 20px;
+  margin-top:0;
   font-family: "Myriad Pro", sans-serif;
   font-weight: bold;
   font-style: normal;
@@ -353,6 +297,7 @@ color: white;
 }
 .article-image{
     min-height: 200px;
+    background-color: #e8e8e8;
 }
 .item-border-full-bottom{
     border: 1px solid #ccc;
@@ -412,4 +357,10 @@ color: white;
 }
 .pull-right {
     float: right;
+}
+.company-logo {
+    background-size: contain!important;
+    background-repeat: no-repeat!important;
+    background-position: center!important;
+    height: 40px;
 }

@@ -89,6 +89,7 @@ export class ArticlePage {
 
     }
     goToFooterInside(links: any) {
+
         console.log(links);
         var str: any;
         switch (links.linktypelink) {

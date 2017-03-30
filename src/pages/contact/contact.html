@@ -14,7 +14,7 @@
 
 
 <ion-content>
-    <ion-segment [(ngModel)]="tab">
+    <ion-segment [(ngModel)]="tab" color="dark">
         <ion-segment-button value="Contact Us">
             Contact Us
         </ion-segment-button>
@@ -26,7 +26,7 @@
 
         <ion-list *ngSwitchCase="'Contact Us'">
 
-            <ion-item>
+            <ion-item style="white-space: normal">
                 <ion-icon ios="ios-pin-outline" md="md-pin"></ion-icon>
                 {{data.content}}
             </ion-item>
@@ -37,9 +37,10 @@
             <ion-item>
                 <ion-icon ios="ios-globe-outline" md="md-globe"></ion-icon>
                 {{data.type}}
+
             </ion-item>
             <ion-item>
-                <div class="map" [innerHTML]="data.description.description | getBase"></div>
+                <div class="map" [innerHTML]="data.description | getBase"></div>
             </ion-item>
         </ion-list>
 
@@ -72,4 +73,22 @@
     </div>
 
 
+
 </ion-content>
+<ion-footer class="footer-appture">
+    <ion-scroll zoom="false" scrollX="true" style="height: 60px" class="categories-filter">
+    <span class="footer-col" ng-click="footerLink(links)" *ngFor="let links of commonService.footerLinks">
+                <ion-row class="padding-top-5">
+                    <ion-col class="col padding-0 text-x-large" (click)="goToFooterInside(links)">
+                        <i class="icon" [ngClass]="links.icon"></i>
+                        <!--<ion-icon name="search"></ion-icon>-->
+                    </ion-col>
+                </ion-row>
+                <ion-row class="">
+                    <ion-col class="col padding-0 text-small" (click)="goToFooterInside(links)">
+                        {{links.name}}
+                    </ion-col>
+                </ion-row>
+            </span>
+    </ion-scroll>
+</ion-footer>

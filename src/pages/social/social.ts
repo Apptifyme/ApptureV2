@@ -19,7 +19,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 @Component({
     selector: 'page-social',
     templateUrl: 'social.html',
-    providers:[InAppBrowser]
+   providers:[InAppBrowser]
 })
 export class SocialPage {
 
@@ -28,14 +28,14 @@ export class SocialPage {
     header: any;
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public commonService: commonServices,
-        public plt: Platform, public iab:InAppBrowser) {
-
-        console.log(this.commonService.appConfig);
+                public plt: Platform,public iab:InAppBrowser) {
+        //   public iab:InAppBrowser
+        console.log(this.commonService.AllMenuData.config);
         this.header = this.commonService.headerLogo;
-        this.socialData = JSON.parse(this.commonService.appConfig[6].text);
-        console.log(this.commonService.appConfig);
+        this.socialData = JSON.parse(this.commonService.AllMenuData.config[6].text);
         console.log(this.socialData);
-        console.log(this.commonService.appConfig[6]);
+        // console.log(this.socialData);
+        // console.log(this.commonService.appConfig[6]);
         for (var i = 0; i < this.socialData.length; i++) {
             console.log("in for");
 
@@ -72,6 +72,7 @@ export class SocialPage {
     ionViewDidLoad() {
         console.log('ionViewDidLoad SocialPage');
     }
+
     goToFooterInside(links: any) {
         console.log(links);
         var str: any;
@@ -96,7 +97,7 @@ export class SocialPage {
 
         }
         if (links.name == "Phone Call") {
-                 window.open('tel:' + ('+1' + this.commonService.PhoneNo), '_system');
+            window.open('tel:' + ('+1' + this.commonService.PhoneNo), '_system');
         }
         else if (links.linktypelink == "home") {
             this.navCtrl.push(HomePage, {});
@@ -112,8 +113,8 @@ export class SocialPage {
 
     goSocial(link) {
         if (this.plt.is('cordova')) {
-            const browser = this.iab.create(link, '_blank', 'location=yes');
-            browser.show();
+           const browser = this.iab.create(link, '_blank', 'location=yes');
+           browser.show();
         }
         else {
             window.open(link, "_blank");

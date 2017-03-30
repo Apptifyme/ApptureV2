@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController, NavParams, LoadingController, Slides } from 'ionic-angular';
 
 import { API } from '../../providers/api';
 import { commonServices } from '../../providers/common-services';
@@ -12,7 +12,8 @@ import { VideoGalleryPage } from "../video-gallery/video-gallery.ts";
 import { ImageCategoryPage } from "../image-category/image-category";
 import { RssArticlePage } from "../rss-article/rss-article"
 import * as localforage from "localforage";
-import {RefreshData} from "../../providers/refresh.service";
+import { RefreshData } from "../../providers/refresh.service";
+import { LightboxPage } from '../lightbox/lightbox'
 
 
 
@@ -20,205 +21,102 @@ import {RefreshData} from "../../providers/refresh.service";
   selector: 'page-home',
   templateUrl: 'home.html',
   styleUrls: ['/home.scss'],
-  providers:[RefreshData]
+  providers: [RefreshData]
 })
 export class HomePage {
   headerLogo: string;
-  slides: any;
+  @ViewChild(Slides) sliders: Slides;
+  slides = [];
   slider1Loading: boolean = true;
   banners: any;
   RSS = [];
   categories = [];
-  content=[];
-  baseImageUrl="http://business.staging.appturemarket.com/uploads/";
+  content = [];
+  loading: any = {};
+  phoneNumber = 0;
+  baseImageUrl = "http://business.staging.appturemarket.com/uploads/";
+  public allDataPromise: any = [];
+  public allObservableData: any = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public api: API, public commonServices: commonServices, public rs: RefreshData) {
+  constructor(public loadingCtrl: LoadingController, public navCtrl: NavController, public navParams: NavParams, public api: API, public commonServices: commonServices, public rs: RefreshData) {
 
   }
 
   ionViewDidLoad() {
-    // console.log("Header in Home form service",this.commonServices.headerLogo);
-    this.headerLogo = this.commonServices.headerLogo;
-    // console.log('ionViewDidLoad HomePage');
-    this.slides = this.commonServices.slides;
+    this.loading = this.loadingCtrl.create({
+      content: 'Please wait...'
+    });
     this.slider1Loading = false;
-    this.RSS = this.commonServices.RSSarray;
-    this.banners = this.commonServices.banners;
-    console.log(this.commonServices.RSSarray);
-    this.fetchRSSData();
-    // this.sortRssLinks(this.commonServices.AllMenuData);
-     this.getAppconfig();
   }
   ngOnInit() {
-    // this.rs.refreshData().then(function(){
-
-    // });
   }
-  refreshdata(){
-    let home=this;
-    localforage.removeItem("allObservbledata").then(function(){
-      console.log("refresh call");
-      //home.RefreshDataFun.refreshData();
-      home.rs.refreshData();
-
-    })
-  }
-  getAppconfig() {
-     localforage.getItem("appConfig").then((result)=>{
-      this.content = result ? <Array<Object>> result : [];
-      console.log("data exist in local forage app confog");
-      this.commonServices.appConfig=this.content;
-      return;
-    }, (error) => {
-      console.log("ERROR: ", error);
-    })
-
-    this.api.getHeaderLogo()
-      .subscribe(
-      response => {
-        this.commonServices.appConfig = response;
-//        console.log("my Social Data data");
-        console.log(this.commonServices.appConfig);
-              localforage.setItem("appConfig",response);
-               },
-      error => console.log(error)
-      )
-
-  }
-
-  sortRssLinks(data: any): any {
-    // console.log(data);
-    data.menu.map((n, index) => {
-      if (n.linktypelink != "setting" && n.linktypelink != "contact" && n.linktypelink != "profile") {
-        var newmenu = {
-          id: n.id,
-          name: n.name,
-          order: n.order,
-          icon: n.icon,
-          link_type: n.linktypename,
-          articlename: n.articlename,
-          typeid: 0,
-          link: ''
-        };
-        switch (n.linktype) {
-          case '3':
-            newmenu.typeid = n.event;
-            break;
-          case '6':
-            newmenu.typeid = n.gallery;
-            break;
-          case '8':
-            newmenu.typeid = n.video;
-            break;
-          case '10':
-            newmenu.typeid = n.blog;
-            break;
-          case '2':
-            newmenu.typeid = n.article;
-            break;
-          default:
-            newmenu.typeid = 0;
-        }
-        newmenu.link = n.linktypelink;
-        // $rootScope.homeName = 'Home';
-
-        //If there is URL in page name, it means it contains RSS feed links
-        if (n.linktypename == "Pages" && this.commonServices.isURL(n.articlename)) {
-          // console.log(this.commonServices.RSSarray);
-
-          //  this.commonServices.RSSarray=[];
-          console.log(this.commonServices.RSSarray);
-          this.commonServices.RSSarray.push(newmenu);
-
-          // console.log(this.commonServices.RSSarray);
-
-          // console.log(n);
-
-        }
-        // console.log(this.commonServices.RSSarray);
-      }
+  refreshdata() {
+    this.loading = this.loadingCtrl.create({
+      content: 'Please wait...'
     });
-    //localforage.setItem("RSSArray",this.commonServices.RSSarray);
-    // console.log('from sortlinks');
-    if (this.RSS.length == 0) {
-      this.fetchRSSData();
-    }
-  }
+    this.loading.present();
+    let headerPromise = this.api.getHeaderLogo();
+    this.allDataPromise.push(headerPromise);
+    let sliderPromise = this.api.getallsliders()
+    this.allDataPromise.push(sliderPromise);
+    let promotionsPromise = this.api.getAllPromotions()
+    this.allDataPromise.push(promotionsPromise);
+    let frontMenuPromise = this.api.getAllFrontMenu()
+    this.allDataPromise.push(frontMenuPromise);
 
+    localforage.removeItem("allObservbledata").then(() => {
 
-  fetchRSSData() {
-    let promise = [];
-    for (let i = 0; i < this.commonServices.RSSarray.length; i++) {
-      promise[i] = this.api.getSingleArticle(this.commonServices.RSSarray[i].article)
-    }
-    console.log(promise)
-    // this.commonServices.RSSarray.map((n) => {
-    //   if (n.typeid) {
-    //     promise[i] = this.api.getSingleArticle(n.typeid)
-    //     i++;
-    // .subscribe((data) => {
-    //   this.RSS.push(data);
-    //   this.commonServices.RSS.feeds.push({});
-    // });
-    //   }
-    // });
-    let categories = [];
-    Observable.forkJoin(promise)
-      .subscribe((response) => {
-        // console.log("Response:", response);
-        this.RSS = [];
-        for (var i = 0; i < response.length; i++) {
-          // console.log(response[i]);
-          if (this.RSS.indexOf(response[i]) === -1) {
-            this.RSS.push(response[i]);
-            // console.log(response[i]);
+      this.commonServices.AllMenuData = [];
+      this.commonServices.menuData = [];
+
+      Observable.forkJoin(this.allDataPromise).subscribe((resPromise) => {
+        this.allObservableData = resPromise;
+        localforage.setItem("allObservbledata", resPromise);
+        this.allObservableData[0]
+          .map(item => {
+            if (item.title == 'Header Logo') {
+              // console.log(item);
+              this.commonServices.headerLogo = 'http://business.staging.appturemarket.com/uploads/header-logo/' + item.image;
+            }
+          });
+        this.commonServices.slides = this.allObservableData[1];
+        this.commonServices.banners = this.allObservableData[2].menu;
+        this.commonServices.AllMenuData = this.allObservableData[3];
+
+        this.allObservableData[3].menu.map(item => {
+          if (item.linktypename == "Pages" && this.commonServices.isURL(item.articlename)) {
+            this.commonServices.RSSarray.push(item);
           }
-        }
-        console.log(this.RSS);
-
-
-        // this.RSS = response;
-        let index = 0;
-        // this.RSS.map(n => {
-        //   n.name = this.commonServices.RSSarray[index].name;
-        //   n.typeid = this.commonServices.RSSarray[index].typeid;
-        //   var content = n.content.replace(/<[^>]*>/g, '');
-        //   content = content.replace(' ', '').toLowerCase();
-        //   content = content.replace('nbsp', '');
-        //   content = content.replace(/[^a-zA-Z,]/g, "");
-        //   n.categories = content.split(',');
-
-        //   n.categories.map(category => categories.push(category));
-
-        // });
-
-        // categories.map(category => {
-        //   if (this.categories.indexOf(category) === -1) {
-        //     this.categories.push(category);
-
+          else {
+            if (item.name != 'Settings') {
+              this.commonServices.menuData.push(item);
+            }
+          }
+        });
+        // for (var i = 0; i < this.commonServices.menuData.length; i++) {
+        //   if (this.commonServices.menuData[i].name == "Settings") {
+        //     this.commonServices.menuData[i].name = "Scheduler";
         //   }
-        // });
-        this.commonServices.RssData = this.RSS;
-        // this.categories.unshift('All');
-        // console.log(this.categories);
-
-
-
+        //   else if (this.commonServices.menuData[i].name == "My Profile") {
+        //     this.commonServices.menuData[i].name = "Breaking News";
+        //   }
+        // }
+        this.loading.dismiss();
+        this.sliders.startAutoplay();
+        //     return new Promise((resolve, reject) => resolve());
       });
 
+
+    })
   }
+
   goToInside(id: number) {
-    // console.log("page Change Article");
-    // console.log(id);
     this.navCtrl.push(ArticlePage, { id: id });
   }
   goToPromotion(id: number) {
-    // console.log("page Change Article");
-    // console.log(id);
     this.navCtrl.push(ArticlePage, { id: id });
   }
   goToFooterInside(links: any) {
-    console.log(links);
     var str: any;
     switch (links.linktypelink) {
       case 'home':
@@ -241,19 +139,22 @@ export class HomePage {
 
     }
     if (links.name == "Phone Call") {
-           window.open('tel:' + ('+1' + this.commonServices.PhoneNo), '_system');
+      window.open('tel:' + ('+1' + this.commonServices.PhoneNo), '_system');
     }
     else if (links.linktypelink == "home") {
       this.navCtrl.push(HomePage, {});
 
     }
     else {
-      console.log("page Change");
       this.navCtrl.push(str, {});
     }
   }
+
   gotoRss(i: number) {
     // console.log( i);
-    this.navCtrl.push(RssArticlePage, { id: i })
+    this.navCtrl.push(RssArticlePage, { id: i, prev: 'home' })
+  }
+  pressMe() {
+    this.navCtrl.push(LightboxPage, {});
   }
 }

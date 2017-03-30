@@ -10,11 +10,23 @@ page-rss-single {
 .padding-0{
   padding: 0px!important;
   margin:0px!important;
+  .item-inner{
+    padding-right: 0px!important;
+    .input-inner{
+      .input-wrapper{
+
+
+      }
+    }
+  }
+}
+.label-ios{
+  margin: 0px!important;
 }
 .new-line{
   color:white;
   white-space:normal!important;
-  margin:10px;
+  margin:5px;
 }
 
 
@@ -29,9 +41,12 @@ page-rss-single {
   position: absolute;
   bottom: 0;
   left: 0;
-  padding: 15px 15px 15px 15px;
+  padding: 10px;
   text-align: left;
   z-index: 2;
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.5);
+  background: linear-gradient(transparent,rgba(0,0,0,0.7));
+
 }
 
 .playfair{
@@ -48,8 +63,14 @@ page-rss-single {
 .item-image {
   padding: 0;
   text-align: center;
+  background-size: cover;
 }
-
+.rss-title{
+    padding: 0 50px 1px!important;
+    .toolbar-title{
+        font-size: 14px;
+    }
+}
 .item-image .titles {
   position: absolute;
   bottom: 0;

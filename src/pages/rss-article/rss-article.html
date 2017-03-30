@@ -7,13 +7,35 @@
 
 <ion-header>
 
-    <ion-navbar class="bar-appture">
+    <ion-navbar class="bar-appture" *ngIf="!prevState">
 
         <ion-title class="text-center">
-            <h1 [ngStyle]="{'background': 'url(' + commonServices.headerLogo + ') no-repeat center', 'background-size': 'cover'}" class="title company-logo article-header-logo">&nbsp;</h1>
+            <h1 [ngStyle]="{'background': 'url(' + commonServices.headerLogo + ') no-repeat center', 'background-size': 'cover'}" class="title company-logo article-header-logo"></h1>
             <!--<img src="{{commonServices.headerLogo}}">-->
         </ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="refreshData()">
+                <ion-icon name="md-refresh"></ion-icon>
+            </button>
+        </ion-buttons>
     </ion-navbar>
+    <ion-toolbar class="bar-appture" *ngIf="prevState">
+        <ion-buttons left>
+            <button ion-button icon-only (click)="goBack()">
+                <ion-icon name="ios-arrow-back-outline" click="goBack()"></ion-icon>
+
+            </button>
+        </ion-buttons>
+        <ion-title>
+            <h1 [ngStyle]="{'background': 'url(' + commonServices.headerLogo + ') no-repeat center', 'background-size': 'cover'}" class="title company-logo article-header-logo"></h1>
+
+        </ion-title>
+        <ion-buttons right>
+            <button ion-button icon-only (click)="refreshData()">
+                <ion-icon name="md-refresh"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-toolbar>
     <ion-toolbar class="bar-appture">
         <ion-buttons left>
             <button ion-button icon-only (click)="goLeft()">
@@ -21,7 +43,7 @@
 
             </button>
         </ion-buttons>
-        <ion-title>{{title}}</ion-title>
+        <ion-title class="rss-title">{{title}}</ion-title>
         <ion-buttons right>
             <button ion-button icon-only (click)="goRight()">
                 <ion-icon name="md-arrow-forward" click="goRight"></ion-icon>
@@ -32,25 +54,24 @@
 </ion-header>
 
 
-<ion-content >
+<ion-content>
 
     <ion-slides (ionSlideDidChange)="slideChanged()" scrollY="true">
 
         <ion-slide *ngFor="let p of commonServices.RssArticle,let parentIndex=index" scrollY="true" class="slide-content">
             <ion-list *ngIf="p.items">
-                <ion-item class="item-border-full-bottom rss-item"
-                *ngFor="let q of p.items.items,let childIndex=index" (click)="goinsideRSS(q,parentIndex,childIndex)" >
+                <ion-item class="item-border-full-bottom rss-item" *ngFor="let q of p.items.items,let childIndex=index" (click)="goinsideRSS(q,parentIndex,childIndex)">
                     <ion-thumbnail item-left>
                         <img src={{q.imageLink}}>
                     </ion-thumbnail>
                     <h2> {{q.title}} </h2>
-                    <ion-item class="item-small padding-0">
+                    <ion-item class="item-small padding-0 transparent-bg">
                         <ion-icon item-left ios="ios-bulb-outline" md="md-bulb"></ion-icon>
                         <p> {{q.author}} </p>
                     </ion-item>
-                    <ion-item class="item-small padding-0">
-                        <ion-icon  item-left ios="ios-calendar-outline" md="md-calendar"></ion-icon>
-                        <!--<p > {{q.pubDate |   date:'longDate'}}</p>-->
+                    <ion-item class="item-small padding-0 transparent-bg">
+                        <ion-icon item-left ios="ios-calendar-outline" md="md-calendar"></ion-icon>
+                        <p> {{q.pubDate}}</p>
                     </ion-item>
 
                 </ion-item>
