@@ -1,24 +1,18 @@
 page-home {
-
-}
-
-.slider-bg {
+    .slider-bg {
     padding: 0px;
+    width: 100%;
     background-size: cover !important;
     background-position: center center !important;
     border-bottom: 1px solid gray;
+    background-repeat: none;
 }
 
 .lightgray-bg{
     background-color: lightgray!important;
 }
 
-.company-logo {
-    /*background-image: url('../img/simpl.png');*/
-    background-size: contain!important;
-    background-repeat: no-repeat!important;
-    background-position: center!important;
-}
+
 
 .margin-padding-0{
     margin: 0px!important;
@@ -61,3 +55,6 @@ page-home {
     opacity: 0.7;
     z-index: 1;
 }
+
+}
+

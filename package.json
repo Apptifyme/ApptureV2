@@ -21,6 +21,7 @@
     "@angular/platform-server": "2.4.8",
     "@ionic-native/core": "^3.1.1",
     "@ionic-native/in-app-browser": "^3.1.1",
+    "@ionic-native/status-bar": "^3.4.2",
     "@ionic/storage": "^1.1.7",
     "ionic-angular": "2.2.0",
     "ionic-native": "^2.4.1",
@@ -37,12 +38,8 @@
   "cordovaPlugins": [
     "cordova-plugin-splashscreen",
     "cordova-plugin-whitelist",
-    "cordova-plugin-console",
-    "cordova-plugin-statusbar",
     "cordova-plugin-device",
-    "ionic-plugin-keyboard",
-    "cordova-plugin-nativestorage",
-    "cordova-plugin-inappbrowser"
+    "cordova-plugin-inappbrowser@1.7.0"
   ],
   "cordovaPlatforms": [
     "ios",

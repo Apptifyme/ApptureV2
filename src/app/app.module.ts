@@ -1,6 +1,6 @@
-import { NgModule, ErrorHandler } from '@angular/core';
-import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
-import {EventDetailsPage} from '../pages/event-details/event-details'
+import { NgModule, ErrorHandler, enableProdMode } from '@angular/core';
+import { IonicApp, IonicModule, IonicErrorHandler, Platform } from 'ionic-angular';
+import { EventDetailsPage } from '../pages/event-details/event-details'
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ArticlePage } from '../pages/article/article';
@@ -22,22 +22,22 @@ import { HttpModule } from '@angular/http';
 import { API } from '../providers/api';
 import { commonServices } from '../providers/common-services';
 import { ServerImage } from '../pipes/server-image.pipe';
-import {GetImage} from '../pipes/get.images.pipes'
+import { GetImage } from '../pipes/get.images.pipes'
 import { WindowRef } from './windows-ref';
-import {HttpServiceOfActicle} from '../pages/article/article.service';
-import {HttpService} from '../pages/home/home.service'
-import {ContactPage} from '../pages/contact/contact';
-import {HttpServiceOfEvent} from '../pages/events/event.service'
-import {HttpServiceOfVideoGallary} from '../pages/video-gallery/video-gallery.service';
-import {HttpServiceOfVideoCategory} from '../pages/video-category/video-category.service';
-import {HttpServiceOfEventDetails} from '../pages/event-details/event-deatails.service'
-import {HttpServiceOfRss} from '../pages/rss-article/rss.service';
-import {GetTime} from '../pipes/get.time.pipes'
+import { HttpServiceOfActicle } from '../pages/article/article.service';
+import { HttpService } from '../pages/home/home.service'
+import { ContactPage } from '../pages/contact/contact';
+import { HttpServiceOfEvent } from '../pages/events/event.service'
+import { HttpServiceOfVideoGallary } from '../pages/video-gallery/video-gallery.service';
+import { HttpServiceOfVideoCategory } from '../pages/video-category/video-category.service';
+import { HttpServiceOfEventDetails } from '../pages/event-details/event-deatails.service'
+import { HttpServiceOfRss } from '../pages/rss-article/rss.service';
+import { GetTime } from '../pipes/get.time.pipes'
 //import {SafePipe} from '../pipes/get.trust.pipes'
-import {SafeHtmlUrl} from "../pipes/get.trust.url.pipes";
-import {SafeBase} from '../pipes/get.base.pipe'
+import { SafeHtmlUrl } from "../pipes/get.trust.url.pipes";
+import { SafeBase } from '../pipes/get.base.pipe'
 import { DatePipe } from '@angular/common';
-import{RefreshData} from "../providers/refresh.service"
+import { RefreshData } from "../providers/refresh.service"
 
 @NgModule({
   declarations: [
@@ -63,13 +63,13 @@ import{RefreshData} from "../providers/refresh.service"
     ContactPage,
     EventDetailsPage,
     GetTime,
-   // SafePipe,
-      SafeBase,
+    // SafePipe,
+    SafeBase,
     SafeHtmlUrl
 
   ],
   imports: [
-    IonicModule.forRoot(MyApp,{
+    IonicModule.forRoot(MyApp, {
       backButtonText: ''
     }), HttpModule
   ],
@@ -92,22 +92,28 @@ import{RefreshData} from "../providers/refresh.service"
     VideoGalleryPage,
     VideoModalPage,
     WalkthroughPage,
-      ContactPage,
+    ContactPage,
     EventDetailsPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler},
+  providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler },
     API,
     commonServices,
     WindowRef,
     HttpServiceOfActicle,
-      HttpService,
-      HttpServiceOfEvent,
-      HttpServiceOfVideoGallary,
-      HttpServiceOfVideoCategory,
+    HttpService,
+    HttpServiceOfEvent,
+    HttpServiceOfVideoGallary,
+    HttpServiceOfVideoCategory,
     HttpServiceOfEventDetails,
     HttpServiceOfRss,
-      DatePipe,
+    DatePipe,
     RefreshData
   ]
 })
-export class AppModule { }
+export class AppModule {
+  // constructor(public platform: Platform) {
+  //   if (this.platform.is('ios') || this.platform.is('android')) {
+  //     enableProdMode();
+  //   }
+  // }
+}

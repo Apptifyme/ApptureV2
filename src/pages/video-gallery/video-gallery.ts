@@ -39,11 +39,11 @@ export class VideoGalleryPage {
     }
 
     ionViewDidLoad() {
-        console.log('ionViewDidLoad VideoGalleryPage');
+        // console.log('ionViewDidLoad VideoGalleryPage');
 
     }
     refreshdata() {
-        console.log("data refresh");
+        // console.log("data refresh");
         let _this = this;
         localforage.removeItem("AllVideoData").then(function () {
             _this.commonServices.ALlVideodata = null;
@@ -58,7 +58,7 @@ export class VideoGalleryPage {
         );
     }
     goToFooterInside(links: any) {
-        console.log(links);
+        // console.log(links);
         var str: any;
         switch (links.linktypelink) {
             case 'home':
@@ -88,18 +88,18 @@ export class VideoGalleryPage {
 
         }
         else {
-            console.log("page Change");
+            // console.log("page Change");
             this.navCtrl.push(str, {});
         }
     }
     getVideoCategorydata() {
         localforage.getItem("AllVideoData").then((result) => {
-            console.log("data exist in local forage");
-            console.log("result");
+            // console.log("data exist in local forage");
+            // console.log("result");
 
-            console.log(result);
+            // console.log(result);
             this.video = result ? result : [];
-            console.log(this.video);
+            // console.log(this.video);
 
             if (this.video.length != 0) {
                 this.commonServices.ALlVideodata = this.video;
@@ -113,20 +113,20 @@ export class VideoGalleryPage {
                     .subscribe(
                     response => {
                         this.video = response;
-                        console.log("my Videogallary data loaded");
-                        console.log(this.video);
+                        // console.log("my Videogallary data loaded");
+                        // console.log(this.video);
                         this.commonServices.ALlVideodata = this.video;
                         localforage.setItem("AllVideoData", this.video);
-                        console.log(this.commonServices.ALlVideodata);
+                        // console.log(this.commonServices.ALlVideodata);
                         this.loading.dismiss();
                         this.image = this.video.queryresult[1].url.split(',');
-                        console.log(this.image);
+                        // console.log(this.image);
                     },
                     error => console.log(error)
                     )
             }
             else {
-                console.log("data Already exist");
+                // console.log("data Already exist");
                 this.video = this.commonServices.ALlVideodata;
                 //   this.loading.dismiss();
 
@@ -134,7 +134,7 @@ export class VideoGalleryPage {
         })
     }
     goToImages(id: any, i: number) {
-        console.log(" Inside video category");
+        // console.log(" Inside video category");
         this.navCtrl.push(VideoCategoryPage, { id: id, i: i });
     }
 

@@ -32,7 +32,7 @@ export class ImageModalPage {
   closeModal() {
    this.viewCtrl.dismiss();
  }
-  goToFfooterInside(links:any){
+  goToFooterInside(links:any){
     console.log(links);
     var str:any;
     switch(links.linktypelink){

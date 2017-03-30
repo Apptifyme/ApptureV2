@@ -25,13 +25,13 @@ export class RssPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public commonService:commonServices) {}
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad RssPage');
+    // console.log('ionViewDidLoad RssPage');
   }
   gotoRss(id:number){
     this.navCtrl.push(RssArticlePage,{id:id});
   }
   goToFooterInside(links:any){
-    console.log(links);
+    // console.log(links);
     var str:any;
     switch(links.linktypelink){
       case 'home':
@@ -61,7 +61,6 @@ export class RssPage {
 
     }
     else {
-      console.log("page Change");
       this.navCtrl.push(str,{});
     }
   }

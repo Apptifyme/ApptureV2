@@ -47,8 +47,8 @@ export class commonServices {
   adminImage: string = 'http://business.staging.appturemarket.com/uploads/';
   devH = this.winRef.nativeWindow.innerHeight;
   devW = this.winRef.nativeWindow.innerWidth;
-  sliderheight = { 'max-height': 0.44 * this.devH + 'px', 'height': 0.44 * this.devH + 'px', 'width': this.devW + 'px' };
-  promo_banner = {'max-height': 0.15 * this.devH + 'px', 'height': 0.15 * this.devH + 'px', 'width': this.devW + 'px'};
+  sliderheight = {  'height': 0.44 * this.devH + 'px', 'width': this.devW + 'px' };
+  promo_banner = { 'height': 0.15 * this.devH + 'px', 'width': this.devW + 'px'};
   RSSCat = {'min-height': this.devW / 2 + 'px'};
   RSS = {
     menuData: [], 

@@ -1,7 +1,8 @@
 page-rss-article {
 .rss-item{
         border-bottom:1px solid #ccc;
-        min-height: 100px;
+        // min-height: 100px;
+        // max-height:120px;
         padding: 12px!important;
         ion-thumbnail{
             margin-top: 0!important;
@@ -9,6 +10,7 @@ page-rss-article {
                 width: 70px;
                 height: 70px;
                 border-radius: 4px;
+                background-color: #e8e8e8;
             }
         }
         .item-inner{
@@ -21,6 +23,12 @@ page-rss-article {
                 }
             }
         }
+    }
+}
+.rss-title{
+    padding: 0 50px 1px!important;
+    .toolbar-title{
+        font-size: 14px;
     }
 }
 .overflow{
