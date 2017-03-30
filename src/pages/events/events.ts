@@ -21,7 +21,8 @@ import * as localforage from "localforage";
 
 @Component({
   selector: 'page-events',
-  templateUrl: 'events.html',styleUrls:['/events.scss'],
+  templateUrl: 'events.html',
+    styleUrls:['/events.scss'],
 })
 export class EventsPage {
     private content=null;

@@ -20,9 +20,9 @@
     <img src={{videoimage}}{{id.image}}>
     <ion-list>
 
-        <ion-item *ngFor="let p of videodata.queryresult,let i=index" (click)="openVideo(p)" class="event-item">
-            <ion-thumbnail item-left>
-                <img [src]="baseImageUrl+p.url+baseImageUrl2">
+        <ion-item *ngFor="let p of videodata.queryresult,let i=index" (click)="openVideo(p)" class="event-item" style="padding: 0px!important" >
+            <ion-thumbnail item-left class="height-width-100" style="border-radius:0px!important; margin-bottom: 0px!important;">
+                <img class="height-width-100"[src]="baseImageUrl+p.url+baseImageUrl2">
             </ion-thumbnail>
             <h2> {{p.alt}}</h2>
             <p>{{p.subtitle}}</p>

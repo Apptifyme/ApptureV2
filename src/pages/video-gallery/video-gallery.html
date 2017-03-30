@@ -29,9 +29,9 @@
 
 <ion-content>
   <ion-list >
-    <ion-item *ngFor="let p of video.queryresult,let i=index" class="event-item" (click)="goToImages(p,i)">
-      <ion-thumbnail item-left >
-        <img src="{{baseImageUrl}}{{p.url | getImage}}{{baseImageUrl2}}">
+    <ion-item *ngFor="let p of video.queryresult,let i=index" class="event-item" style="padding: 0px!important"(click)="goToImages(p,i)">
+      <ion-thumbnail item-left class="height-width-100">
+        <img class="height-width-100" src="{{baseImageUrl}}{{p.url | getImage}}{{baseImageUrl2}}">
       </ion-thumbnail>
       <h2> {{p.name}} </h2>
       <p>{{p.subtitle}}</p>

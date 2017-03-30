@@ -1,4 +1,14 @@
 page-video-category {
 
-}
+  .height-width-100 {
+    height: 100px !important;
+    width: 100px !important;
+    border-radius: 0px !important;
+    margin-bottom: 0px !important;
+  }
 
+  ion-label.label {
+    padding: 5px;
+    height: 100%;
+    }
+}

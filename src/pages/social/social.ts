@@ -29,7 +29,7 @@ export class SocialPage {
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public commonService: commonServices,
                 public plt: Platform,public iab:InAppBrowser) {
-        //   public iab:InAppBrowser
+
         console.log(this.commonService.AllMenuData.config);
         this.header = this.commonService.headerLogo;
         this.socialData = JSON.parse(this.commonService.AllMenuData.config[6].text);

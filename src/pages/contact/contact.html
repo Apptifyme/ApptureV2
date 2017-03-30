@@ -51,24 +51,24 @@
 
                 <ion-item>
                     <ion-label floating>FullName</ion-label>
-                    <ion-input type="text" [ngModel]="enquiry.name"></ion-input>
+                    <ion-input type="text" [(ngModel)]="enquiry.name"></ion-input>
                 </ion-item>
 
                 <ion-item>
                     <ion-label floating>E-mail</ion-label>
-                    <ion-input type="email" [ngModel]="enquiry.email"></ion-input>
+                    <ion-input type="email" [(ngModel)]="enquiry.email"></ion-input>
                 </ion-item>
                 <ion-item>
                     <ion-label floating>Subject</ion-label>
-                    <ion-input type="text" [ngModel]="enquiry.title"></ion-input>
+                    <ion-input type="text" [(ngModel)]="enquiry.title"></ion-input>
                 </ion-item>
                 <ion-item>
                     <ion-label floating>Comment</ion-label>
-                    <ion-input type="text" [ngModel]="enquiry.comment"></ion-input>
+                    <ion-input type="text" [(ngModel)]="enquiry.comment"></ion-input>
                 </ion-item>
 
             </ion-list>
-            <button ion-button block (click)="enquiryform()">Submit</button>
+            <button ion-button block (click)="enquiryform(enquiry)">Submit</button>
         </ion-list>
     </div>
 

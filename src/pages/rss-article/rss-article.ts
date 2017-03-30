@@ -21,10 +21,13 @@ import * as localforage from "localforage";
  */
 @Component({
     selector: 'page-rss-article',
-    templateUrl: 'rss-article.html'
+    templateUrl: 'rss-article.html',
+    styleUrls: ['/rss-article.scss'],
+
 })
 export class RssArticlePage {
     title = "";
+    Fulltitle="";
     change = false;
     index: any;
     public RSStemp = [];
@@ -40,6 +43,7 @@ export class RssArticlePage {
     prev = 0;
     watching = { 'id': 0, 'data': {} };
     public loading: any;
+    subtitle="";
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public loadingController: LoadingController, public modalController: ModalController, public commonServices: commonServices, public httpserviceOfRss: HttpServiceOfRss) {
         console.log(this.commonServices.RssData);
@@ -103,9 +107,15 @@ export class RssArticlePage {
                     //  this.commonServices.RssArticle[this.index].items = [];
                     this.commonServices.RssArticle[this.index].items = home.RSStemp[i].data;
                     this.title = home.RSStemp[i].data.feed.title;
+                    this.Fulltitle=this.title;
                     this.title= this.title.replace(/\u2013|\u2014/g, "-");
+
                     this.title = this.title.substring(0,this.title.indexOf('-')-1);
+                    console.log(this.title);
+                    console.log(this.Fulltitle)
+                    this.subtitle = this.Fulltitle.substring(this.Fulltitle.indexOf('-') + 1);
                     // this.slides.slideTo(this.index,0);
+                    console.log(this.subtitle);
                     this.loading.dismiss();
                     return;
 
@@ -121,14 +131,23 @@ export class RssArticlePage {
                     // if (this.RssData[this.index] == null) {
                     this.commonServices.RssArticle[this.index].items = [];
                     this.commonServices.RssArticle[this.index].items = this.RssData;
-                    
+
+                    console.log(this.RssData);
                     this.title = this.RssData.feed.title;
                     this.title= this.title.replace(/\u2013|\u2014/g, "-");
-                    this.title = this.title.substring(0,this.title.indexOf('-')-1);
+
+                    this.subtitle = this.title.substring(0,this.title.indexOf('-')-1);
                     // this.RssData.feed.title = this.title;
                     // this.title = this.splitBy(this.title, '-');
                     // this.httpserviceOfRss.RssContent = this.Rsscontent;
                     for (var i = 0; i < this.RssData.items.length; i++) {
+                        var fullTitle=this.RssData.items[i].title;
+                        fullTitle = fullTitle.replace(/\u2013|\u2014/g, "-");
+                        if (fullTitle.indexOf('-') != -1) {
+                            this.RssData.items[i].title = fullTitle.substring(0, fullTitle.indexOf('-') - 1);
+                            this.RssData.items[i].subTitle = fullTitle.substring(fullTitle.indexOf('-') + 1);
+                            this.commonServices.RssArticle[this.index].items.items[i].subtitle=this.RssData.items[i].subTitle;
+                        }
                         
                         let fullDate = new Date(this.RssData.items[i].pubDate.replace(/\s/, 'T')).toString();
                         let tempArray = fullDate.split(' ');
@@ -137,6 +156,7 @@ export class RssArticlePage {
                         if (this.RssData.items[i].thumbnail == '' && typeof this.RssData.items[i].image == 'undefined') {
                             this.RssData.items[i].imageLink = this.getBlogImage(this.RssData.items[i].content);
                             this.RssData.items[i].imageSource = 'pickedFromHtml';
+
                         }
                         else if (this.RssData.items[i].image.url != 'undefined') {
                             this.RssData.items[i].imageLink = this.RssData.items[i].image.url;

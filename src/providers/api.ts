@@ -60,9 +60,9 @@ export class API {
       .catch(this.handleError);
   }
 
-  sendEnquiry(data): Observable<any> {
+  sendEnquiry(Data): Observable<any> {
     
-    return this.http.post(this.commonServices.adminUrl + 'createEnquiry',data)
+    return this.http.post(this.commonServices.adminUrl + 'createEnquiry',Data)
       .map(res => res.json())
       .catch(this.handleError);
   }

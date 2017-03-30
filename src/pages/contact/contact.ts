@@ -58,6 +58,7 @@ export class ContactPage {
         return isvalid2;
     }
     enquiryform = function (enquiry) {
+        console.log(enquiry);
         this.allvalidation = [{
             field: this.enquiry.name,
             validation: ""
@@ -68,7 +69,7 @@ export class ContactPage {
             field: this.enquiry.title,
             validation: ""
         }, {
-            field: this.enquiry.content,
+            field: this.enquiry.comment,
             validation: ""
         }];
         console.log(this.allvalidation);
@@ -77,13 +78,23 @@ export class ContactPage {
             'name': this.enquiry.name,
             'email': this.enquiry.email,
             'title': this.enquiry.title,
-            'content': this.enquiry.content
+            'content': this.enquiry.comment
         }
+        console.log(data);
         if (check) {
-            this.api.createenquiry(data).subscribe((data) => {
+            this.api.sendEnquiry(data).subscribe((data) => {
                 console.log(data);
+                console.log("if");
+                this.enquiry.name="";
+                this.enquiry.email="";
+                this.enquiry.title="";
+                this.enquiry.comment="";
             })
         } else {
+            // this.api.sendEnquiry(data).subscribe((data) => {
+            //     console.log(data);
+            //     console.log("else");
+            // })
             console.log('error');
         }
 
