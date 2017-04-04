@@ -136,7 +136,7 @@ export class RssArticlePage {
                     this.title = this.RssData.feed.title;
                     this.title= this.title.replace(/\u2013|\u2014/g, "-");
 
-                    this.subtitle = this.title.substring(0,this.title.indexOf('-')-1);
+                    this.title = this.title.substring(0,this.title.indexOf('-')-1);
                     // this.RssData.feed.title = this.title;
                     // this.title = this.splitBy(this.title, '-');
                     // this.httpserviceOfRss.RssContent = this.Rsscontent;

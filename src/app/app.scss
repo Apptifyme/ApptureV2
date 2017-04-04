@@ -325,9 +325,12 @@ color: white;
     overflow-y: scroll;
     display: block;
 }
+.list-ios > .item-block.event-item:last-child{
+            border-bottom:1px solid #ccc!important;
 
+}
 .event-item{
-        border-bottom:1px solid #ccc;
+        border-bottom:1px solid #ccc!important;
         min-height: 100px;
         padding: 12px!important;
         ion-thumbnail{
