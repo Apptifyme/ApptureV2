@@ -36,7 +36,7 @@ export class RssSinglePage {
         }
         setTimeout(() => {
             this.slides.slideTo(this.childIndex, 0);
-        }, 300);
+        }, 500);
         // this.size=this.rssData.items.length;
 
         for (var i = 0; i < this.rssData.length; i++) {

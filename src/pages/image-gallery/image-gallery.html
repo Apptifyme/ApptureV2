@@ -13,7 +13,7 @@
 
 <ion-content>
   <div class="row-wrap text-center" style="padding: 3px;">
-    <div class="col-wrap border-lightgray" [ngStyle]="imageInGallery" *ngFor="let image of galleryImages" (click)="openImageInModal(image.src)">
+    <div class="col-wrap border-lightgray" [ngStyle]="imageInGallery" *ngFor="let image of galleryImages,let i=index" (click)="openImageInModal(galleryImages,i)">
         <div class="full-dim bg-cover" [ngStyle]="{'background-image':'url('+image.src+')'}"></div>
     </div>
   </div>

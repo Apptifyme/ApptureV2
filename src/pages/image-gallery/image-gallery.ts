@@ -95,8 +95,8 @@ export class ImageGalleryPage {
     this.getGalleryImages();
   }
 
-  openImageInModal(image) {
-    let profileModal = this.modalCtrl.create(ImageModalPage, { imagesrc: image });
+  openImageInModal(image,i) {
+    let profileModal = this.modalCtrl.create(ImageModalPage, { imagesrc: image,index:i });
     profileModal.present();
   }
   goToFooterInside(links:any){

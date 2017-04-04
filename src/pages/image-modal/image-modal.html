@@ -16,17 +16,21 @@
 </ion-header>
 
 <ion-content class="no-header black-bg">
+    <ion-slides>
+        <ion-slide *ngFor="let image of imageLink">
   <div class="valign-parent full-height">
     <ion-grid class="valign-child">
       <ion-row>
         <ion-col class="valign-parent">
           <div class="valign-child">
-            <img [src]="imageLink" class="full-image">
+            <img [src]="image.src" class="full-image">
           </div>
         </ion-col>
       </ion-row>
     </ion-grid>
   </div>
+        </ion-slide>
+    </ion-slides>
 </ion-content>
 
 <ion-footer class="footer-appture">

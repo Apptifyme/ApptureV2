@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams, ViewController } from 'ionic-angular';
+import { Component,ViewChild } from '@angular/core';
+import { NavController, NavParams, ViewController,Slides } from 'ionic-angular';
 import {commonServices} from '../../providers/common-services';
 
 import {HomePage} from '../home/home';
@@ -22,11 +22,18 @@ import {ImageCategoryPage} from '../image-category/image-category'
 })
 export class ImageModalPage {
   imageLink:any;
-  constructor(public navCtrl: NavController, public navParams: NavParams,public viewCtrl: ViewController, public commonServices:commonServices) {}
+  index:any;
+  @ViewChild(Slides) slides: Slides;
+  constructor(public navCtrl: NavController, public navParams: NavParams,public viewCtrl: ViewController, public commonServices:commonServices) {
+    setTimeout(() => {
+      this.slides.slideTo(this.index, 0);
+    }, 300);
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ImageModalPage');
     this.imageLink = this.navParams.get('imagesrc');
+    this.index=this.navParams.get('index');
   }
 
   closeModal() {

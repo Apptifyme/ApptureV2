@@ -37,7 +37,7 @@
 
 <ion-footer class="footer-appture">
   <ion-scroll zoom="false" scrollX="true" style="height: 60px" class="categories-filter">
-    <span class="footer-col" *ngFor="let links of commonService.footerLinks">
+    <span class="footer-col" (click)="footerLink(links)" *ngFor="let links of commonService.footerLinks">
                 <ion-row class="padding-top-5" (click)="goToFooterInside(links)">
                     <ion-col class="col padding-0 text-x-large" >
                         <i class="icon" [ngClass]="links.icon"></i>
