@@ -8,7 +8,7 @@ import { VideoCategoryPage } from '../video-category/video-category'
 import { VideoGalleryPage } from "../video-gallery/video-gallery.ts";
 import { ImageCategoryPage } from "../image-category/image-category";
 import { ArticlePage } from '../article/article.ts';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
+// import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 /*
   Generated class for the Social page.
@@ -19,7 +19,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 @Component({
     selector: 'page-social',
     templateUrl: 'social.html',
-   providers:[InAppBrowser]
+ //  providers:[InAppBrowser]
 })
 export class SocialPage {
 
@@ -28,7 +28,7 @@ export class SocialPage {
     header: any;
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public commonService: commonServices,
-                public plt: Platform,public iab:InAppBrowser) {
+                public plt: Platform) {
 
         console.log(this.commonService.AllMenuData.config);
         this.header = this.commonService.headerLogo;
@@ -112,12 +112,12 @@ export class SocialPage {
 
 
     goSocial(link) {
-        if (this.plt.is('cordova')) {
-           const browser = this.iab.create(link, '_blank', 'location=yes');
-           browser.show();
-        }
-        else {
-            window.open(link, "_blank");
-        }
+        // if (this.plt.is('cordova')) {
+        //    const browser = this.iab.create(link, '_blank', 'location=yes');
+        //    browser.show();
+        // }
+        // else {
+        //     window.open(link, "_blank");
+        // }
     }
 }

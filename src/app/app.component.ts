@@ -13,19 +13,19 @@ import { EventsPage } from '../pages/events/events.ts';
 import { VideoCategoryPage } from '../pages/video-category/video-category'
 import { VideoGalleryPage } from '../pages/video-gallery/video-gallery.ts'
 import { LightboxPage } from '../pages/lightbox/lightbox'
-import { InAppBrowser } from '@ionic-native/in-app-browser';
+//import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 @Component({
   templateUrl: 'app.html',
   styleUrls: ['/app.scss'],
-  providers: [InAppBrowser]
+  //providers: [InAppBrowser]
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
   rootPage: any = LandingPage;
   pages: Array<{ title: string, component: any }>;
 
-  constructor(public platform: Platform, public commonServices: commonServices, public api: API, public iab: InAppBrowser) {
+  constructor(public platform: Platform, public commonServices: commonServices, public api: API) {
     this.initializeApp();
     console.log(this.commonServices);
 
@@ -87,13 +87,13 @@ export class MyApp {
   }
 
   openScheduler() {
-    if (this.platform.is('cordova')) {
-      const browser = this.iab.create('http://www.appturesoftware.com/booking/', '_blank', 'location=no');
-      browser.show();
-    }
-    else {
-      window.open('http://www.appturesoftware.com/booking/', "_blank");
-    }
+    // if (this.platform.is('cordova')) {
+    //   const browser = this.iab.create('http://www.appturesoftware.com/booking/', '_blank', 'location=no');
+    //   browser.show();
+    // }
+    // else {
+    //   window.open('http://www.appturesoftware.com/booking/', "_blank");
+    // }
   }
 
   gotoArticle(id: number, name, articlename, article, linktypelink) {
